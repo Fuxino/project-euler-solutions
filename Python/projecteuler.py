@@ -27,7 +27,7 @@ def gcd(a, b):
     return a
 
 def lcm(a, b):
-    return a * b / gcd(a, b)
+    return a * b // gcd(a, b)
 
 def lcmm(values, n):
     if n == 2:
@@ -58,3 +58,16 @@ def sieve(n):
                 primes[j] = 0
 
     return primes
+
+def count_divisors(n):
+    count = 0
+    limit = math.floor(math.sqrt(n))
+
+    for i in range(1, limit):
+        if n % i == 0:
+            count = count + 2
+
+        if n == limit * limit:
+            count = count - 1
+
+    return count

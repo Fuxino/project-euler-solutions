@@ -10,7 +10,7 @@ def max_prime_factor(num):
         return num
 
     if num % 2 == 0:
-        return max_prime_factor(num / 2)
+        return max_prime_factor(num // 2)
 
     else:
         limit = math.floor(math.sqrt(num)) + 1
@@ -18,7 +18,7 @@ def max_prime_factor(num):
         for i in range(3, limit, 2):
             if num % i == 0:
                 if is_prime(i):
-                    return max_prime_factor(num / i)
+                    return max_prime_factor(num // i)
 
 def main():
     start = default_timer()
@@ -28,7 +28,7 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 3')
-    print('Answer: {}'.format(int(res)))
+    print('Answer: {}'.format(res))
 
     print('Elapsed time: {:.9f} seconds'.format(end - start))
 

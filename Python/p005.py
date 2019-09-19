@@ -14,7 +14,7 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 5')
-    print('Answer: {}'.format(int(res)))
+    print('Answer: {}'.format(res))
 
     print('Elapsed time: {:.9f} seconds'.format(end - start))
 

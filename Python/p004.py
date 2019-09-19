@@ -10,7 +10,7 @@ def is_palindrome(num, base):
     while tmp > 0:
         reverse = reverse * base
         reverse = reverse + tmp % base
-        tmp = int(tmp / base)
+        tmp = tmp // base
 
     if num == reverse:
         return 1
