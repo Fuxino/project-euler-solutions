@@ -44,9 +44,9 @@ int main(int argc, char **argv)
          fscanf(fp, "%d", &triang[i-1][j]);
       }
    }
-   
+
    fclose(fp);
-   
+
    sum_triangle(triang, 15, 0, 0, 0);
 
    clock_gettime(CLOCK_MONOTONIC, &end);

@@ -49,7 +49,7 @@ int main(int argc, char **argv)
          day = (day + 1) % 7;
       }
       month = (month + 1) % 12;
-      
+
       if(month == jan)
       {
          year++;

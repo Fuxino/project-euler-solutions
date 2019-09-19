@@ -31,7 +31,7 @@ int main(int argc, char **argv)
    gmp_printf("Answer: %Zd\n", sum);
 
    printf("Elapsed time: %.9lf seconds\n", elapsed);
-   
+
    mpz_clears(p, sum, r, NULL);
 
    return 0;

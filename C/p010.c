@@ -14,8 +14,11 @@ int main(int argc, char **argv)
    struct timespec start, end;
 
    clock_gettime(CLOCK_MONOTONIC, &start);
-   
-   primes = sieve(N);
+
+   if(primes = sieve(N) == NULL)
+   {
+      fprintf(stderr, "Error! Sieve function returned NULL\n");
+      return 1;
 
    for(i = 0; i < N; i++)
    {
@@ -33,7 +36,7 @@ int main(int argc, char **argv)
 
    printf("Project Euler, Problem 10\n");
    printf("Answer: %ld\n", sum);
-   
+
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 
    return 0;

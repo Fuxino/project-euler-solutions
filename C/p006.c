@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 
    elapsed = (end.tv_sec - start.tv_sec) + (double)(end.tv_nsec - start.tv_nsec) / 1000000000;
 
-   printf("Project Euler, Problem 6\n");   
+   printf("Project Euler, Problem 6\n");
    printf("Answer: %d\n", square_sum-sum_squares);
 
    printf("Elapsed time: %.9lf seconds\n", elapsed);

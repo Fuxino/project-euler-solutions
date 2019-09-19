@@ -18,7 +18,7 @@ int main(int argc, char **argv)
    {
       sum += n1_19[i];
    }
-   
+
    for(i = 0; i < 8; i++)
    {
       n20_90[i] *= 10;
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
       }
       sum += n20_90[i];
    }
-   
+
    for(i = 0; i < 9; i++)
    {
       n100_900[i] *= 100;
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
       }
       sum += n100_900[i] - 3;
    }
-   
+
    sum += n1000;
 
    clock_gettime(CLOCK_MONOTONIC, &end);

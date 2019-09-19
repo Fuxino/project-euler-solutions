@@ -10,7 +10,7 @@ int main(int argc, char **argv)
    mpz_t count, tmp;
 
    clock_gettime(CLOCK_MONOTONIC, &start);
-   
+
    mpz_inits(count, tmp, NULL);
    mpz_fac_ui(count, 40);
    mpz_fac_ui(tmp, 20);
@@ -25,7 +25,7 @@ int main(int argc, char **argv)
    gmp_printf("Answer: %Zd\n", count);
 
    printf("Elapsed time: %.9lf seconds\n", elapsed);
-   
+
    mpz_clears(count, tmp, NULL);
 
    return 0;
