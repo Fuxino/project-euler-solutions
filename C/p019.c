@@ -23,7 +23,7 @@ int main(int argc, char **argv)
    {
       if(month == feb)
       {
-         if(i % 400 == 0 || (i % 4 == 0 && i % 100 != 0))
+         if(year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
          {
             limit = 29;
          }
