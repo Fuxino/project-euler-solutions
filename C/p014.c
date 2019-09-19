@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
-   for(i = 1; i< 1000000; i++)
+   for(i = 1; i < 1000000; i++)
    {
       count = collatz_length(i);
       collatz_found[i] = count;

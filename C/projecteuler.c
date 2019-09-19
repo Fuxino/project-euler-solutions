@@ -109,18 +109,18 @@ int *sieve(int n)
 
 int count_divisors(int n)
 {
-   int i, top, count = 0;
+   int i, limit, count = 0;
 
-   top = floor(sqrt(n));
+   limit = floor(sqrt(n));
 
-   for(i = 1; i < top; i++)
+   for(i = 1; i < limit; i++)
    {
       if(n % i == 0)
       {
          count += 2;
       }
 
-      if(n == top * top)
+      if(n == limit * limit)
       {
          count--;
       }
