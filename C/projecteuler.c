@@ -128,3 +128,30 @@ int count_divisors(int n)
 
    return count;
 }
+
+void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
+{
+   int i, j;
+   void *pivot, *tmp;
+
+   if (l >= r) return;
+
+   pivot = array[l];
+   i = l - 1;
+   j = r + 1;
+
+   while (i < j) {
+
+      while (cmp(array[++i], pivot) < 0);
+      while (cmp(array[--j], pivot) > 0);
+
+      if (i < j) {
+         tmp = array[i];
+         array[i] = array[j];
+         array[j] = tmp;
+      }
+   }
+
+   quick_sort(array, l, j, cmp);
+   quick_sort(array, j+1, r, cmp);
+}

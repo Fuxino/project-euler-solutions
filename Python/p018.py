@@ -28,12 +28,12 @@ def main():
 
     for line in fp:
         triang.append(line.strip('\n').split())
-    
+
     fp.close()
 
     for i in range(len(triang)):
         triang[i] = list(map(int, triang[i]))
-   
+
     max_ = 0
     sum_triangle(triang, 15, 0, 0, 0)
 
