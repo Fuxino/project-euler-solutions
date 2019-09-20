@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-from numpy import zeros
-
 from timeit import default_timer
 
 def main():
