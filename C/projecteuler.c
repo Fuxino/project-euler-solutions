@@ -2,6 +2,8 @@
 #include <math.h>
 #include "projecteuler.h"
 
+int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
+
 int is_prime(long int num)
 {
    int i, limit;
@@ -129,29 +131,81 @@ int count_divisors(int n)
    return count;
 }
 
-void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
+void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i, j;
-   void *pivot, *tmp;
-
-   if (l >= r) return;
-
-   pivot = array[l];
-   i = l - 1;
-   j = r + 1;
-
-   while (i < j) {
-
-      while (cmp(array[++i], pivot) < 0);
-      while (cmp(array[--j], pivot) > 0);
-
-      if (i < j) {
+   void *tmp;
+   
+   for(i = r; i > l; i--)
+   {
+      if(cmp(array[i], array[i-1]) < 0)
+      {
          tmp = array[i];
-         array[i] = array[j];
-         array[j] = tmp;
+         array[i] = array[i-1];
+         array[i-1] = tmp;
       }
    }
+   for(i = l + 2; i <= r; i++)
+   {
+      tmp = array[i];
+      j = i;
 
-   quick_sort(array, l, j, cmp);
-   quick_sort(array, j+1, r, cmp);
+      while(cmp(tmp, array[j-1]) < 0)
+      {
+         array[j] = array[j-1];
+         j--;
+      }
+      
+      array[j] = tmp;
+   }
+}
+
+int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
+{
+   int i = l -1, j = r;
+   void *pivot, *tmp;
+   
+   pivot = array[r];
+   
+   while(1)
+   {
+      while(cmp(array[++i], pivot) < 0);
+      while(cmp(array[--j], pivot) > 0)
+      {
+         if(j == l)
+         {
+            break;
+         }
+      }
+
+      if(j <= i)
+      {
+         break;
+      }
+
+      tmp = array[i];
+      array[i] = array[j];
+      array[j] = tmp;
+   }
+
+   tmp = array[i];
+   array[i] = array[r];
+   array[r] = tmp;
+   
+   return i;
+}
+
+void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
+{
+   int i;
+   
+   if(r - l <= 10)
+   {
+      insertion_sort(array, l, r, cmp);
+      return;
+   }
+   
+   i = partition(array, l, r, cmp);
+   quick_sort(array, l, i-1, cmp);
+   quick_sort(array, i+1, r, cmp);
 }
