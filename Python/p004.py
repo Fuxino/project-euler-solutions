@@ -1,21 +1,7 @@
 #!/usr/bin/python3
 
 from timeit import default_timer
-
-def is_palindrome(num, base):
-    reverse = 0
-
-    tmp = num
-
-    while tmp > 0:
-        reverse = reverse * base
-        reverse = reverse + tmp % base
-        tmp = tmp // base
-
-    if num == reverse:
-        return 1
-
-    return 0
+from projecteuler import is_palindrome
 
 def main():
     start = default_timer()

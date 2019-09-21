@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-int is_palindrome(int num, int base);
+#include "projecteuler.h"
 
 int main(int argc, char **argv)
 {
@@ -32,27 +31,6 @@ int main(int argc, char **argv)
    printf("Answer: %d\n", max);
 
    printf("Elapsed time: %.9lf seconds\n", elapsed);
-
-   return 0;
-}
-
-int is_palindrome(int num, int base)
-{
-   int reverse = 0, tmp;
-
-   tmp = num;
-
-   while(tmp > 0)
-   {
-      reverse *= base;
-      reverse += tmp % base;
-      tmp /= base;
-   }
-
-   if(num == reverse)
-   {
-      return 1;
-   }
 
    return 0;
 }

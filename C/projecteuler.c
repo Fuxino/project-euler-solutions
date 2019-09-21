@@ -205,3 +205,24 @@ void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
    quick_sort(array, l, i-1, cmp);
    quick_sort(array, i+1, r, cmp);
 }
+
+int is_palindrome(int num, int base)
+{
+   int reverse = 0, tmp;
+
+   tmp = num;
+
+   while(tmp > 0)
+   {
+      reverse *= base;
+      reverse += tmp % base;
+      tmp /= base;
+   }
+
+   if(num == reverse)
+   {
+      return 1;
+   }
+
+   return 0;
+}

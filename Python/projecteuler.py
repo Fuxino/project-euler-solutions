@@ -69,3 +69,18 @@ def count_divisors(n):
             count = count - 1
 
     return count
+
+def is_palindrome(num, base):
+    reverse = 0
+
+    tmp = num
+
+    while tmp > 0:
+        reverse = reverse * base
+        reverse = reverse + tmp % base
+        tmp = tmp // base
+
+    if num == reverse:
+        return 1
+
+    return 0
