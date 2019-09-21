@@ -33,16 +33,10 @@ int is_prime(long int num)
 
 long int gcd(long int a, long int b)
 {
-   long int tmp;
-
-   while(b != 0)
-   {
-      tmp = b;
-      b = a % b;
-      a = tmp;
-   }
-
-   return a;
+   if(b == 0)
+      return a;
+   else
+      return gcd(b, a%b);
 }
 
 long int lcm(long int a, long int b)

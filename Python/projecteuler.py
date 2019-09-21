@@ -19,12 +19,10 @@ def is_prime(num):
     return 1
 
 def gcd(a, b):
-    while b != 0:
-        tmp = b
-        b = a % b
-        a = tmp
+    if b == 0:
+        return a
 
-    return a
+    return gcd(b, a%b)
 
 def lcm(a, b):
     return a * b // gcd(a, b)
