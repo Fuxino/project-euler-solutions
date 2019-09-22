@@ -5,10 +5,12 @@ int is_prime(long int);
 long int lcmm(long int *values, int n);
 long int lcm(long int a, long int b);
 long int gcd(long int a, long int b);
-int is_palindrome(int num, int base);
 int *sieve(int n);
 int count_divisors(int n);
 void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
+int is_palindrome(int num, int base);
+int is_pandigital(int value, int n);
+int is_pentagonal(long int n);
 
 #endif

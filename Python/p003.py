@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import math
+from math import floor, sqrt
 
 from timeit import default_timer
 from projecteuler import is_prime
@@ -13,7 +13,7 @@ def max_prime_factor(num):
         return max_prime_factor(num // 2)
 
     else:
-        limit = math.floor(math.sqrt(num)) + 1
+        limit = floor(sqrt(num)) + 1
 
         for i in range(3, limit, 2):
             if num % i == 0:

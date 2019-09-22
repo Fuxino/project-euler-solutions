@@ -11,8 +11,8 @@ def main():
 
     sum_ = 0
 
-    for i in range(len(n)):
-        sum_ = sum_ + int(n[i])
+    for i in n:
+        sum_ = sum_ + int(i)
 
     end = default_timer()
 

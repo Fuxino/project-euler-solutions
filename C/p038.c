@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-int is_pandigital(int value, int n);
+#include "projecteuler.h"
 
 int main(int argc, char **argv)
 {
@@ -52,7 +51,7 @@ int main(int argc, char **argv)
 
    clock_gettime(CLOCK_MONOTONIC, &end);
 
-   elapsed=(end.tv_sec-start.tv_sec)+(double)(end.tv_nsec-start.tv_nsec)/1000000000;
+   elapsed = (end.tv_sec - start.tv_sec) + (double)(end.tv_nsec - start.tv_nsec) / 1000000000;
 
    printf("Project Euler, Problem 38\n");
    printf("Answer: %ld\n", max);
@@ -62,46 +61,3 @@ int main(int argc, char **argv)
    return 0;
 }
 
-int is_pandigital(int value, int n)
-{
-   int *digits;
-   int i, digit;
-
-   if((digits = (int *)calloc(n+1, sizeof(int))) == NULL)
-   {
-      fprintf(stderr, "Error while allocating memory\n");
-      exit(1);
-   }
-
-   for(i = 0; i < n && value > 0; i++)
-   {
-      digit = value % 10;
-      digits[digit]++;
-      value /= 10;
-   }
-
-   if(i < n || value > 0)
-   {
-      free(digits);
-      return 0;
-   }
-
-   if(digits[0] != 0)
-   {
-      free(digits);
-      return 0;
-   }
-
-   for(i = 1; i <= n; i++)
-   {
-      if(digits[i] != 1)
-      {
-         free(digits);
-         return 0;
-      }
-   }
-
-   free(digits);
-
-   return 1;
-}

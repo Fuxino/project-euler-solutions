@@ -33,8 +33,8 @@ def main():
         curr = number[i:i+13]
         prod = 1
 
-        for j in range(len(curr)):
-            prod = prod * curr[j]
+        for j in curr:
+            prod = prod * j
 
         if prod > max_:
             max_ = prod

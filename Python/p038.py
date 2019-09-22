@@ -3,30 +3,7 @@
 from numpy import zeros
 
 from timeit import default_timer
-
-def is_pandigital(value, n):
-    i = 0
-
-    digits = zeros(n + 1, int)
-
-    while i < n and value > 0:
-        digit = value % 10
-        digits[digit] = digits[digit] + 1
-        value = value // 10
-        i = i + 1
-
-    if i < n or value > 0:
-        return 0
-
-    if digits[0] != 0:
-        return 0
-
-    for i in range(1, n+1):
-        if digits[i] != 1:
-            return 0
-        i = i + 1
-
-    return 1
+from projecteuler import is_pandigital
 
 def main():
     start = default_timer()

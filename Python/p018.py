@@ -31,7 +31,9 @@ def main():
 
     fp.close()
 
-    for i in range(len(triang)):
+    l = len(triang)
+
+    for i in range(l):
         triang[i] = list(map(int, triang[i]))
 
     max_ = 0

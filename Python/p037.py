@@ -11,7 +11,7 @@ def is_tr_prime(n):
 
     while tmp > 0:
         if not is_prime(tmp):
-            return 0
+            return False
         tmp = tmp // 10
 
     i = 10
@@ -19,11 +19,11 @@ def is_tr_prime(n):
 
     while tmp != n:
         if not is_prime(tmp):
-            return 0
+            return False
         i = i * 10
         tmp = n % i
 
-    return 1
+    return True
 
 def main():
     start = default_timer()

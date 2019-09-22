@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "projecteuler.h"
@@ -225,4 +226,68 @@ int is_palindrome(int num, int base)
    }
 
    return 0;
+}
+
+int is_pandigital(int value, int n)
+{
+   int *digits;
+   int i, digit;
+
+   if((digits = (int *)calloc(n+1, sizeof(int))) == NULL)
+   {
+      fprintf(stderr, "Error while allocating memory\n");
+      exit(1);
+   }
+
+   for(i = 0; i < n && value > 0; i++)
+   {
+      digit = value % 10;
+      if(digit > n)
+      {
+         return 0;
+      }
+      digits[digit]++;
+      value /= 10;
+   }
+
+   if(i < n || value > 0)
+   {
+      free(digits);
+      return 0;
+   }
+
+   if(digits[0] != 0)
+   {
+      free(digits);
+      return 0;
+   }
+
+   for(i = 1; i <= n; i++)
+   {
+      if(digits[i] != 1)
+      {
+         free(digits);
+         return 0;
+      }
+   }
+
+   free(digits);
+
+   return 1;
+}
+
+int is_pentagonal(long int n)
+{
+   double i;
+
+   i = (sqrt(24*n+1) + 1) / 6;
+
+   if(i == (int)i)
+   {
+      return 1;
+   }
+   else
+   {
+      return 0;
+   }
 }

@@ -9,8 +9,8 @@ def main():
 
     sum_ = 0
 
-    for i in range(len(res)):
-        sum_ = sum_ + int(res[i])
+    for i in res:
+        sum_ = sum_ + int(i)
 
     end = default_timer()
 

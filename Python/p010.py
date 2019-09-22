@@ -10,7 +10,7 @@ def main():
     sum_ = 0
 
     for i in range(2000000):
-        if primes[i]:
+        if primes[i] == 1:
             sum_ = sum_ + i
 
     end = default_timer()

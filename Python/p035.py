@@ -7,14 +7,14 @@ def is_circular_prime(n):
     global primes
 
     if primes[n] == 0:
-        return 0
+        return False
 
     tmp = n
     count = 0
 
     while tmp > 0:
         if tmp % 2 == 0:
-            return 0
+            return False
         count = count + 1
         tmp = tmp // 10
 
@@ -22,9 +22,9 @@ def is_circular_prime(n):
         n = n % (10 ** (count - 1)) * 10 + n // (10 ** (count - 1))
 
         if primes[n] == 0:
-            return 0
+            return False
 
-    return 1
+    return True
 
 def main():
     start = default_timer()

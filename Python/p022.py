@@ -15,14 +15,16 @@ def main():
     names.sort()
 
     sum_ = 0
+    i = 1
 
-    for i in range(len(names)):
-        l = len(names[i])
+    for name in names:
+        l = len(name)
         score = 0
         for j in range(l):
-            score = score + ord(names[i][j]) - ord('A') + 1
-        score = score * (i + 1)
+            score = score + ord(name[j]) - ord('A') + 1
+        score = score * i
         sum_ = sum_ + score
+        i = i + 1
 
     end = default_timer()
 

@@ -1,11 +1,11 @@
 #!/usr/bin/python3
 
-import math
+from math import floor, sqrt
 
 from timeit import default_timer
 
 def sum_of_divisors(n):
-    limit = math.floor(math.sqrt(n)) + 1
+    limit = floor(sqrt(n)) + 1
 
     sum_ = 1
 

@@ -2,24 +2,40 @@
 #include <stdlib.h>
 #include <time.h>
 #include <gmp.h>
+#include "projecteuler.h"
 
-void selection_sort(mpz_t *v, int n);
+int compare(void *a, void *b);
 
 int main(int argc, char **argv)
 {
    mpz_t a;
-   mpz_t powers[9801];
+   mpz_t **powers;
    int i, j, count;
    double elapsed;
    struct timespec start, end;
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
+   if((powers = (mpz_t **)malloc(9801*sizeof(mpz_t *))) == NULL)
+   {
+      fprintf(stderr, "Error while allocating memory\n");
+      return 1;
+   }
+
+   for(i = 0; i < 9801; i++)
+   {
+      if((powers[i] = (mpz_t *)malloc(sizeof(mpz_t))) == NULL)
+      {
+         fprintf(stderr, "Error while allocating memory\n");
+         return 1;
+      }
+   }
+
    mpz_init(a);
 
    for(i = 0; i < 9801; i++)
    {
-      mpz_init(powers[i]);
+      mpz_init(*powers[i]);
    }
 
    for(i = 2; i <= 100; i++)
@@ -27,18 +43,18 @@ int main(int argc, char **argv)
       mpz_set_ui(a, i);
       for(j = 2; j <= 100; j++)
       {
-         mpz_pow_ui(powers[(i-2)*99+j-2], a, j);
+         mpz_pow_ui(*powers[(i-2)*99+j-2], a, j);
       }
    }
 
    mpz_clear(a);
 
-   selection_sort(powers, 9801);
+   quick_sort((void **)powers, 0, 9800, compare);
    count = 1;
 
    for(i = 1; i < 9801; i++)
    {
-      if(mpz_cmp(powers[i], powers[i-1]))
+      if(mpz_cmp(*powers[i], *powers[i-1]))
       {
          count++;
       }
@@ -46,8 +62,11 @@ int main(int argc, char **argv)
 
    for(i = 0; i < 9801; i++)
    {
-      mpz_clear(powers[i]);
+      mpz_clear(*powers[i]);
+      free(powers[i]);
    }
+
+   free(powers);
 
    clock_gettime(CLOCK_MONOTONIC, &end);
 
@@ -61,27 +80,12 @@ int main(int argc, char **argv)
    return 0;
 }
 
-void selection_sort(mpz_t *v, int n)
+int compare(void *a, void *b)
 {
-   int i, j, min;
-   mpz_t tmp;
+   mpz_t *n1, *n2;
 
-   mpz_init(tmp);
+   n1 = (mpz_t *)a;
+   n2 = (mpz_t *)b;
 
-   for(i = 0; i < n - 1; i++)
-   {
-      min = i;
-      
-      for(j = i + 1; j < n; j++)
-      {
-         if(mpz_cmp(v[j], v[min])<0)
-         {
-            min = j;
-         }
-      }
-
-      mpz_set(tmp, v[min]);
-      mpz_set(v[min], v[i]);
-      mpz_set(v[i], tmp);
-   }
+   return mpz_cmp(*n1, *n2);
 }
