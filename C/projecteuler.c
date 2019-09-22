@@ -143,7 +143,7 @@ int *sieve(int n)
     * there is no need check i>sqrt(n).*/
    limit = floor(sqrt(n));
 
-   for(i = 3; i < limit; i += 2)
+   for(i = 3; i <= limit; i += 2)
    {
       /* Find the next number not crossed out, which is prime.*/
       if(primes[i])
@@ -166,19 +166,23 @@ int count_divisors(int n)
 {
    int i, limit, count = 0;
 
+   /* For every divisor below the square root of n, there is a corresponding one
+    * above the square root, so it's sufficient to check up to the square root of n
+    * and count every divisor twice. If n is a perfect square, the last divisor is
+    * wrongly counted twice and must be corrected.*/ 
    limit = floor(sqrt(n));
 
-   for(i = 1; i < limit; i++)
+   for(i = 1; i <= limit; i++)
    {
       if(n % i == 0)
       {
          count += 2;
       }
-
-      if(n == limit * limit)
-      {
-         count--;
-      }
+   }
+   
+   if(n == limit * limit)
+   {
+      count--;
    }
 
    return count;

@@ -19,6 +19,21 @@ def is_prime(num):
 
     return True
 
+def is_palindrome(num, base):
+    reverse = 0
+
+    tmp = num
+
+    while tmp > 0:
+        reverse = reverse * base
+        reverse = reverse + tmp % base
+        tmp = tmp // base
+
+    if num == reverse:
+        return True
+
+    return False
+
 def lcm(a, b):
     return a * b // gcd(a, b)
 
@@ -60,25 +75,10 @@ def count_divisors(n):
         if n % i == 0:
             count = count + 2
 
-        if n == limit * limit:
-            count = count - 1
+    if n == limit * limit:
+        count = count - 1
 
     return count
-
-def is_palindrome(num, base):
-    reverse = 0
-
-    tmp = num
-
-    while tmp > 0:
-        reverse = reverse * base
-        reverse = reverse + tmp % base
-        tmp = tmp // base
-
-    if num == reverse:
-        return True
-
-    return False
 
 def is_pandigital(value, n):
     i = 0
