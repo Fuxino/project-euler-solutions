@@ -7,20 +7,29 @@ int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 
 int is_prime(long int num)
 {
-   int i, limit;
+   long int i, limit;
 
    if(num <= 3)
    {
+      /* If num is 2 or 3 then it's prime.*/
       return num == 2 || num == 3;
    }
 
+   /* If num is divisible by 2 or 3 then it's not prime.*/
    if(num % 2 == 0 || num % 3 == 0)
    {
       return 0;
    }
 
+   /* Any number can have only one prime factor greater than its
+    * square root. If we reach the square root and we haven't found
+    * any smaller prime factors, then the number is prime.*/
    limit = floor(sqrt(num));
 
+   /* Every prime other than 2 and 3 is in the form 6k+1 or 6k-1.
+    * If I check all those value no prime factors of the number 
+    * will be missed. If a factor is found, the number is not prime
+    * and the function returns 0.*/
    for(i = 5; i <= limit; i += 6)
    {
       if(num % i == 0 || num % (i + 2) == 0)
@@ -29,11 +38,42 @@ int is_prime(long int num)
       }
    }
 
+   /* If no factor is found up to the square root of num, num is prime.*/
    return 1;
+}
+
+int is_palindrome(int num, int base)
+{
+   int reverse = 0, tmp;
+
+   tmp = num;
+
+   /* Start with reverse=0, get the rightmost digit of the number using 
+    * modulo operation (num modulo base), add it to reverse. Remove the
+    * rightmost digit dividing num by the base, shift the reverse left
+    * multiplying by the base, repeat until all digits have been inserted
+    * in reverse order.*/
+   while(tmp > 0)
+   {
+      reverse *= base;
+      reverse += tmp % base;
+      tmp /= base;
+   }
+
+   /* If the reversed number is equal to the original one, then it's palindrome.*/
+   if(num == reverse)
+   {
+      return 1;
+   }
+
+   return 0;
 }
 
 long int gcd(long int a, long int b)
 {
+   /* Euclid's algorithm for the greatest common divisor:
+    * gcd(a, 0) = a
+    * gcd(a, b) = gcd(b, a modulo b)*/
    if(b == 0)
    {
       return a;
@@ -42,16 +82,19 @@ long int gcd(long int a, long int b)
    return gcd(b, a%b);
 }
 
+/* Least common multiple algorithm using the greatest common divisor.*/
 long int lcm(long int a, long int b)
 {
    return a * b / gcd(a, b);
 }
 
+/* Recursive function to calculate the least common multiple of more than 2 numbers.*/
 long int lcmm(long int *values, int n)
 {
    int i;
    long int value;
 
+   /* If there are only two numbers, use the lcm function to calculate the lcm.*/
    if(n == 2)
    {
       return lcm(values[0], values[1]);
@@ -65,6 +108,7 @@ long int lcmm(long int *values, int n)
          values[i] = values[i+1];
       }
 
+      /* Recursively calculate lcm(a, b, c, ..., n) = lcm(a, lcm(b, c, ..., n)).*/
       return lcm(value, lcmm(values, n-1));
    }
 }
@@ -205,27 +249,6 @@ void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
    i = partition(array, l, r, cmp);
    quick_sort(array, l, i-1, cmp);
    quick_sort(array, i+1, r, cmp);
-}
-
-int is_palindrome(int num, int base)
-{
-   int reverse = 0, tmp;
-
-   tmp = num;
-
-   while(tmp > 0)
-   {
-      reverse *= base;
-      reverse += tmp % base;
-      tmp /= base;
-   }
-
-   if(num == reverse)
-   {
-      return 1;
-   }
-
-   return 0;
 }
 
 int is_pandigital(int value, int n)

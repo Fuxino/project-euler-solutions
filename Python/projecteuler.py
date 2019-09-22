@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from math import sqrt, floor
+from math import sqrt, floor, gcd
 
 from numpy import ndarray, zeros
 
@@ -18,12 +18,6 @@ def is_prime(num):
             return False
 
     return True
-
-def gcd(a, b):
-    if b == 0:
-        return a
-
-    return gcd(b, a%b)
 
 def lcm(a, b):
     return a * b // gcd(a, b)

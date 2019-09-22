@@ -1,3 +1,7 @@
+/* A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
+ *
+ * Find the largest palindrome made from the product of two 3-digit numbers.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -11,11 +15,15 @@ int main(int argc, char **argv)
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
+   /* Using a brute-force approach: generate every product of 3-digit numbers
+    * and check if it's palindrome. If the product found is greater than the
+    * current maximum, save the current product.*/
    for(i = 999; i >= 100; i--)
    {
       for(j = i; j >= 100; j--)
       {
          num = i * j;
+         /* Use the function defined in projecteuler.c to check if a number is palindrome.*/
          if(num > max && is_palindrome(num, 10))
          {
             max = num;

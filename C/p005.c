@@ -1,3 +1,7 @@
+/* 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
+ *
+ * What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -11,6 +15,7 @@ int main(int argc, char **argv)
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
+   /* Function define in projecteuler.c to find the least common multiple of multiple numbers.*/
    res = lcmm(n, 20);
 
    clock_gettime(CLOCK_MONOTONIC, &end);
