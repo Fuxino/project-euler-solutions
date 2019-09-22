@@ -113,6 +113,8 @@ long int lcmm(long int *values, int n)
    }
 }
 
+/* Function implementing the Sieve or Eratosthenes to generate
+ * primes up to a certain number.*/
 int *sieve(int n)
 {
    int i, j, limit;
@@ -123,23 +125,33 @@ int *sieve(int n)
       return NULL;
    }
 
+   /* 0 and 1 are not prime, 2 and 3 are prime.*/
    primes[0] = 0;
    primes[1] = 0;
    primes[2] = 1;
    primes[3] = 1;
 
+   /* Cross out (set to 0) all even numbers and set the odd numbers to 1 (possible prime).*/
    for(i = 4; i < n - 1; i += 2)
    {
       primes[i] = 0;
       primes[i+1] = 1;
    }
 
+   /* If i is prime, all multiples of i smaller than i*i have already been crossed out.
+    * if i=sqrt(n), all multiples of i up to n (the target) have been crossed out. So
+    * there is no need check i>sqrt(n).*/
    limit = floor(sqrt(n));
 
    for(i = 3; i < limit; i += 2)
    {
+      /* Find the next number not crossed out, which is prime.*/
       if(primes[i])
       {
+         /* Cross out all multiples of i, starting with i*i because any smaller multiple 
+          * of i has a smaller prime factor and has already been crossed out. Also, since
+          * i is odd, i*i+i is even and has already been crossed out, so multiples are 
+          * crossed out with steps of 2*i.*/
          for(j = i * i; j < n; j += 2 * i)
          {
             primes[j] = 0;

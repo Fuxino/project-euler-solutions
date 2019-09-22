@@ -1,3 +1,7 @@
+/* The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+ *
+ * Find the sum of all the primes below two million.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -15,11 +19,15 @@ int main(int argc, char **argv)
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
-   if(primes = sieve(N) == NULL)
+   /* Use the function in projecteuler.c implementing the 
+    * Sieve of Eratosthenes algorithm to generate primes.*/
+   if((primes = sieve(N)) == NULL)
    {
       fprintf(stderr, "Error! Sieve function returned NULL\n");
       return 1;
+   }
 
+   /* Sum all the primes.*/
    for(i = 0; i < N; i++)
    {
       if(primes[i])
