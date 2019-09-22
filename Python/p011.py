@@ -28,94 +28,52 @@ def main():
 
     max_ = 0
 
-    for i in range(20):
-        for j in range(20):
+    for i in range(17):
+        for j in range(17):
             prod = 1
             k = j
 
-            while k < j + 4 and k < 20:
+            while k < j + 4:
                 prod = prod * grid[i][k]
                 k = k + 1
 
-            if k == j + 4 and prod > max_:
-                max_ = prod
-
-            prod = 1
-            k = j
-
-            while k > j - 4 and k >= 0:
-                prod = prod * grid[i][k]
-                k = k - 1
-
-            if k == j - 4 and prod > max_:
+            if prod > max_:
                 max_ = prod
 
             prod = 1
             k = i
 
-            while k < i + 4 and k < 20:
+            while k < i + 4:
                 prod = prod * grid[k][j]
                 k = k + 1
 
-            if k == i + 4 and prod > max_:
-                max_ = prod
-
-            prod = 1
-            k = i
-
-            while k > i - 4 and k >= 0:
-                prod = prod * grid[k][j]
-                k = k - 1
-
-            if k == i - 4 and prod > max_:
+            if prod > max_:
                 max_ = prod
 
             prod = 1
             k = i
             w = j
 
-            while k < i + 4 and w < j + 4 and k < 20 and w < 20:
+            while k < i + 4 and w < j + 4:
                 prod = prod * grid[k][w]
                 k = k + 1
                 w = w + 1
 
-            if k == i + 4 and w == j + 4 and prod > max_:
+            if prod > max_:
                 max_ = prod
 
+    for i in range(17):
+        for j in range(3, 20):
             prod = 1
             k = i
             w = j
 
-            while k < i + 4 and w > j - 4 and k < 20 and w >= 0:
+            while k < i + 4 and w > j - 4:
                 prod = prod * grid[k][w]
                 k = k + 1
                 w = w - 1
 
-            if k == i + 4 and w == j - 4 and prod > max_:
-                max_ = prod
-
-            prod = 1
-            k = i
-            w = j
-
-            while k > i - 4 and w < j + 4 and k >= 0 and w < 20:
-                prod = prod * grid[k][w]
-                k = k - 1
-                w = w + 1
-
-            if k == i - 4 and w == j + 4 and prod > max_:
-                max_ = prod
-
-            prod = 1
-            k = i
-            w = j
-
-            while k > i - 4 and w > j - 4 and k >= 0 and w >= 0:
-                prod = prod * grid[k][w]
-                k = k - 1
-                w = w - 1
-
-            if k == i - 4 and w == j - 4 and prod > max_:
+            if prod > max_:
                 max_ = prod
 
     end = default_timer()
