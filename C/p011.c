@@ -70,7 +70,7 @@ int main(int argc, char **argv)
          {
             prod *= grid[i][k];
          }
-            
+
          if(prod > max)
          {
             max = prod;
@@ -102,7 +102,7 @@ int main(int argc, char **argv)
          }
       }
    }
-  
+
    /* The last diagonal is handled separately.*/ 
    for(i = 0; i < 17; i++)
    {
