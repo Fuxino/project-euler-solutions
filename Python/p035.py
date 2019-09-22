@@ -31,10 +31,12 @@ def main():
 
     global primes
 
-    primes = sieve(1000000)
+    N = 1000000
+
+    primes = sieve(N)
     count = 13
 
-    for i in range(101, 1000000, 2):
+    for i in range(101, N, 2):
         if is_circular_prime(i):
             count = count + 1
 

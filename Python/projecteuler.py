@@ -45,14 +45,14 @@ def sieve(n):
     primes[2] = 1
     primes[3] = 1
 
-    for i in range(4, n, 2):
+    for i in range(4, n -1, 2):
         primes[i] = 0
         primes[i+1] = 1
 
     limit = floor(sqrt(n))
 
     for i in range(3, limit, 2):
-        if primes[i]:
+        if primes[i] == 1:
             for j in range(i * i, n, 2 * i):
                 primes[j] = 0
 

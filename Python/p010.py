@@ -6,10 +6,12 @@ from projecteuler import sieve
 def main():
     start = default_timer()
 
-    primes = sieve(2000000)
+    N = 2000000
+
+    primes = sieve(N)
     sum_ = 0
 
-    for i in range(2000000):
+    for i in range(N):
         if primes[i] == 1:
             sum_ = sum_ + i
 

@@ -5,7 +5,9 @@ from timeit import default_timer
 def main():
     start = default_timer()
 
-    limit = 1001 * 1001
+    N = 1001
+
+    limit = N * N
 
     i = 0
     j = 1
