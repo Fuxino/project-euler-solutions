@@ -1,3 +1,11 @@
+/* Using names.txt, a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order.
+ * Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
+ *
+ * For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list.
+ * So, COLIN would obtain a score of 938 × 53 = 49714.
+ *
+ * What is the total of all the name scores in the file?*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -29,6 +37,7 @@ int main(int argc, char **argv)
    len = strlen(line);
    n = 1;
 
+   /* Count the names in the file.*/
    for(i = 0; i < len; i++)
    {
       if(line[i] == ',')
@@ -43,6 +52,7 @@ int main(int argc, char **argv)
       return 1;
    }
 
+   /* Save each name in a string.*/
    names[0] = strtok(line, ",\"");
 
    for(i = 1; i < n; i++)
@@ -50,8 +60,10 @@ int main(int argc, char **argv)
       names[i] = strtok(NULL, ",\"");
    }
 
+   /* Use quick_sort algorithm implemented in projecteuler.c to sort the names.*/
    quick_sort((void **)names, 0, n-1, compare);
 
+   /* Calculate the score of each name an multiply by its position.*/
    for(i = 0; i < n; i++)
    {
       len = strlen(names[i]);
@@ -77,6 +89,7 @@ int main(int argc, char **argv)
    return 0;
 }
 
+/* Function to compare two strings, to pass to the quick_sort function.*/
 int compare(void *string1, void *string2)
 {
    char *s1, *s2;
