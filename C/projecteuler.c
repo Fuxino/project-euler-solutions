@@ -188,6 +188,24 @@ int count_divisors(int n)
    return count;
 }
 
+int find_max_path(int **triang, int n)
+{
+   int i, j;
+
+   for(i = n - 2; i >= 0; i--)
+   {
+      for(j = 0; j <= i; j++)
+      {
+         if(triang[i+1][j] > triang[i+1][j+1])
+            triang[i][j] += triang[i+1][j];
+         else
+            triang[i][j] += triang[i+1][j+1];
+      }
+   }
+
+   return triang[0][0];
+}
+
 void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i, j;

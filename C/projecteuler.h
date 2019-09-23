@@ -8,6 +8,7 @@ long int lcm(long int a, long int b);
 long int lcmm(long int *values, int n);
 int *sieve(int n);
 int count_divisors(int n);
+int find_max_path(int **triang, int n);
 void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 int is_pandigital(int value, int n);
