@@ -50,7 +50,7 @@ int is_palindrome(int num, int base)
 
    /* Start with reverse=0, get the rightmost digit of the number using 
     * modulo operation (num modulo base), add it to reverse. Remove the
-    * rightmost digit dividing num by the base, shift the reverse left
+    * rightmost digit from num dividing num by the base, shift the reverse left
     * multiplying by the base, repeat until all digits have been inserted
     * in reverse order.*/
    while(tmp > 0)
@@ -192,8 +192,12 @@ int find_max_path(int **triang, int n)
 {
    int i, j;
 
+   /* Start from the second to last row and go up.*/
    for(i = n - 2; i >= 0; i--)
    {
+      /* For each element in the row, check the two adjacent elements
+       * in the row below and sum the larger one to it. At the end,
+       * the element at the top will contain the value of the maximum path.*/
       for(j = 0; j <= i; j++)
       {
          if(triang[i+1][j] > triang[i+1][j+1])
@@ -206,11 +210,40 @@ int find_max_path(int **triang, int n)
    return triang[0][0];
 }
 
+int sum_of_divisors(int n)
+{
+   int i, sum = 1, limit;
+
+   /* For each divisor of n smaller than the square root of n,
+    * there is another one larger than the square root. If i is 
+    * a divisor of n, so is n/i. Checking divisors i up to square
+    * root of n and adding both i and n/i is sufficient to sum
+    * all divisors.*/
+   limit = floor(sqrt(n));
+
+   for(i = 2; i <= limit; i++)
+   {
+      if(n % i == 0)
+      {
+         sum += i;
+         /* If n is a perfect square, i=limit is a divisor and
+          * has to be counted only once.*/
+         if(n != i * i)
+         {
+            sum += (n / i);
+         }
+      }
+   }
+
+   return sum;
+}
+
 void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i, j;
    void *tmp;
-   
+  
+   /* After this cycle the smallest element will be in the first position of the array.*/ 
    for(i = r; i > l; i--)
    {
       if(cmp(array[i], array[i-1]) < 0)
@@ -220,6 +253,9 @@ void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
          array[i-1] = tmp;
       }
    }
+
+   /* For each element in the array (starting from i=2), move it to the left until a 
+    * smaller element on its left is found.*/
    for(i = l + 2; i <= r; i++)
    {
       tmp = array[i];
@@ -239,12 +275,16 @@ int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i = l -1, j = r;
    void *pivot, *tmp;
-   
+  
+   /* Arbitrarily selecting the rightmost element as pivot.*/ 
    pivot = array[r];
    
    while(1)
    {
+      /* From the left, loop until an element greater than the pivot is found.*/ 
       while(cmp(array[++i], pivot) < 0);
+      /* From the right, loop until an element smaller than the pivot is found
+       * or the beginning of the array is reached.*/
       while(cmp(array[--j], pivot) > 0)
       {
          if(j == l)
@@ -253,16 +293,22 @@ int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
          }
       }
 
+      /* If j<=i, array[j], which is smaller than pivot, is already on the left
+       * of array[i], which is larger than pivot, so they don't need to be swapped.*/
       if(j <= i)
       {
          break;
       }
 
+      /* If j>i, swap array[i] and array[j].*/
       tmp = array[i];
       array[i] = array[j];
       array[j] = tmp;
    }
 
+   /* Swap array[i] with pivot. All elements on the left of pivot are smaller, all
+    * the elements on the right are bigger, so pivot is in the correct position
+    * in the sorted array.*/
    tmp = array[i];
    array[i] = array[r];
    array[r] = tmp;
@@ -273,13 +319,15 @@ int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i;
-   
-   if(r - l <= 10)
+  
+   /* If the array is small, it's better to just use a simple insertion_sort algorithm.*/ 
+   if(r - l <= 20)
    {
       insertion_sort(array, l, r, cmp);
       return;
    }
-   
+  
+   /* Partition the array and recursively run quick_sort on the two partitions.*/ 
    i = partition(array, l, r, cmp);
    quick_sort(array, l, i-1, cmp);
    quick_sort(array, i+1, r, cmp);

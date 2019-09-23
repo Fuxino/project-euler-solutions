@@ -74,6 +74,7 @@ int main(int argc, char **argv)
 
    fclose(fp);
 
+   /* Use function implemented in projecteuler.c to find the maximum path.*/
    max = find_max_path(triang, 15);
 
    clock_gettime(CLOCK_MONOTONIC, &end);

@@ -1,21 +1,9 @@
 #!/usr/bin/python3
 
 from timeit import default_timer
-
-def sum_triangle(triang, n, i, j, sum_):
-    global max_
-
-    if i == n:
-        if sum_ > max_:
-            max_ = sum_
-        return max_
-
-    sum_triangle(triang, n, i+1, j, sum_+triang[i][j])
-    sum_triangle(triang, n, i+1, j+1, sum_+triang[i][j])
+from projecteuler import find_max_path
 
 def main():
-    global max_
-
     start = default_timer()
 
     try:
@@ -36,8 +24,7 @@ def main():
     for i in range(l):
         triang[i] = list(map(int, triang[i]))
 
-    max_ = 0
-    sum_triangle(triang, 15, 0, 0, 0)
+    max_ = find_max_path(triang, 15)
 
     end = default_timer()
 

@@ -80,6 +80,16 @@ def count_divisors(n):
 
     return count
 
+def find_max_path(triang, n):
+    for i in range(n-2, -1, -1):
+        for j in range(0, i+1):
+            if triang[i+1][j] > triang[i+1][j+1]:
+                triang[i][j] = triang[i][j] + triang[i+1][j]
+            else:
+                triang[i][j] = triang[i][j] + triang[i+1][j+1]
+
+    return triang[0][0]
+
 def is_pandigital(value, n):
     i = 0
     digits = zeros(n + 1, int)

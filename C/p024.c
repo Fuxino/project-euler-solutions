@@ -1,23 +1,58 @@
+/* A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4.
+ * If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:
+ *
+ * 012   021   102   120   201   210
+ *
+ * What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "projecteuler.h"
 
-void next_perm(int *perm, int n);
-void swap(int *vet, int i, int j);
-void sort(int *vet, int i, int n);
+void next_perm(int **perm, int n);
+void swap(int **vet, int i, int j);
+int compare(void *a, void *b);
 
 int main(int argc, char **argv)
 {
-   int i, perm[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+   int i, res[10];
+   int **perm;
    double elapsed;
    struct timespec start, end;
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
+   if((perm = (int **)malloc(10*sizeof(int *))) == NULL)
+   {
+      fprintf(stderr, "Error while allocating memory\n");
+      return 1;
+   }
+
+   for(i = 0; i < 10; i++)
+   {
+      if((perm[i] = (int *)malloc(sizeof(int))) == NULL)
+      {
+         fprintf(stderr, "Error while allocating memory\n");
+         return 1;
+      }
+      *perm[i] = i;
+   }
+
    for(i = 0; i < 999999; i++)
    {
+      /* Function that generates permutations in lexicographic order.
+       * Finish when the 1000000th is found.*/
       next_perm(perm, 10);
    }
+
+   for(i = 0; i < 10; i++)
+   {
+      res[i] = *perm[i];
+      free(perm[i]);
+   }
+
+   free(perm);
 
    clock_gettime(CLOCK_MONOTONIC, &end);
 
@@ -26,7 +61,7 @@ int main(int argc, char **argv)
 
    for(i = 0; i < 10; i++)
    {
-      printf("%d", perm[i]);
+      printf("%d", res[i]);
    }
 
    printf("\n");
@@ -38,61 +73,56 @@ int main(int argc, char **argv)
    return 0;
 }
 
-void next_perm(int *perm, int n)
+void swap(int **vet, int i, int j)
 {
-   int i, j, min = n, min_idx, flag = 0;
-
-   for(i = 0; i < n - 1; i++)
-   {
-      if(perm[i] < perm[i+1])
-      {
-         flag=1;
-         break;
-      }
-   }
-
-   if(!flag)
-   {
-      return;
-   }
-
-   for(i = n - 2; perm[i] > perm[i+1]; i--);
-
-   for(j = i + 1; j < n; j++)
-   {
-      if(perm[j] > perm[i] && perm[j] < min)
-      {
-         min = perm[j];
-         min_idx = j;
-      }
-   }
-
-   swap(perm, i, min_idx);
-   sort(perm, i+1, n);
-}
-
-void swap(int *vet, int i, int j)
-{
-   int tmp;
+   int *tmp;
 
    tmp = vet[i];
    vet[i] = vet[j];
    vet[j] = tmp;
 }
 
-void sort(int *vet, int i, int j)
+int compare(void *a, void *b)
 {
-   int a, b, tmp;
+   int *n1, *n2;
 
-   for(a=i+1; a<j; a++)
+   n1 = (int *)a;
+   n2 = (int *)b;
+
+   return *n1 - *n2;
+}
+
+/* Implements SEPA (Simple, Efficient Permutation Algorithm)
+ * to find the next permutation.*/
+void next_perm(int **perm, int n)
+{
+   int i, key;
+
+   /* Starting from the right of the array, for each pair of values
+    * if the left one is smaller than the right, that value is the key.*/
+   for(i = n - 2; i >= 0; i--)
    {
-      tmp=vet[a];
-      b=a-1;
-      while(b>=i && vet[b]>tmp)
+      if(compare((void *)perm[i], (void *)perm[i+1]) < 0)
       {
-         vet[b+1]=vet[b];
-         b--;
+         key = i;
+         break;
       }
-      vet[b+1]=tmp;
    }
+
+   /* If no left value is smaller than its right value, the
+    * array is in reverse order, i.e. it's the last permutation.*/
+   if(i == -1)
+   {
+      return;
+   }
+
+   /* Find the smallest value on the right of the key which is bigger than the key itself,
+    * considering that the values at the right of the key are in reverse order.*/
+   for(i = key + 1; i < n && compare((void *)perm[i], (void *)perm[key]) > 0; i++);
+
+   /* Swap the value found and the key.*/
+   swap(perm, key, i-1);
+   /* Sort the values at the right of the key. This is
+    * the next permutation.*/
+   insertion_sort((void **)perm, key+1, n-1, compare);
 }
