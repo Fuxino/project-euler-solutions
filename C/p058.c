@@ -55,7 +55,7 @@ int main(int argc, char **argv)
       {
          count++;
       }
-      
+
       i += step;
       ratio = (double)count / diag;
 

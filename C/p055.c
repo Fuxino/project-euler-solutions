@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 
    printf("Project Euler, Problem 55\n");
    printf("Answer: %d\n", count);
-   
+
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 
    return 0;
@@ -75,7 +75,7 @@ int is_lychrel(mpz_t n)
    for(i = 0; i < 50; i++)
    {
       mpz_set_ui(reverse, 0);
-    
+
       /* Find the reverse of the given number.*/ 
       while(mpz_cmp_ui(tmp, 0) > 0)
       {

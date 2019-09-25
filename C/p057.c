@@ -56,7 +56,7 @@ int main(int argc, char **argv)
 
    printf("Project Euler, Problem 57\n");
    printf("Answer: %d\n", count);
-   
+
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 
    return 0;

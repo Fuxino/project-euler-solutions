@@ -54,7 +54,7 @@ int main(int argc, char **argv)
    }
 
    free(primes);
-   
+
    clock_gettime(CLOCK_MONOTONIC, &end);
 
    elapsed = (end.tv_sec - start.tv_sec) + (double)(end.tv_nsec - start.tv_nsec) / 1000000000;

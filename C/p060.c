@@ -13,7 +13,7 @@
 #define N 10000
 
 int cat(int i, int j);
-   
+
 int *primes;
 
 int main(int argc, char **argv)
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
 
    printf("Project Euler, Problem 60\n");
    printf("Answer: %d\n", n);
-   
+
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 
    return 0;

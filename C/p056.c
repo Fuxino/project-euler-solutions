@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 
    printf("Project Euler, Problem 56\n");
    printf("Answer: %d\n", max);
-   
+
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 
    return 0;
