@@ -57,7 +57,7 @@ int main(int argc, char **argv)
          /* After eliminating factors 2s and 5s, the length of the repeating cycle 
           * of 1/d is the smallest n for which k=10^n-1/d is an integer. So we start 
           * with k=9, then k=99, k=999 and  so on until k is divisible by d. 
-          * The number of digits of k (n) is the length of the repeating cycle.*/
+          * The number  of digits of k is the length of the repeating cycle.*/
          while(!mpz_divisible_p(k, div))
          {
             n++;

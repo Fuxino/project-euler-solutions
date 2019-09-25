@@ -1,3 +1,9 @@
+/* 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
+ *
+ * Find the sum of all numbers which are equal to the sum of the factorial of their digits.
+ *
+ * Note: as 1! = 1 and 2! = 2 are not sums they are not included.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -22,12 +28,14 @@ int main(int argc, char **argv)
       mpz_init_set_ui(factorials[i], 1);
    }
 
+   /* Pre-calculate factorials of each digit from 0 to 9.*/
    for(i = 2; i < 10; i++)
    {
       mpz_fac_ui(factorials[i], i);
    }
 
-   while(mpz_cmp_ui(a, 50000) < 0)
+   /* 9!*7<9999999, so 9999999 is certainly un upper bound.*/
+   while(mpz_cmp_ui(a, 9999999) < 0)
    {
       mpz_set(b, a);
       mpz_set_ui(sum_f, 0);
