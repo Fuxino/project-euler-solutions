@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <gmp.h>
 #include "projecteuler.h"
 
 int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
@@ -65,6 +66,33 @@ int is_palindrome(int num, int base)
    {
       return 1;
    }
+
+   return 0;
+}
+
+/* Same function, using GMP Library for long numbers.*/
+int is_palindrome_mpz(mpz_t num, int base)
+{
+   mpz_t tmp, reverse, rem;
+
+   mpz_inits(tmp, reverse, rem, NULL);
+   mpz_set(tmp, num);
+   mpz_set_ui(reverse, 0);
+
+   while(mpz_cmp_ui(tmp, 0) > 0)
+   {
+      mpz_mul_ui(reverse, reverse, base);
+      mpz_tdiv_qr_ui(tmp, rem, tmp, base);
+      mpz_add(reverse, reverse, rem);
+   }
+
+   if(!mpz_cmp(num, reverse))
+   {
+      mpz_clears(reverse, rem, NULL);
+      return 1;
+   }
+      
+   mpz_clears(reverse, rem, NULL);
 
    return 0;
 }
