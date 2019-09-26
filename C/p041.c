@@ -30,7 +30,7 @@ int main(int argc, char **argv)
       {
          break;
       }
-//       Skipping the even numbers.
+      /*Skipping the even numbers.*/
       i -= 2;
    }
 

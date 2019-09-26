@@ -17,7 +17,7 @@ int compare(void *a, void *b);
 
 int main(int argc, char **argv)
 {
-   int a, b, i, j, p, sum, n = 0, num;
+   int i, j, p, sum, n = 0, num;
    int **products;
    char num_s[10];
    double elapsed;

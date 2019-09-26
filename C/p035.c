@@ -88,7 +88,7 @@ int is_circular_prime(int n)
 
    for(i = 1; i < count; i++)
    {
-      /* Generate rotations and check if it's primes.*/
+      /* Generate rotations and check if they're prime.*/
       n = n % (int)pow(10, count-1) * 10 + n / (int)pow(10, count-1);
       if(primes[n] == 0)
       {
