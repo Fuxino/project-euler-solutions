@@ -1,22 +1,62 @@
+/* The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a
+ * rather interesting sub-string divisibility property.
+ *
+ * Let d1 be the 1st digit, d2 be the 2nd digit, and so on. In this way, we note the following:
+ *
+ * d2d3d4=406 is divisible by 2
+ * d3d4d5=063 is divisible by 3
+ * d4d5d6=635 is divisible by 5
+ * d5d6d7=357 is divisible by 7
+ * d6d7d8=572 is divisible by 11
+ * d7d8d9=728 is divisible by 13
+ * d8d9d10=289 is divisible by 17
+ *
+ * Find the sum of all 0 to 9 pandigital numbers with this property.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "projecteuler.h"
 
-void permute(int *v, int i, int n);
-void swap(int *a, int *b);
-int has_property(int *v);
-
-long int sum = 0;
+int compare(void *a, void *b);
+int has_property(int **n);
 
 int main(int argc, char **argv)
 {
-   int n[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+   int i;
+   int **n;
+   long int sum = 0;
    double elapsed;
    struct timespec start, end;
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
-   permute(n, 0, 9);
+   if((n = (int **)malloc(10*sizeof(int *))) == NULL)
+   {
+      fprintf(stderr, "Error while allocating memory\n");
+      return 1;
+   }
+ 
+   for(i = 0; i < 10; i++)
+   {
+      if((n[i] = (int *)malloc(sizeof(int))) == NULL)
+      {
+         fprintf(stderr, "Error while allocating memory\n");
+         return 1;
+      }
+      *n[i] = i;
+   }
+
+   /* Find the next permutation and check if it has the required property.
+    * Repeat until all the permutations have been found.*/
+   while(next_permutation((void **)n, 10, compare) != -1)
+   {
+      if(has_property(n))
+      {
+         sum += *n[0] * 1e9 + *n[1] * 1e8 + *n[2] * 1e7 + *n[3] * 1e6 + *n[4] * 1e5 +
+                *n[5] * 1e4 + *n[6] * 1e3 + *n[7] * 1e2 + *n[8] * 1e1 + *n[9];
+      }
+   }
 
    clock_gettime(CLOCK_MONOTONIC, &end);
 
@@ -30,84 +70,64 @@ int main(int argc, char **argv)
    return 0;
 }
 
-void permute(int *v, int i, int n)
+int compare(void *a, void *b)
 {
-   int j;
+   int *n1, *n2;
 
-   if(i == n)
-   {
-      if(has_property(v))
-      {
-         sum += v[0] * 1e9 + v[1] * 1e8 + v[2] * 1e7 + v[3] * 1e6 + v[4] * 1e5 + v[5] * 1e4 + v[6] * 1e3 + v[7] * 1e2 + v[8] * 1e1 + v[9];
-      }
-   }
-   else
-   {
-      for(j = i; j <= n; j++)
-      {
-         swap((v+i), (v+j));
-         permute(v, i+1, n);
-         swap((v+i), (v+j));
-      }
-   }
+   n1 = (int *)a;
+   n2 = (int *)b;
+
+   return *n1 - *n2;
 }
 
-void swap(int *a, int *b)
-{
-   int tmp;
-
-   tmp = *a;
-   *a = *b;
-   *b = tmp;
-}
-
-int has_property(int *v)
+/* Function to check if the value has the desired property.*/
+int has_property(int **n)
 {
    long int value;
 
-   value = v[1] * 100 + v[2] * 10 + v[3];
+   value = *n[1] * 100 + *n[2] * 10 + *n[3];
 
    if(value % 2 != 0)
    {
       return 0;
    }
 
-   value = v[2] * 100 + v[3] * 10 + v[4];
+   value = *n[2] * 100 + *n[3] * 10 + *n[4];
 
    if(value % 3 != 0)
    {
       return 0;
    }
 
-   value = v[3] * 100 + v[4] * 10 + v[5];
+   value = *n[3] * 100 + *n[4] * 10 + *n[5];
 
    if(value % 5 != 0)
    {
       return 0;
    }
 
-   value = v[4] * 100 + v[5] * 10 + v[6];
+   value = *n[4] * 100 + *n[5] * 10 + *n[6];
 
    if(value % 7 != 0)
    {
       return 0;
    }
 
-   value = v[5] * 100 + v[6] * 10 + v[7];
+   value = *n[5] * 100 + *n[6] * 10 + *n[7];
 
    if(value % 11 != 0)
    {
       return 0;
    }
 
-   value = v[6] * 100 + v[7] * 10 + v[8];
+   value = *n[6] * 100 + *n[7] * 10 + *n[8];
 
    if(value %13 != 0)
    {
       return 0;
    }
 
-   value = v[7] * 100 + v[8] * 10 + v[9];
+   value = *n[7] * 100 + *n[8] * 10 + *n[9];
 
    if(value % 17 != 0)
    {

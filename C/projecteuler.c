@@ -266,6 +266,15 @@ int sum_of_divisors(int n)
    return sum;
 }
 
+void swap(void **array, int i, int j)
+{
+   void *tmp;
+
+   tmp = array[i];
+   array[i] = array[j];
+   array[j] = tmp;
+}
+
 void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i, j;
@@ -276,9 +285,7 @@ void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
    {
       if(cmp(array[i], array[i-1]) < 0)
       {
-         tmp = array[i];
-         array[i] = array[i-1];
-         array[i-1] = tmp;
+         swap(array, i, i-1);
       }
    }
 
@@ -329,17 +336,13 @@ int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
       }
 
       /* If j>i, swap array[i] and array[j].*/
-      tmp = array[i];
-      array[i] = array[j];
-      array[j] = tmp;
+      swap(array, i, j);
    }
 
    /* Swap array[i] with pivot. All elements on the left of pivot are smaller, all
     * the elements on the right are bigger, so pivot is in the correct position
     * in the sorted array.*/
-   tmp = array[i];
-   array[i] = array[r];
-   array[r] = tmp;
+   swap(array, i, r);
    
    return i;
 }
@@ -359,6 +362,43 @@ void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
    i = partition(array, l, r, cmp);
    quick_sort(array, l, i-1, cmp);
    quick_sort(array, i+1, r, cmp);
+}
+
+/* Implements SEPA (Simple, Efficient Permutation Algorithm)
+ * to find the next permutation.*/
+int next_permutation(void **perm, int n, int (*cmp)(void *a, void *b))
+{
+   int i, key;
+
+   /* Starting from the right of the array, for each pair of values
+    * if the left one is smaller than the right, that value is the key.*/
+   for(i = n - 2; i >= 0; i--)
+   {
+      if(cmp(perm[i], perm[i+1]) < 0)
+      {
+         key = i;
+         break;
+      }
+   }
+
+   /* If no left value is smaller than its right value, the
+    * array is in reverse order, i.e. it's the last permutation.*/
+   if(i == -1)
+   {
+      return -1;
+   }
+
+   /* Find the smallest value on the right of the key which is bigger than the key itself,
+    * considering that the values at the right of the key are in reverse order.*/
+   for(i = key + 1; i < n && cmp(perm[i], perm[key]) > 0; i++);
+
+   /* Swap the value found and the key.*/
+   swap(perm, key, i-1);
+   /* Sort the values at the right of the key. This is
+    * the next permutation.*/
+   insertion_sort(perm, key+1, n-1, cmp);
+
+   return 0;
 }
 
 int is_pandigital(int value, int n)
@@ -413,6 +453,8 @@ int is_pentagonal(long int n)
 {
    double i;
 
+   /* A number n is pentagonal if p=(sqrt(24n+1)+1)/6 is an integer.
+    * In this case, n is the pth pentagonal number.*/
    i = (sqrt(24*n+1) + 1) / 6;
 
    if(i == (int)i)
