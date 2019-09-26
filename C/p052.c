@@ -10,7 +10,7 @@ int have_same_digits(int a, int b);
 
 int main(int argc, char **argv)
 {
-   int i, found = 0;
+   int i;
    double elapsed;
    struct timespec start, end;
 
@@ -19,12 +19,12 @@ int main(int argc, char **argv)
    i = 1;
 
    /* Brute force approach, try every integer number until the desired one is found.*/
-   while(!found)
+   while(1)
    {
       if(have_same_digits(i, 2*i) && have_same_digits(i, 3*i) && have_same_digits(i, 4*i) &&
             have_same_digits(i, 5*i) && have_same_digits(i, 6*i))
       {
-         found = 1;
+         break;
       }
 
       i++;
