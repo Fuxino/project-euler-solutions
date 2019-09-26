@@ -6,7 +6,7 @@ from projecteuler import sieve
 def goldbach(n):
     global primes
 
-    for i in range(2, n):
+    for i in range(3, n, 2):
         if primes[i] == 1:
             j = 1
 
