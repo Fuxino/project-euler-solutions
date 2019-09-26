@@ -1,3 +1,7 @@
+/* The series, 1^1 + 2^2 + 3^3 + ... + 10^10 = 10405071317.
+ *
+ * Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -17,6 +21,7 @@ int main(int argc, char **argv)
    mpz_init_set_ui(sum, 0);
    mpz_init(power);
 
+   /* Simply calculate the sum of the powers using the GMP Library.*/
    for(i = 1; i <= 1000; i++)
    {
       mpz_ui_pow_ui(power, i, i);
