@@ -33,13 +33,13 @@ int main(int argc, char **argv)
    primes = sieve(N);
 
    /* Checking only odd numbers with at least 4 digits.*/
-   for(i = 1001; !found && i < N; i += 2)
+   for(i = 1001; i < N; i += 2)
    {
       /* The family of numbers needs to have at least one of 0, 1 or 2 as
        * repeated digits, otherwise we can't get a 8 number family (there 
        * are only 7 other digits). Also, the number of repeated digits must
        * be 3, otherwise at least 3 resulting numbers will be divisible by 3.
-       * So the smaller number of this family must have three 0s, three 1s or
+       * So the smallest number of this family must have three 0s, three 1s or
        * three 2s.*/
       if(count_digit(i, 0) >= 3 || count_digit(i, 1) >= 3 ||
             count_digit(i, 2) >= 3)
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
        * this is the result.*/
          if(primes[i] && replace(i) == 8)
          {
-            found = 1;
+            break;
          }
       }
    }
@@ -60,7 +60,7 @@ int main(int argc, char **argv)
    elapsed = (end.tv_sec - start.tv_sec) + (double)(end.tv_nsec - start.tv_nsec) / 1000000000;
 
    printf("Project Euler, Problem 51\n");
-   printf("Answer: %d\n", i-2);
+   printf("Answer: %d\n", i);
 
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 
@@ -104,7 +104,9 @@ int replace(int n)
             for(w = 0; w < 10; w++)
             {
                if(i == 0 && w == 0)
+               {
                   continue;
+               }
 
                sprintf(n_to_s, "%d", n);
                n_to_s[i] = w + '0';
@@ -115,14 +117,18 @@ int replace(int n)
                if(primes[s_to_n])
                {
                   if(count == 0 && s_to_n != n)
+                  {
                      continue;
+                  }
 
                   count++;
                }
             }
 
             if(count > max)
+            {
                max = count;
+            }
          }
       }
    }
