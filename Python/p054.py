@@ -44,7 +44,7 @@
 #      You can assume that all hands are valid (no invalid characters or repeated cards), each player's hand is in no specific order,
 #      and in each hand there is a clear winner.
 #
-#      How many hands does Player 1 win?*/
+#      How many hands does Player 1 win?
 
 from enum import IntEnum
 

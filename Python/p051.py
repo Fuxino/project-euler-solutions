@@ -7,7 +7,7 @@
 # family, is the smallest prime with this property.
 #
 # Find the smallest prime which, by replacing part of the number (not necessarily adjacent digits) with the same digit, is part of an eight prime
-# value family.*/
+# value family.
 
 from timeit import default_timer
 from projecteuler import sieve

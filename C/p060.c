@@ -29,7 +29,7 @@ int main(int argc, char **argv)
    /* Straightforward brute force approach.*/
    for(p1 = 3; p1 < N && !found; p1 += 2)
    {
-      /* If p1 is not prime, go to next number.*/
+      /* If p1 is not prime, go to the next number.*/
       if(!primes[p1])
       {
          continue;

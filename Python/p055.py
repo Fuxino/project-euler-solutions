@@ -21,7 +21,7 @@
 #
 # How many Lychrel numbers are there below ten-thousand?
 #
-# NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.*/
+# NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
 
 from timeit import default_timer
 from projecteuler import is_palindrome

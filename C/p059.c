@@ -122,6 +122,7 @@ int main(int argc, char **argv)
                }
 
                found = 1;
+               printf("%c%c%c\n", c1, c2, c3);
             }
          }
       }
