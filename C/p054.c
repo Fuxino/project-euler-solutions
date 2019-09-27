@@ -239,7 +239,7 @@ int eval(char *hands)
 
    /* If player 1 has a Royal Flush, player 1 wins.*/
    if(cards1[4]->value == ace && cards1[3]->value == king && cards1[2]->value == queen && 
-         cards1[1]->value == jack && cards1[0]->value == ten && cards1[0]->suit == cards1[1]->suit &&
+    
          cards1[0]->suit == cards1[2]->suit && cards1[0]->suit == cards1[3]->suit &&
          cards1[0]->suit == cards1[4]->suit)
    {
@@ -271,7 +271,7 @@ int eval(char *hands)
 
       if(i == 5)
       {
-         straightflush1=1;
+         straightflush1 = 1;
       }
    }
 
@@ -322,16 +322,15 @@ int eval(char *hands)
       }
    }
 
-   /* Check if player 1 has a four of a kind.*/
-   if((cards1[0]->value == cards1[1]->value && cards1[0]->value == cards1[2]->value && cards1[0]->value == cards1[3]->value) ||
-         (cards1[1]->value == cards1[2]->value && cards1[1]->value == cards1[3]->value && cards1[1]->value == cards1[4]->value))
+   /* Check if player 1 has four of a kind. Since cards are ordered, it is sufficient
+    * to check if the first card is equal to the fourth or if the second is equal to the fifth.*/
+   if(cards1[0]->value == cards1[3]-> value || cards1[1]->value == cards1[4]->value)
    {
       four1 = 1;
    }
 
-   /* Check if player 2 has a four of a kind.*/
-   if((cards2[0]->value == cards2[1]->value && cards2[0]->value == cards2[2]->value && cards2[0]->value == cards2[3]->value) ||
-         (cards2[1]->value == cards2[2]->value && cards2[1]->value == cards2[3]->value && cards2[1]->value == cards2[4]->value))
+   /* Check if player 2 has four of a kind.*/
+   if(cards2[0]->value == cards2[3]->value || cards2[1]->value == cards2[4]->value)
    {
       four2 = 1;
    }
@@ -349,45 +348,29 @@ int eval(char *hands)
    }
 
    /* If both players have four of a kind, check who has the highest value for
-    * those four cards. If they are equal, check the higest value for the different
-    * card.*/
+    * those four cards.*/
    if(four1 && four2)
    {
       if(cards1[1]->value > cards2[1]->value)
       {
          return 1;
       }
-      else if(cards1[1]->value < cards2[1]->value)
+      if(cards1[1]->value < cards2[1]->value)
       {
          return -1;
-      }
-      else
-      {
-         for(i = 4; i <= 0; i--)
-         {
-            if(cards1[i]->value > cards2[i]->value)
-            {
-               return 1;
-            }
-
-            if(cards1[i]->value < cards2[i]->value)
-            {
-               return -1;
-            }
-         }
       }
    }
 
    /* Check if player 1 has a full house.*/
-   if(cards1[0]->value == cards1[1]->value && cards1[1]->value == cards1[2]->value && 
-         cards1[1]->value == cards1[3]->value && cards1[1]->value == cards1[4]->value)
+   if(cards1[0]->value == cards1[1]->value && cards1[3]->value == cards1[4]->value && 
+         (cards1[1]->value == cards1[2]->value || cards1[2]->value == cards1[3]->value))
    {
       full1 = 1;
    }
 
    /* Check if player 2 has a full house.*/
-   if(cards2[0]->value == cards2[1]->value && cards2[1]->value == cards2[2]->value && 
-         cards2[1]->value == cards2[3]->value && cards2[1]->value == cards2[4]->value)
+   if(cards2[0]->value == cards2[1]->value && cards2[3]->value == cards2[4]->value && 
+         (cards2[1]->value == cards2[2]->value || cards2[2]->value == cards2[3]->value))
    {
       full2 = 1;
    }
@@ -406,8 +389,7 @@ int eval(char *hands)
 
    /* If both players have a full house, check who has the highest value
     * for the three equal cards (the third card in the array will be part
-    * of the set of three). If they are equal, check the highest value
-    * for the other two cards.*/
+    * of the set of three).*/
    if(full1 && full2)
    {
       if(cards1[2]->value > cards2[2]->value)
@@ -418,19 +400,6 @@ int eval(char *hands)
       if(cards1[2]->value < cards2[2]->value)
       {
          return -1;
-      }
-
-      for(i = 4; i >= 0; i--)
-      {
-         if(cards1[i]->value > cards2[i]->value)
-         {
-            return 1;
-         }
-
-         if(cards1[i]->value < cards2[i]->value)
-         {
-            return -1;
-         }
       }
    }
 
@@ -458,24 +427,6 @@ int eval(char *hands)
    if(!flush1 && flush2)
    {
       return -1;
-   }
-
-   /* If both players have a flush, check who has the highest card, if
-    * the highest is equal check the second highest and so on.*/
-   if(flush1 && flush2)
-   {
-      for(i = 4; i <= 0; i--)
-      {
-         if(cards1[i]->value > cards2[i]->value)
-         {
-            return 1;
-         }
-
-         if(cards1[i]->value < cards2[i]->value)
-         {
-            return -1;
-         }
-      }
    }
 
    /* Check if player 1 has a straight.*/
@@ -522,19 +473,6 @@ int eval(char *hands)
       return -1;
    }
 
-   /* If both players have a straight, check who has the highest card.*/
-   if(straight1 && straight2)
-   {
-      if(cards1[4]->value > cards2[4]->value)
-      {
-         return 1;
-      }
-      else
-      {
-         return -1;
-      }
-   }
-
    /* Check if player 1 has three of a kind.*/
    if((cards1[0]->value == cards1[1]->value && cards1[0]->value == cards1[2]->value) ||
          (cards1[1]->value == cards1[2]->value && cards1[1]->value == cards1[3]->value) ||
@@ -564,8 +502,7 @@ int eval(char *hands)
    }
 
    /* If both players have three of a kind, check who has the highest value for
-    * these three cards. If it's equal, check who has the highest value for the
-    * other cards.*/
+    * these three cards.*/
    if(three1 && three2)
    {
       if(cards1[2]->value > cards2[2]->value)
@@ -576,19 +513,6 @@ int eval(char *hands)
       if(cards1[2]->value < cards2[2]->value)
       {
          return -1;
-      }
-
-      for(i = 4; i <= 0; i--)
-      {
-         if(cards1[i]->value > cards2[i]->value)
-         {
-            return 1;
-         }
-
-         if(cards1[i]->value < cards2[i]->value)
-         {
-            return -1;
-         }
       }
    }
 
@@ -628,23 +552,20 @@ int eval(char *hands)
       {
          return 1;
       }
-
-      if(cards1[3]->value < cards2[3]->value)
+      else if(cards1[3]->value < cards2[3]->value)
       {
          return -1;
       }
-
-      if(cards1[1]->value > cards2[1]->value)
+      else if(cards1[1]->value > cards2[1]->value)
       {
          return 1;
       }
-
-      if(cards1[1]->value < cards2[1]->value)
+      else if(cards1[1]->value < cards2[1]->value)
       {
          return -1;
       }
 
-      for(i = 4; i <= 0; i--)
+      for(i = 4; i >= 0; i--)
       {
          if(cards1[i]->value > cards2[i]->value)
          {
@@ -658,33 +579,33 @@ int eval(char *hands)
       }
    }
 
-   /* Check if player 1 has a pair.*/
+   /* Check if player 1 has a pair of cards*/
    if(cards1[0]->value == cards1[1]->value || cards1[1]->value == cards1[2]->value ||
          cards1[2]->value == cards1[3]->value || cards1[3]->value == cards1[4]->value)
    {
       pair1 = 1;
    }
 
-   /* Check if player 2 has a pair.*/
+   /* Check if player 2 has a pair of cards.*/
    if(cards2[0]->value == cards2[1]->value || cards2[1]->value == cards2[2]->value ||
          cards2[2]->value == cards2[3]->value || cards2[3]->value == cards2[4]->value)
    {
       pair2 = 1;
    }
 
-   /* If player 1 has a pair and player 2 doesn't, player 1 wins.*/
+   /* If player 1 has a pair of cards and player 2 doesn't, player 1 wins.*/
    if(pair1 && !pair2)
    {
       return 1;
    }
 
-   /* If player 2 has a pair and player 1 doesn't, player 2 wins.*/
+   /* If player 2 has a pair of cards and player 1 doesn't, player 2 wins.*/
    if(!pair1 && pair2)
    {
       return -1;
    }
 
-   /* If both players have a pair, check who has the highest pair. Since the cards are
+   /* If both players have a pair of cards, check who has the highest pair. Since the cards are
     * ordered by value, either card[1] will be part of the pair (card[0]=card[1] or
     * card[1]=card[2]) or card[3] will be part of the pair (card[2]=card[3] or
     * card[3]=card[4]). */
@@ -736,8 +657,7 @@ int eval(char *hands)
                return -1;
             }
          }
-
-         if(cards2[2]->value == cards2[3]->value || cards2[3]->value == cards2[4]->value)
+         else if(cards2[2]->value == cards2[3]->value || cards2[3]->value == cards2[4]->value)
          {
             if(value > cards2[3]->value)
             {
@@ -752,8 +672,7 @@ int eval(char *hands)
       }
    }
 
-   /* If the players have the same pair, or if both don't have a pair, check who has
-    * the highest card, if it's equal check the second highest and so on.*/
+   /* If all other things are equal, check who has the highest card, if it's equal check the second highest and so on.*/
    for(i = 4; i >= 0; i--)
    {
       if(cards1[i]->value > cards2[i]->value)
@@ -767,5 +686,6 @@ int eval(char *hands)
       }
    }
 
+   /* If everything is equal, return 0.*/
    return 0;
 }
