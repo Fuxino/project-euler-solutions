@@ -179,3 +179,35 @@ def is_pentagonal(n):
 
     return i.is_integer()
 
+# Function implementing the iterative algorithm taken from Wikipedia
+# to find the continued fraction for sqrt(S). The algorithm is as
+# follows:
+#
+# m_0=0
+# d_0=1
+# a_0=floor(sqrt(n))
+# m_(n+1)=d_n*a_n-m_n
+# d_(n+1)=(S-m_(n+1)^2)/d_n
+# a_(n+1)=floor((sqrt(S)+m_(n+1))/d_(n+1))=floor((a_0+m_(n+1))/d_(n+1))
+# if a_i=2*a_0, the algorithm ends.
+def period_cf(n):
+    mn = 0
+    dn = 1
+    count = 0
+
+    a0 = floor(sqrt(n))
+    an = a0
+
+    while True:
+        mn1 = dn * an - mn
+        dn1 = (n - mn1 * mn1) // dn
+        an1 = floor((a0+mn1)/dn1)
+        mn = mn1
+        dn = dn1
+        an = an1
+        count = count + 1
+
+        if an == 2 * a0:
+            break
+
+    return count

@@ -19,5 +19,6 @@ void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 int next_permutation(void **perm, int n, int (*cmp)(void *a, void *b));
 int is_pandigital(int value, int n);
 int is_pentagonal(long int n);
+int period_cf(int n);
 
 #endif
