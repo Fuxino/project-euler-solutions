@@ -35,7 +35,7 @@ def main():
     i = 1
 
 #   Brute force approach, try every integer number until the desired one is found.
-    while 1:
+    while True:
         if have_same_digits(i, 2*i) and have_same_digits(i, 3*i) and have_same_digits(i, 4*i) and\
                 have_same_digits(i, 5*i) and have_same_digits(i, 6*i):
                     break

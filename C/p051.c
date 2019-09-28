@@ -30,7 +30,11 @@ int main(int argc, char **argv)
    clock_gettime(CLOCK_MONOTONIC, &start);
 
    /* N set to 1000000 as a reasonable limit, which turns out to be enough.*/
-   primes = sieve(N);
+   if((primes = sieve(N)) == NULL)
+   {
+      fprintf(stderr, "Error! Sieve function returned NULL\n");
+      return 1;
+   }
 
    /* Checking only odd numbers with at least 4 digits.*/
    for(i = 1001; i < N; i += 2)

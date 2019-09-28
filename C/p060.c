@@ -24,7 +24,11 @@ int main(int argc, char **argv)
 
    clock_gettime(CLOCK_MONOTONIC, &start);
 
-   primes = sieve(N);
+   if((primes = sieve(N)) == NULL)
+   {
+      fprintf(stderr, "Error! Sieve function returned NULL\n");
+      return 1;
+   }
 
    /* Straightforward brute force approach.*/
    for(p1 = 3; p1 < N && !found; p1 += 2)

@@ -26,7 +26,7 @@ def max_prime_factor(num):
 
 #       If num is divisible by i and i is prime, find largest
 #       prime factor of num/i.
-        while 1:
+        while True:
             if num % i == 0:
                 if is_prime(i):
                     return max_prime_factor(num//i)

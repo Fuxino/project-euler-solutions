@@ -33,7 +33,7 @@ def main():
     count = 0
     diag = 5
 
-    while 1:
+    while True:
         i = i + step
 
         if is_prime(i):

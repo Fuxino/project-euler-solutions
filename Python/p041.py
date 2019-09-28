@@ -8,15 +8,6 @@
 from timeit import default_timer
 from projecteuler import is_pandigital, is_prime
 
-def count_digits(n):
-    i = 0
-
-    while n > 0:
-        i = i + 1
-        n = n // 10
-
-    return i
-
 def main():
     start = default_timer()
 
@@ -28,7 +19,7 @@ def main():
     i = 7654321
 
     while(i > 0):
-        if is_pandigital(i, count_digits(i)) and is_prime(i):
+        if is_pandigital(i, len(str(i))) and is_prime(i):
             break
 #       Skipping the even numbers.
         i = i - 2

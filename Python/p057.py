@@ -18,15 +18,6 @@
 
 from timeit import default_timer
 
-def count_digits(n):
-    count = 0
-
-    while n > 0:
-        n = n // 10
-        count = count + 1
-
-    return count
-
 def main():
     start = default_timer()
 
@@ -41,7 +32,7 @@ def main():
         d = n + d
         n = n +  d2
 
-        if count_digits(n) > count_digits(d):
+        if len(str(n)) > len(str(d)):
             count = count + 1
 
     end = default_timer()

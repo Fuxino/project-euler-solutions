@@ -33,7 +33,7 @@ def main():
         n = 0
         j = 1
 
-        while 1:
+        while True:
             tmp = i * j
             n = n + tmp
             j = j + 1
