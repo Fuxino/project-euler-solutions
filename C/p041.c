@@ -49,6 +49,11 @@ int main(int argc, char **argv)
 int count_digits(int n)
 {
    int i = 0;
+   
+   if(n == 0)
+   {
+      return 1;
+   }
 
    while(n > 0)
    {

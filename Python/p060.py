@@ -82,7 +82,7 @@ def main():
 
     end = default_timer()
 
-    print('Project Euler, Problem 59')
+    print('Project Euler, Problem 60')
     print('Answer: {}'.format(n))
 
     print('Elapsed time: {:.9f} seconds'.format(end - start))

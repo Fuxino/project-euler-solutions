@@ -67,6 +67,11 @@ int count_digits(mpz_t n)
    int count = 0;
    mpz_t value;
 
+   if(mpz_cmp_ui(n, 0) == 0)
+   {
+      return 1;
+   }
+
    mpz_init_set(value, n);
 
    while(mpz_cmp_ui(value, 0))

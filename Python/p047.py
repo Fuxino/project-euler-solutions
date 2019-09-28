@@ -16,7 +16,7 @@
 from timeit import default_timer
 
 # Function using a modified sieve of Eratosthenes to count
-# the prime factors of each number.
+# the distinct prime factors of each number.
 def count_factors(n):
     factors = [0] * n
     i = 2
