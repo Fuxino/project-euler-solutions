@@ -190,24 +190,137 @@ def is_pentagonal(n):
 # d_(n+1)=(S-m_(n+1)^2)/d_n
 # a_(n+1)=floor((sqrt(S)+m_(n+1))/d_(n+1))=floor((a_0+m_(n+1))/d_(n+1))
 # if a_i=2*a_0, the algorithm ends.
-def period_cf(n):
+def build_sqrt_cont_fraction(i, l):
     mn = 0
     dn = 1
     count = 0
 
-    a0 = floor(sqrt(n))
+    fraction = [0] * l
+
+    j = 0
+    a0 = floor(sqrt(i))
     an = a0
+    fraction[j] = an
+    j = j + 1
 
     while True:
         mn1 = dn * an - mn
-        dn1 = (n - mn1 * mn1) // dn
+        dn1 = (i - mn1 * mn1)/ dn
         an1 = floor((a0+mn1)/dn1)
         mn = mn1
         dn = dn1
         an = an1
         count = count + 1
+        fraction[j] = an
+        j = j + 1
 
         if an == 2 * a0:
             break
 
-    return count
+    fraction[j] = -1
+
+    return fraction, count
+
+# Function to solve the Diophantine equation in the form x^2-Dy^2=1
+# (Pell equation) using continued fractions.
+
+def pell_eq(d):
+#   Find the continued fraction for sqrt(d).
+    fraction, period = build_sqrt_cont_fraction(d, 100)
+
+#   Calculate the first convergent of the continued fraction.
+    n1 = 0
+    n2 = 1
+    d1 = 1
+    d2 = 0
+
+    j = 0
+    n3 = fraction[j] * n2 + n1
+    d3 = fraction[j] * d2 + d1
+    j = j + 1
+
+#   Check if x=n, y=d solve the equation x^2-Dy^2=1.
+    sol = n3 * n3 - d * d3 * d3
+
+    if sol == 1:
+        return n3
+
+#   Until a solution is found, calculate the next convergent
+#   and check if x=n and y=d solve the equation.
+    while True:
+        n1 = n2
+        n2 = n3
+        d1 = d2
+        d2 = d3
+        n3 = fraction[j] * n2 + n1
+        d3 = fraction[j] * d2 + d1
+
+        sol = n3 * n3 - d * d3 * d3
+
+        if sol == 1:
+            return n3
+
+        j = j + 1
+
+        if fraction[j] == -1:
+            j = 1
+
+# Function to check if a number is semiprime. Parameters include
+# pointers to p and q to return the factors values and a list of
+# primes.
+def is_semiprime(n, primes):
+#   If n is prime, it's not semiprime.
+    if primes[n] == 1:
+        return False, -1, -1
+
+#   Check if n is semiprime and one of the factors is 2.
+    if n % 2 == 0:
+        if primes[n//2] == 1:
+            p = 2
+            q = n // 2
+            return True, p, q
+        else:
+            return False, -1, -1
+#   Check if n is semiprime and one of the factors is 3.
+    elif n % 3 == 0:
+        if primes[n//3] == 1:
+            p = 3
+            q = n // 3
+            return True, p, q
+        else:
+            return False, -1, -1
+
+#   Any number can have only one prime factor greater than its
+#   square root, so we can stop checking at this point.
+    limit = floor(sqrt(n)) + 1
+
+#   Every prime other than 2 and 3 is in the form 6k+1 or 6k-1.
+#   If I check all those value no prime factors of the number 
+#   will be missed. For each of these possible primes, check if 
+#   they are prime, then if the number is semiprime with using
+#   that factor.
+    for i in range(5, limit, 6):
+        if primes[i] == 1 and n % i == 0:
+            if primes[n//i] == 1:
+                p = i
+                q = n // i
+                return True, p, q
+            else:
+                return False, -1, -1
+        elif primes[i+2] == 1 and n % (i + 2) == 0:
+            if primes[n//(i+2)] == 1:
+                p = i + 2
+                q = n // (i + 2)
+                return True, p, q
+            else:
+                return False, -1, -1
+
+    return False, -1, -1
+
+# If n=pq is semiprime, phi(n)=(p-1)(q-1)=pq-p-q+1=n-(p+4)+1
+# if p!=q. If p=q (n is a square), phi(n)=n-p.
+def phi_semiprime(n, p, q):
+    if p == q:
+        return n - p
+    else:
+        return n - (p + q) + 1

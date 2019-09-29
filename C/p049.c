@@ -14,7 +14,7 @@
 
 #define N 10000
 
-int check_digits(int a, int b);
+int is_permutation(int a, int b);
 
 int *primes;
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
             /* If i, i+j and i+2*j are all primes and they have
              * all the same digits, the result has been found.*/
             if(i + 2 * j < N && primes[i+j] && primes[i+2*j] &&
-                  check_digits(i, i+j) && check_digits(i, i+2*j))
+                  is_permutation(i, i+j) && is_permutation(i, i+2*j))
             {
                found = 1;
                break;
@@ -73,23 +73,26 @@ int main(int argc, char **argv)
    return 0;
 }
 
-int check_digits(int a, int b)
+int is_permutation(int a, int b)
 {
    int i;
    int digits1[10] = {0}, digits2[10] = {0};
 
+   /* Get digits of a.*/
    while(a > 0)
    {
       digits1[a%10]++;
       a /= 10;
    }
 
+   /* Get digits of b.*/
    while(b > 0)
    {
       digits2[b%10]++;
       b /= 10;
    }
 
+   /* If they're not the same, return 0.*/
    for(i = 0; i < 10; i++)
    {
       if(digits1[i] != digits2[i])

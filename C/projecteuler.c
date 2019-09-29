@@ -478,23 +478,215 @@ int is_pentagonal(long int n)
  * d_(n+1)=(S-m_(n+1)^2)/d_n
  * a_(n+1)=floor((sqrt(S)+m_(n+1))/d_(n+1))=floor((a_0+m_(n+1))/d_(n+1))
  * if a_i=2*a_0, the algorithm ends.*/
-int period_cf(int n)
+int *build_sqrt_cont_fraction(int i, int *period, int l)
 {
-   int mn = 0, mn1, dn = 1, dn1, a0, an, an1, count = 0;
+   int mn = 0, mn1, dn = 1, dn1, a0, an, an1, count = 0, j;
+   int *fraction;
 
-   a0 = floor(sqrt(n));
+   if((fraction = (int *)malloc(l*sizeof(int))) == NULL)
+   {
+      return NULL;
+   }
+
+   j = 0;
+   a0 = floor(sqrt(i));
    an = a0;
-   
+   fraction[j] = an;
+   j++;
+
    do
    {
       mn1 = dn * an - mn;
-      dn1 = (n - mn1 * mn1) / dn;
+      dn1 = (i - mn1 * mn1)/ dn;
       an1 = floor((a0+mn1)/dn1);
       mn = mn1;
       dn = dn1;
       an = an1;
       count++;
+      fraction[j] = an;
+      j++;
    }while(an != 2 * a0);
 
-   return count;
+   fraction[j] = -1;
+
+   *period = count;
+
+   return fraction;
+}
+
+/* Function to solve the Diophantine equation in the form x^2-Dy^2=1
+ * (Pell equation) using continued fractions.*/
+int pell_eq(int d, mpz_t x)
+{
+   int found = 0, j, period;
+   mpz_t n1, n2, n3, d1, d2, d3, sol, tmp;
+   int *fraction;
+
+   /* Find the continued fraction for sqrt(d).*/
+   if((fraction = build_sqrt_cont_fraction(d, &period, 100)) == NULL)
+   {
+      return -1;
+   }
+
+   /* Calculate the first convergent of the continued fraction.*/
+   mpz_init_set_ui(n1, 0);
+   mpz_init_set_ui(n2, 1);
+   mpz_init_set_ui(d1, 1);
+   mpz_init_set_ui(d2, 0);
+   mpz_inits(n3, d3, sol, tmp, NULL);
+
+   j = 0;
+   mpz_mul_ui(n3, n2, fraction[j]);
+   mpz_add(n3, n3, n1);
+   mpz_mul_ui(d3, d2, fraction[j]);
+   mpz_add(d3, d3, d1);
+   j++;
+
+   /* Check if x=n, y=d solve the equation x^2-Dy^2=1.*/
+   mpz_mul(sol, n3, n3);
+   mpz_mul(tmp, d3, d3);
+   mpz_mul_ui(tmp, tmp, d);
+   mpz_sub(sol, sol, tmp);
+
+   if(mpz_cmp_ui(sol, 1) == 0)
+   {
+      mpz_set(x, n3);
+      found = 1;
+      free(fraction);
+      mpz_clears(n1, n2, n3, d1, d2, d3, sol, tmp, NULL);
+   }
+
+   /* Until a solution is found, calculate the next convergent
+    * and check if x=n and y=d solve the equation.*/
+   while(!found)
+   {
+      mpz_set(n1, n2);
+      mpz_set(n2, n3);
+      mpz_set(d1, d2);
+      mpz_set(d2, d3);
+      mpz_mul_ui(n3, n2, fraction[j]);
+      mpz_add(n3, n3, n1);
+      mpz_mul_ui(d3, d2, fraction[j]);
+      mpz_add(d3, d3, d1);
+
+      mpz_mul(sol, n3, n3);
+      mpz_mul(tmp, d3, d3);
+      mpz_mul_ui(tmp, tmp, d);
+      mpz_sub(sol, sol, tmp);
+
+      if(mpz_cmp_ui(sol, 1) == 0)
+      {
+         mpz_set(x, n3);
+         found = 1;
+         free(fraction);
+         mpz_clears(n1, n2, n3, d1, d2, d3, sol, tmp, NULL);
+      }
+
+      j++;
+
+      if(fraction[j] == -1)
+      {
+         j = 1;
+      }
+   }
+
+   return 0;
+}
+
+/* Function to check if a number is semiprime. Parameters include
+ * pointers to p and q to return the factors values and a list of
+ * primes.*/
+int is_semiprime(int n, int *p, int *q, int *primes)
+{
+   int i, limit;
+
+   /* If n is prime, it's not semiprime.*/
+   if(primes[n])
+   {
+      return 0;
+   }
+
+   /* Check if n is semiprime and one of the factors is 2.*/
+   if(n % 2 == 0)
+   {
+      if(primes[n/2])
+      {
+         *p = 2;
+         *q = n / 2;
+         return 1;
+      }
+      else
+      {
+         return 0;
+      }
+   }
+   /* Check if n is semiprime and one of the factors is 3.*/
+   else if(n % 3 == 0)
+   {
+      if(primes[n/3])
+      {
+         *p = 3;
+         *q = n / 3;
+         return 1;
+      }
+      else
+      {
+         return 0;
+      }
+   }
+
+   /*Any number can have only one prime factor greater than its
+   square root, so we can stop checking at this point.*/
+   limit = floor(sqrt(n));
+
+   /* Every prime other than 2 and 3 is in the form 6k+1 or 6k-1.
+    * If I check all those value no prime factors of the number 
+    * will be missed. For each of these possible primes, check if 
+    * they are prime, then if the number is semiprime with using
+    * that factor.*/
+   for(i = 5; i <= limit; i += 6)
+   {
+      if(primes[i] && n % i == 0)
+      {
+         if(primes[n/i])
+         {
+            *p = i;
+            *q = n / i;
+            return 1;
+         }
+         else
+         {
+            return 0;
+         }
+      }
+      else if(primes[i+2] && n % (i + 2) == 0)
+      {
+         if(primes[n/(i+2)])
+         {
+            *p = i + 2;
+            *q = n / (i + 2);
+            return 1;
+         }
+         else
+         {
+            return 0;
+         }
+      }
+   }
+
+   return 0;
+}
+
+/* If n=pq is semiprime, phi(n)=(p-1)(q-1)=pq-p-q+1=n-(p+4)+1
+ * if p!=q. If p=q (n is a square), phi(n)=n-p.*/
+int phi_semiprime(int n, int p, int q)
+{
+   if(p == q)
+   {
+      return n - p;
+   }
+   else
+   {
+      return n - (p + q) + 1;
+   }
 }

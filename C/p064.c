@@ -50,7 +50,8 @@ int is_square(int n);
 
 int main(int argc, char **argv)
 {
-   int i, count = 0;
+   int i, count = 0, period;
+   int *fraction;
    double elapsed;
    struct timespec start, end;
 
@@ -60,11 +61,22 @@ int main(int argc, char **argv)
    {
       /* Perfect squares are obviously not represented as continued fractions.
        * For all other numbers, calculate their period and check if it's odd.*/
-      if(!is_square(i) && period_cf(i) % 2 != 0)
+      if(!is_square(i))
       {
-         count++;
+         if((fraction = build_sqrt_cont_fraction(i, &period, 300)) == NULL)
+         {
+            fprintf(stderr, "Error! Build_cont_fraction function returned NULL\n");
+            return 1;
+         }
+
+         if(period % 2 != 0)
+         {
+            count++;
+         }
       }
    }
+
+   free(fraction);
 
    clock_gettime(CLOCK_MONOTONIC, &end);
 

@@ -19,6 +19,9 @@ void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 int next_permutation(void **perm, int n, int (*cmp)(void *a, void *b));
 int is_pandigital(int value, int n);
 int is_pentagonal(long int n);
-int period_cf(int n);
+int *build_sqrt_cont_fraction(int i, int *period, int l);
+int pell_eq(int i, mpz_t x);
+int is_semiprime(int n, int *p, int *q, int *primes);
+int phi_semiprime(int n, int p, int q);
 
 #endif

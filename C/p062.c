@@ -9,7 +9,7 @@
 
 #define N 10000
 
-int check_digits(long int a, long int b);
+int is_permutation(long int a, long int b);
 int count_digits(long int a);
 
 int main(int argc, char **argv)
@@ -38,7 +38,7 @@ int main(int argc, char **argv)
        * they can't be permutations).*/
       for(j = i + 1; j < N && count_digits(cubes[j]) == count_digits(cubes[i]); j++)
       {
-         if(check_digits(cubes[i], cubes[j]))
+         if(is_permutation(cubes[i], cubes[j]))
          {
             count++;
          }
@@ -85,23 +85,26 @@ int count_digits(long int a)
    return count;
 }
 
-int check_digits(long int a, long int b)
+int is_permutation(int a, int b)
 {
    int i;
    int digits1[10] = {0}, digits2[10] = {0};
 
+   /* Get digits of a.*/
    while(a > 0)
    {
       digits1[a%10]++;
       a /= 10;
    }
 
+   /* Get digits of b.*/
    while(b > 0)
    {
       digits2[b%10]++;
       b /= 10;
    }
 
+   /* If they're not the same, return 0.*/
    for(i = 0; i < 10; i++)
    {
       if(digits1[i] != digits2[i])

@@ -45,16 +45,16 @@
 from math import floor, sqrt
 
 from timeit import default_timer
-from projecteuler import period_cf
+from projecteuler import build_sqrt_cont_fraction
 
 def is_square(n):
     p = sqrt(n)
     m = int(p)
 
     if p == m:
-        return 1
+        return True
     else:
-        return 0
+        return False
 
 def main():
     start = default_timer()
@@ -64,8 +64,12 @@ def main():
     for i in range(2, 10000):
 #       Perfect squares are obviously not represented as continued fractions.
 #       For all other numbers, calculate their period and check if it's odd.
-        if not is_square(i) and period_cf(i) % 2 != 0:
-            count = count + 1
+        if not is_square(i):
+#            period_cf(i) % 2 != 0:
+            fraction, period = build_sqrt_cont_fraction(i, 300)
+
+            if period % 2 != 0:
+                count = count + 1
 
     end = default_timer()
 

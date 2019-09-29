@@ -13,24 +13,6 @@ from numpy import zeros
 from timeit import default_timer
 from projecteuler import sieve
 
-def check_digits(a, b):
-    digits1 = zeros(10, int)
-    digits2 = zeros(10, int)
-
-    while a > 0:
-        digits1[a%10] = digits1[a%10] + 1
-        a = a // 10
-
-    while b > 0:
-        digits2[b%10] = digits2[b%10] + 1
-        b = b // 10
-
-    for i in range(10):
-        if digits1[i] != digits2[i]:
-            return False
-
-    return True
-
 def main():
     start = default_timer()
 
@@ -51,7 +33,8 @@ def main():
 #               If i, i+j and i+2*j are all primes and they have
 #               all the same digits, the result has been found.
                 if i + 2 * j < N and primes[i+j] == 1 and primes[i+2*j] == 1 and\
-                        check_digits(i, i+j) and check_digits(i, i+2*j):
+                        ''.join(sorted(str(i))) == ''.join(sorted(str(i+j))) and\
+                        ''.join(sorted(str(i))) == ''.join(sorted(str(i+2*j))):
                             found = 1
                             break
         if(found):

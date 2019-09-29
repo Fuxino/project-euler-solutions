@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int have_same_digits(int a, int b);
+int is_permutation(int a, int b);
 
 int main(int argc, char **argv)
 {
@@ -21,8 +21,8 @@ int main(int argc, char **argv)
    /* Brute force approach, try every integer number until the desired one is found.*/
    while(1)
    {
-      if(have_same_digits(i, 2*i) && have_same_digits(i, 3*i) && have_same_digits(i, 4*i) &&
-            have_same_digits(i, 5*i) && have_same_digits(i, 6*i))
+      if(is_permutation(i, 2*i) && is_permutation(i, 3*i) && is_permutation(i, 4*i) &&
+            is_permutation(i, 5*i) && is_permutation(i, 6*i))
       {
          break;
       }
@@ -42,7 +42,7 @@ int main(int argc, char **argv)
    return 0;
 }
 
-int have_same_digits(int a, int b)
+int is_permutation(int a, int b)
 {
    int i;
    int digits1[10] = {0}, digits2[10] = {0};

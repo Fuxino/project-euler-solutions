@@ -54,7 +54,7 @@ def main():
     for i in range(l):
         triang[i] = list(map(int, triang[i]))
 
-#   Use function implemented in projecteuler.c to find the maximum path.
+#   Use the function implemented in projecteuler.c to find the maximum path.
     max_ = find_max_path(triang, 15)
 
     end = default_timer()

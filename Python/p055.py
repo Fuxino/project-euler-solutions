@@ -44,11 +44,11 @@ def is_lychrel(n):
 
 #       If the sum is palindrome, the number is not a Lychrel number.
         if is_palindrome(tmp, 10):
-            return 0
+            return False
 
         n = tmp
 
-    return 1
+    return True
 
 def main():
     start = default_timer()
