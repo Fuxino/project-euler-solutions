@@ -11,10 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "projecteuler.h"
 
 int main(int argc, char **argv)
 {
-   int a, b, c, m, n, found = 0;
+   int a, b, c, tmpa, tmpb, tmpc, i, m, n, found = 0;
    double elapsed;
    struct timespec start, end;
 
@@ -24,16 +25,39 @@ int main(int argc, char **argv)
     * Euclid's formula, until the one where a+b+c=1000 is found.*/
    for(m = 2; found == 0; m++)
    {
-      for(n = 1; n < m; n++)
+      for(n = 1; n < m && !found; n++)
       {
-         a = m * m - n * n;
-         b = 2 * m * n;
-         c = m * m + n * n;
-
-         if(a + b + c == 1000)
+         if(gcd(m, n) == 1 && (m % 2 == 0 && n % 2 != 0 || m % 2 != 0 && n % 2 == 0))
          {
-            found = 1;
-            break;
+            a = m * m - n * n;
+            b = 2 * m * n;
+            c = m * m + n * n;
+
+            if(a + b + c == 1000)
+            {
+               found = 1;
+               break;
+            }
+
+            i = 2;
+
+            do
+            {
+               tmpa = a * i;
+               tmpb = b * i;
+               tmpc = c * i;
+
+               if(tmpa + tmpb + tmpc == 1000)
+               {
+                  a = tmpa;
+                  b = tmpb;
+                  c = tmpc;
+                  found = 1;
+                  break;
+               }
+               
+               i++;
+            }while(tmpa + tmpb + tmpc < 1000);
          }
       }
    }
