@@ -12,23 +12,29 @@ How many different ways can one hundred be written as a sum of at least two posi
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
-int count(int value, int n, int i);
-
-int integers[99];
+#include "projecteuler.h"
 
 int main(int argc, char **argv)
 {
 	int i, n;
+   long int *partitions;
 	double elapsed;
 	struct timespec start, end;
 
 	clock_gettime(CLOCK_MONOTONIC, &start);
 
-	for(i = 0; i < 99; i++)
-		integers[i] = i + 1;
+   if((partitions = (long int *)calloc(100, sizeof(long int))) == NULL)
+   {
+      fprintf(stderr, "Error while allocating memory\n");
+      return 1;
+   }
 
-	n = count(0, 0, 0);
+   /* The number of ways a number can be written as a sum is given by the partition function
+    * (-1 because the partition function includes also the number itself).
+    * The function is implemented in projecteuler.c*/
+	n = partition_fn(100, partitions) - 1;
+
+   free(partitions);
 
 	clock_gettime(CLOCK_MONOTONIC, &end);
 
@@ -40,30 +46,4 @@ int main(int argc, char **argv)
 	printf("Elapsed time: %.9lf seconds\n", elapsed);
 
 	return 0;
-}
-
-int count(int value, int n, int i)
-{
-	int j;
-
-	for(j = i; j < 99; j++)
-	{
-		value += integers[j];
-
-		if(value == 100)
-      {
-			return n + 1;
-      }
-		else if(value > 100)
-      {
-			return n;
-      }
-		else
-		{
-			n = count(value, n, j);
-			value -= integers[j];
-		}
-	}
-
-	return n;
 }

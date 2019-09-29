@@ -783,3 +783,45 @@ int phi(int n, int *primes)
 
    return (int)ph;
 }
+
+/* Function implementing the partition function.*/
+long int partition_fn(int n, long int *partitions)
+{
+   int k, limit;
+   long int res = 0;
+
+   /* The partition function for negative numbers is 0 by definition.*/
+   if(n < 0)
+   {
+      return 0;
+   }
+
+   /* The partition function for zero is 1 by definition.*/
+   if(n == 0)
+   {
+      partitions[n] = 1;
+      return 1;
+   }
+
+   /* If the partition for the current n has already been calculated, return the value.*/
+   if(partitions[n] != 0)
+   {
+      return partitions[n];
+   }
+
+   k = -ceil((sqrt(24*n+1)-1)/6);
+   limit = floor((sqrt(24*n+1)+1)/6);
+
+   while(k <= limit)
+   {
+      if(k != 0)
+      {
+         res += pow(-1, k+1) * partition_fn(n-k*(3*k-1)/2, partitions);
+      }
+      k++;
+   }
+
+   partitions[n] = res;
+
+   return res;
+}

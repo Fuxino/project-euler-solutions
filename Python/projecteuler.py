@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from math import sqrt, floor, gcd
+from math import sqrt, floor, ceil, gcd
 
 from numpy import ndarray, zeros
 
@@ -397,3 +397,33 @@ def phi(n, primes):
         ph = ph * (1 - 1 / n)
 
     return ph
+
+# Function implementing the partition function.
+def partition_fn(n, partitions):
+#   The partition function for negative numbers is 0 by definition.
+    if n < 0:
+        return 0
+
+#   The partition function for zero is 1 by definition.
+    if n == 0:
+        partitions[n] = 1
+        return 1
+
+#   If the partition for the current n has already been calculated, return the value.
+    if partitions[n] != 0:
+        return partitions[n]
+
+    res = 0
+    k = -ceil((sqrt(24*n+1)-1)//6)
+    limit = floor((sqrt(24*n+1)+1)//6)
+
+    while k <= limit:
+        if k != 0:
+            res = res + pow(-1, k+1) * partition_fn(n-k*(3*k-1)//2, partitions)
+        k = k + 1
+
+    partitions[n] = res
+
+    return int(res)
+
+

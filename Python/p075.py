@@ -68,7 +68,6 @@ def main():
         if l[i] == 1:
             count = count + 1
 
-
     end = default_timer()
 
     print('Project Euler, Problem 75')
