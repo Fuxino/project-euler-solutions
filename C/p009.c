@@ -27,7 +27,7 @@ int main(int argc, char **argv)
    {
       for(n = 1; n < m && !found; n++)
       {
-         if(gcd(m, n) == 1 && (m % 2 == 0 && n % 2 != 0 || m % 2 != 0 && n % 2 == 0))
+         if(gcd(m, n) == 1 && ((m % 2 == 0 && n % 2 != 0) || (m % 2 != 0 && n % 2 == 0)))
          {
             a = m * m - n * n;
             b = 2 * m * n;

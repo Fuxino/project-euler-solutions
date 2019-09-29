@@ -77,7 +77,7 @@ int main(int argc, char **argv)
    /* Use the function implemented in projecteuler.c to find the maximum path.*/
    max = find_max_path(triang, 15);
 
-   for(i = 0; i < 100; i++)
+   for(i = 0; i < 15; i++)
    {
       free(triang[i]);
    }

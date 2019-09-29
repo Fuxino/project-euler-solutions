@@ -324,3 +324,76 @@ def phi_semiprime(n, p, q):
         return n - p
     else:
         return n - (p + q) + 1
+
+def phi(n, primes):
+#   If n is primes, phi(n)=n-1.
+    if primes[n] == 1:
+        return n - 1
+
+#   If n is semiprime, use above function.
+    semi_p, p, q = is_semiprime(n, primes)
+
+    if semi_p:
+        return phi_semiprime(n, p, q)
+
+    ph = n
+
+#   If 2 is a factor of n, multiply the current ph (which now is n)
+#   by 1-1/2, then divide all factors 2.
+    if n % 2 == 0:
+        ph = ph * (1 - 1 / 2)
+
+        while True:
+            n = n // 2
+
+            if n % 2 != 0:
+                break
+
+#   If 3 is a factor of n, multiply the current ph by 1-1/3,
+#   then divide all factors 3.
+    if n % 3 == 0:
+        ph = ph * (1 - 1 / 3)
+
+        while True:
+            n = n // 3
+
+            if n % 3 != 0:
+                break
+
+#   Any number can have only one prime factor greater than its
+#   square root, so we can stop checking at this point and deal
+#   with the only factor larger than sqrt(n), if present, at the end
+    limit = floor(sqrt(n)) + 1
+
+#   Every prime other than 2 and 3 is in the form 6k+1 or 6k-1.
+#   If I check all those value no prime factors of the number 
+#   will be missed. For each of these possible primes, check if 
+#   they are prime, then check if the number divides n, in which
+#   case update the current ph.
+    for i in range(5, limit, 6):
+        if primes[i]:
+            if n % i == 0:
+                ph = ph * (1 - 1 / i)
+
+                while True:
+                    n = n // i
+
+                    if n % i != 0:
+                        break
+        if primes[i+2]:
+            if n % (i + 2) == 0:
+                ph = ph * (1 - 1 / (i + 2))
+
+                while True:
+                    n = n // (i + 2)
+
+                    if n % (i + 2) != 0:
+                        break
+
+#   After dividing all prime factors smaller than sqrt(n), n is either 1
+#   or is equal to the only prime factor greater than sqrt(n). In this
+#   second case, we need to update ph with the last prime factor.
+    if n > 1:
+        ph = ph * (1 - 1 / n)
+
+    return ph

@@ -690,3 +690,96 @@ int phi_semiprime(int n, int p, int q)
       return n - (p + q) + 1;
    }
 }
+
+/* Function to calculate phi(n) for any n. If n is prime, phi(n)=n-1,
+ * is n is semiprime, use the above function. In any other case,
+ * phi(n)=n*prod(1-1/p) for every distinct prime p that divides n.*/
+int phi(int n, int *primes)
+{
+   int i, p, q, limit;
+   double ph = (double)n;
+
+   /* If n is prime, phi(n)=n-1*/
+   if(primes[n])
+   {
+      return n - 1;
+   }
+
+   /* If n is semiprime, use above function.*/
+   if(is_semiprime(n, &p, &q, primes))
+   {
+      return phi_semiprime(n, p, q);
+   }
+
+   /* If 2 is a factor of n, multiply the current ph (which now is n)
+    * by 1-1/2, then divide all factors 2.*/
+   if(n % 2 == 0)
+   {
+      ph *= (1.0 - 1.0 / 2.0);
+
+      do
+      {
+         n /= 2;
+      }while(n % 2 == 0);
+   }
+
+   /* If 3 is a factor of n, multiply the current ph by 1-1/3,
+    * then divide all factors 3.*/
+   if(n % 3 == 0)
+   {
+      ph *= (1.0 - 1.0 / 3.0);
+
+      do
+      {
+         n /= 3;
+      }while(n % 3 == 0);
+   }
+
+   /*Any number can have only one prime factor greater than its
+    * square root, so we can stop checking at this point and deal
+    * with the only factor larger than sqrt(n), if present, at the end.*/
+   limit = floor(sqrt(n));
+
+   /* Every prime other than 2 and 3 is in the form 6k+1 or 6k-1.
+    * If I check all those value no prime factors of the number 
+    * will be missed. For each of these possible primes, check if 
+    * they are prime, then check if the number divides n, in which
+    * case update the current ph.*/
+   for(i = 5; i <= limit; i += 6)
+   {
+      if(primes[i])
+      {
+         if(n % i == 0)
+         {
+            ph *= (1.0 - 1.0 / i);
+
+            do
+            {
+               n /= i;
+            }while(n % i == 0);
+         }
+      }
+      if(primes[i+2])
+      {
+         if(n % (i + 2) == 0)
+         {
+            ph *= (1.0 - 1.0 /(i + 2));
+
+            do
+            {
+               n /= (i + 2);
+            }while(n % (i + 2) == 0);
+         }
+      }
+   }
+
+   /* After dividing all prime factors smaller than sqrt(n), n is either 1
+    * or is equal to the only prime factor greater than sqrt(n). In this
+    * second case, we need to update ph with the last prime factor.*/
+   if(n > 1)
+   {
+      ph *= (1.0 - 1.0 / n);
+   }
+
+   return (int)ph;
+}

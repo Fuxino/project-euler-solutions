@@ -85,7 +85,7 @@ int count_digits(long int a)
    return count;
 }
 
-int is_permutation(int a, int b)
+int is_permutation(long int a, long int b)
 {
    int i;
    int digits1[10] = {0}, digits2[10] = {0};

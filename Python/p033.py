@@ -10,8 +10,9 @@
 #
 # If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 
+from math import gcd
+
 from timeit import default_timer
-from projecteuler import gcd
 
 def main():
     start = default_timer()

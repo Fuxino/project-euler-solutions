@@ -49,7 +49,7 @@ int count(int value, int n, int i)
 
       if(value == 200)
       {
-         return n+1;
+         return n + 1;
       }
       else if(value > 200)
       {
