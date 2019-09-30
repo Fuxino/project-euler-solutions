@@ -2,7 +2,7 @@
 
 from math import sqrt, floor, ceil, gcd
 
-from numpy import ndarray, zeros
+from numpy import zeros
 
 def is_prime(num):
     if num < 4:
@@ -66,18 +66,18 @@ def lcmm(values, n):
 # Function implementing the Sieve or Eratosthenes to generate
 # primes up to a certain number.
 def sieve(n):
-    primes = ndarray((n,), int)
+    primes = [1] * n
 
 #   0 and 1 are not prime, 2 and 3 are prime.
     primes[0] = 0
     primes[1] = 0
-    primes[2] = 1
-    primes[3] = 1
+#    primes[2] = 1
+#    primes[3] = 1
 
 #   Cross out (set to 0) all even numbers and set the odd numbers to 1 (possible prime).
     for i in range(4, n -1, 2):
         primes[i] = 0
-        primes[i+1] = 1
+#        primes[i+1] = 1
 
 #   If i is prime, all multiples of i smaller than i*i have already been crossed out.
 #   if i=sqrt(n), all multiples of i up to n (the target) have been crossed out. So
@@ -149,7 +149,7 @@ def sum_of_divisors(n):
 
 def is_pandigital(value, n):
     i = 0
-    digits = zeros(n + 1, int)
+    digits = [0] * (n + 1)
 
     while i < n and value > 0:
         digit = value % 10
@@ -431,3 +431,48 @@ def partition_fn(n, partitions, mod=-1):
         partitions[n] = int(res)
 
         return int(res)
+
+#
+def dijkstra(matrix, distances, m, n, up=False, back=False, start=0):
+    visited = zeros((m, n), int)
+
+    for i in range(m):
+        for j in range(n):
+            distances[i][j] = 2 ** 32
+
+    i = start
+    j = 0
+
+    distances[i][j] = matrix[i][j]
+
+    while True:
+        visited[i][j] = 1
+
+        if i < m - 1 and distances[i][j] + matrix[i+1][j] < distances[i+1][j]:
+            distances[i+1][j] = distances[i][j] + matrix[i+1][j]
+
+        if up:
+            if i > 0 and distances[i][j] + matrix[i-1][j] < distances[i-1][j]:
+                distances[i-1][j] = distances[i][j] + matrix[i-1][j]
+
+        if j < n - 1 and distances[i][j] + matrix[i][j+1] < distances[i][j+1]:
+            distances[i][j+1] = distances[i][j] + matrix[i][j+1]
+
+        if back:
+            if j > 0 and distances[i][j] + matrix[i][j-1] < distances[i][j-1]:
+                distances[i][j-1] = distances[i][j] + matrix[i][j-1]
+
+        min_ = 999999999
+
+        for i in range(m):
+            for j in range(n):
+                if not visited[i][j] and distances[i][j] <= min_:
+                    min_ = distances[i][j]
+                    min_i = i
+                    min_j = j
+
+        i = min_i
+        j = min_j
+
+        if i == m - 1 and j == n - 1:
+            break

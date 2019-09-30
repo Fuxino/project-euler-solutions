@@ -836,3 +836,97 @@ long int partition_fn(int n, long int *partitions, int mod)
       return res;
    }
 }
+
+/* Function implementing Dijkstra's algorithm for a mxn matrix, where the matrix represents
+ * a graph in which each value can be connected to two, three or four adjacent values.
+ * The parameters are the graph matrix, a matrix storing the distances, the size m and n of
+ * the matrix, two flags, up and back, that determines if the path can also go up and/or back
+ * instead of only down and forward, and the starting row.*/
+int dijkstra(int **matrix, int **distances, int m, int n, int up, int back, int start)
+{
+   int i, j, min_i, min_j, min;
+   int **visited;
+
+   if((visited = (int **)malloc(m*sizeof(int *))) == NULL)
+   {
+      return -1;
+   }
+
+   for(i = 0; i < m; i++)
+   {
+      if((visited[i] = (int *)calloc(n, sizeof(int))) == NULL)
+      {
+         return -1;
+      }
+   }
+
+   /* Set the current distances to the maximum value.*/
+   for(i = 0; i < m; i++)
+   {
+      for(j = 0; j < n; j++)
+      {
+         distances[i][j] = INT_MAX;
+      }
+   }
+
+   /* Set the distance of the starting node to its value.*/
+   i = start;
+   j = 0;
+   distances[i][j] = matrix[i][j];
+
+   do
+   {
+      /* Visit the first node, and update the distance of its 2, 3 or 4
+       * adjacent nodes.*/
+      visited[i][j] = 1;
+
+      if(i < m - 1 && distances[i][j] + matrix[i+1][j] < distances[i+1][j])
+      {
+         distances[i+1][j] = distances[i][j] + matrix[i+1][j];
+      }
+
+      if(up)
+      {
+         if(i > 0 && distances[i][j] + matrix[i-1][j] < distances[i-1][j])
+         {
+            distances[i-1][j] = distances[i][j] + matrix[i-1][j];
+         }
+      }
+
+      if(j < n -1 && distances[i][j] + matrix[i][j+1] < distances[i][j+1])
+      {
+         distances[i][j+1] = distances[i][j] + matrix[i][j+1];
+      }
+
+      if(back)
+      {
+         if(j > 0 && distances[i][j] + matrix[i][j-1] < distances[i][j-1])
+         {
+            distances[i][j-1] = distances[i][j] + matrix[i][j-1];
+
+         }
+      }
+
+      min = INT_MAX;
+
+      /* Find the non visited node with the current minimum distance.*/
+      for(i = 0; i < m; i++)
+      {
+         for(j = 0; j < n; j++)
+         {
+            if(!visited[i][j] && distances[i][j] <= min)
+            {
+               min = distances[i][j];
+               min_i = i;
+               min_j = j;
+            }
+         }
+      }
+
+      i = min_i;
+      j = min_j;
+   /* Repeat until all nodes have been visited.*/
+   }while(i != m - 1 || j != n - 1);
+
+   return 1;
+}

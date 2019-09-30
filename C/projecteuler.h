@@ -26,5 +26,6 @@ int phi_semiprime(int n, int p, int q);
 int phi(int n, int *primes);
 long int partition_fn(int n, long int *partitions, int mod);
 int partition_fn_mpz(int n, mpz_t res, mpz_t *partitions);
+int dijkstra(int **matrix, int **distances, int m, int n, int up, int back, int start);
 
 #endif
