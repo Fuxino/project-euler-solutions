@@ -785,7 +785,7 @@ int phi(int n, int *primes)
 }
 
 /* Function implementing the partition function.*/
-long int partition_fn(int n, long int *partitions)
+long int partition_fn(int n, long int *partitions, int mod)
 {
    int k, limit;
    long int res = 0;
@@ -800,6 +800,7 @@ long int partition_fn(int n, long int *partitions)
    if(n == 0)
    {
       partitions[n] = 1;
+
       return 1;
    }
 
@@ -816,12 +817,22 @@ long int partition_fn(int n, long int *partitions)
    {
       if(k != 0)
       {
-         res += pow(-1, k+1) * partition_fn(n-k*(3*k-1)/2, partitions);
+         res += pow(-1, k+1) * partition_fn(n-k*(3*k-1)/2, partitions, mod);
       }
       k++;
    }
 
-   partitions[n] = res;
+   /* Give the result modulo mod, if mod=!-1, otherwise give the full result.*/
+   if(mod != -1)
+   {
+      partitions[n] = res % mod;
 
-   return res;
+      return res % mod;
+   }
+   else
+   {
+      partitions[n] = res;
+
+      return res;
+   }
 }

@@ -24,6 +24,7 @@ int pell_eq(int i, mpz_t x);
 int is_semiprime(int n, int *p, int *q, int *primes);
 int phi_semiprime(int n, int p, int q);
 int phi(int n, int *primes);
-long int partition_fn(int n, long int *partitions);
+long int partition_fn(int n, long int *partitions, int mod);
+int partition_fn_mpz(int n, mpz_t res, mpz_t *partitions);
 
 #endif

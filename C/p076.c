@@ -6,8 +6,8 @@
  * 2 + 2 + 1
  * 2 + 1 + 1 + 1
  * 1 + 1 + 1 + 1 + 1
-
-How many different ways can one hundred be written as a sum of at least two positive integers?*/
+ *
+ * How many different ways can one hundred be written as a sum of at least two positive integers?*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,7 +32,7 @@ int main(int argc, char **argv)
    /* The number of ways a number can be written as a sum is given by the partition function
     * (-1 because the partition function includes also the number itself).
     * The function is implemented in projecteuler.c*/
-	n = partition_fn(100, partitions) - 1;
+	n = partition_fn(100, partitions, -1) - 1;
 
    free(partitions);
 

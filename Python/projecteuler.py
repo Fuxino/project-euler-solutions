@@ -399,7 +399,7 @@ def phi(n, primes):
     return ph
 
 # Function implementing the partition function.
-def partition_fn(n, partitions):
+def partition_fn(n, partitions, mod=-1):
 #   The partition function for negative numbers is 0 by definition.
     if n < 0:
         return 0
@@ -422,8 +422,12 @@ def partition_fn(n, partitions):
             res = res + pow(-1, k+1) * partition_fn(n-k*(3*k-1)//2, partitions)
         k = k + 1
 
-    partitions[n] = res
+#   Give the result modulo mod, if mod!=-1, otherwise give the full result.
+    if mod != -1:
+        partitions[n] = res % mod
 
-    return int(res)
+        return res % mod
+    else:
+        partitions[n] = int(res)
 
-
+        return int(res)
