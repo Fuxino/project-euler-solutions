@@ -1,4 +1,4 @@
 Python/__pycache__
 ProblemsOverviews/*
-C/p{1,2,3,4,5,6}*.c
-Python/p{1,2,3,4,5,6}*.py
+C/p[1,2,3,4,5,6]*.c
+Python/p[1,2,3,4,5,6]*.py
