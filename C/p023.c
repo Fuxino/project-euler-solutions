@@ -84,5 +84,5 @@ int main(int argc, char **argv)
 
 int is_abundant(int n)
 {
-   return sum_of_divisors(n) > n;
+   return sum_of_divisors(n, 1) > n;
 }

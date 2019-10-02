@@ -238,7 +238,7 @@ int find_max_path(int **triang, int n)
    return triang[0][0];
 }
 
-int sum_of_divisors(int n)
+int sum_of_divisors(int n, int proper)
 {
    int i, sum = 1, limit;
 
@@ -254,13 +254,20 @@ int sum_of_divisors(int n)
       if(n % i == 0)
       {
          sum += i;
-         /* If n is a perfect square, i=limit is a divisor and
-          * has to be counted only once.*/
-         if(n != i * i)
-         {
-            sum += (n / i);
-         }
+         sum += n / i;
       }
+   }
+   
+   /* If n is a perfect square, i=limit is a divisor and
+    * has to be counted only once.*/
+   if(n == limit * limit)
+   {
+      sum -= limit;
+   }
+
+   if(!proper)
+   {
+      sum += n;
    }
 
    return sum;

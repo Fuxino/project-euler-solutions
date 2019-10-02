@@ -16,20 +16,18 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
+#include "projecteuler.h"
 
 #define N 1000000
 
-int sum_proper_divisors(int i);
-int sociable_chain(int i, int start, int *min, int l);
+int sociable_chain(int i, int *chain, int l, int *min);
 
-/* Vector to save the current chain values. I started with a longer vector,
- * but no chain is longer than 100 elements, so this is sufficient.*/
-int c[100];
 int divisors[N] = {0};
 
 int main(int argc, char **argv)
 {
    int i, min = 0, min_tmp, length, l_max = 0;
+   int chain[100];
    double elapsed;
    struct timespec start, end;
 
@@ -39,14 +37,14 @@ int main(int argc, char **argv)
    {
       /* Calculate the divisors of i and save it. Ii is equal to the sum of its proper divisors, 
        * the length of the chain is 1 and we don't need to check it.*/
-      if((divisors[i] = sum_proper_divisors(i)) == i)
+      if((divisors[i] = sum_of_divisors(i, 1)) == i)
       {
          continue;
       }
       else
       {
          min_tmp = i;
-         length = sociable_chain(i, i, &min_tmp, 0);
+         length = sociable_chain(i, chain, 0, &min_tmp);
       }
       
       if(length > l_max)
@@ -68,38 +66,15 @@ int main(int argc, char **argv)
    return 0;
 }
 
-int sum_proper_divisors(int n)
-{
-   int i, limit, sum = 1;
-
-   limit = floor(sqrt(n));
-
-   for(i = 2; i <= limit; i++)
-   {
-      if(n % i == 0)
-      {
-         sum += i;
-         sum += n / i;
-      }
-   }
-
-   if(n == limit * limit)
-   {
-      sum -= limit;
-   }
-
-   return sum;
-}
-
 /* Function to recursively find the length of the chain.*/
-int sociable_chain(int i, int start, int *min, int l)
+int sociable_chain(int i, int *chain, int l, int *min)
 {
    int n;
 
    /* Save current number in the chain.*/
-   c[l] = i;
+   chain[l] = i;
 
-   /* If we reached 1, the chain will never return go anywhere.*/
+   /* If we reached 1, the chain will never go anywhere.*/
    if(i == 1)
    {
       return -1;
@@ -112,7 +87,7 @@ int sociable_chain(int i, int start, int *min, int l)
    }
    else
    {
-      n = sum_proper_divisors(i);
+      n = sum_of_divisors(i, 1);
       divisors[i] = n;
    }
    
@@ -123,7 +98,7 @@ int sociable_chain(int i, int start, int *min, int l)
    }
 
    /* If the next number in the chain is equal to the starting one, the chain is finished.*/
-   if(n == start)
+   if(n == chain[0])
    {
       return l + 1;
    }
@@ -132,7 +107,7 @@ int sociable_chain(int i, int start, int *min, int l)
     * chain is stuck in a loop that will not return to the starting number.*/
    for(i = l; i > 0; i--)
    {
-      if(n == c[i])
+      if(n == chain[i])
       {
          return -1;
       }
@@ -145,5 +120,5 @@ int sociable_chain(int i, int start, int *min, int l)
       *min = n;
    }
 
-   return sociable_chain(n, start, min, l+1);
+   return sociable_chain(n, chain, l+1, min);
 }

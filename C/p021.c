@@ -24,10 +24,10 @@ int main(int argc, char **argv)
    {
       /* Calculate the sum of proper divisors with the function
        * implemented in projecteuler.c.*/
-      n = sum_of_divisors(i);
+      n = sum_of_divisors(i, 1);
       /* If i!=n and the sum of proper divisors of n=i,
        * sum the pair of numbers and add it to the total.*/
-      if(i != n && sum_of_divisors(n) == i)
+      if(i != n && sum_of_divisors(n, 1) == i)
       {
          sum += i + n;
       }

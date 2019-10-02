@@ -12,7 +12,7 @@ long int lcmm(long int *values, int n);
 int *sieve(int n);
 int count_divisors(int n);
 int find_max_path(int **triang, int n);
-int sum_of_divisors(int n);
+int sum_of_divisors(int n, int proper);
 void swap(void **vet, int i, int j);
 void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
 void quick_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv));
