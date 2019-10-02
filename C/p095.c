@@ -21,7 +21,7 @@
 #define N 1000000
 
 int sum_proper_divisors(int i);
-int chain(int i, int start, int *min, int l);
+int sociable_chain(int i, int start, int *min, int l);
 
 int chains[N] = {0};
 /* Vector to save the current chain values. I started with a longer vector,
@@ -32,7 +32,8 @@ int *primes;
 
 int main(int argc, char **argv)
 {
-   int i, min, min_tmp, length, l_max = -1;
+   /* l_max starts from 3 because we're interested in chains of at least 3 elements.*/
+   int i, min = 0, min_tmp, length, l_max = 2;
    double elapsed;
    struct timespec start, end;
 
@@ -47,7 +48,7 @@ int main(int argc, char **argv)
    for(i = 4; i <= N; i++)
    {
       /* Calculate the divisors of i, or retrieve the value if previously calculated.
-       * If i is equale to the sum of its proper divisors, the length of the chain is 1
+       * If i is equal to the sum of its proper divisors, the length of the chain is 1
        * (i.e. i is a perfect number.*/
       if(divisors[i] == i || (divisors[i] = sum_proper_divisors(i)) == i)
       {
@@ -57,7 +58,7 @@ int main(int argc, char **argv)
       else if(!primes[i])
       {
          min_tmp = i;
-         length = chain(i, i, &min_tmp, 0);
+         length = sociable_chain(i, i, &min_tmp, 0);
       }
       /* If i is prime, 1 is its only proper divisor, so no amicable chain is possible.*/
       else
@@ -110,26 +111,30 @@ int sum_proper_divisors(int n)
    return sum;
 }
 
-int chain(int i, int start, int *min, int l)
+int sociable_chain(int i, int start, int *min, int l)
 {
    int n;
 
-   /* If the value of the chain starting with the current number has already
-    * been calculated, return the value.*/
-   if(chains[i] > 0)
+   /* If we already calculated that the current value can't form a chain,
+    * or has a chain starting from a different number, it can't form a
+    * chain starting with the current number, so just return -1.*/
+   if(chains[i] != 0)
    {
-      return chains[i];
+      chains[start] = -1;
+      return -1;
    }
 
-   /* If we reached a prime number, the chain will be stuck at 1.*/
+   /* If we reached a prime number, the chain will never return to the starting number.*/
    if(primes[i])
    {
+      chains[start] = -1;
       return -1;
    }
 
    /* Calculate the divisors of i, or retrieve the value if previously calculated.*/
    if(divisors[i] != 0)
    {
+      chains[start] = -1;
       n = divisors[i];
    }
    else
@@ -154,6 +159,7 @@ int chain(int i, int start, int *min, int l)
    {
       if(n == c[i])
       {
+         chains[start] = -1;
          return -1;
       }
    }
@@ -161,6 +167,7 @@ int chain(int i, int start, int *min, int l)
    /* We are looking for chain where no value is greater than 1000000.*/
    if(n > N)
    {
+      chains[start] = -1;
       return -1;
    }
 
@@ -171,5 +178,5 @@ int chain(int i, int start, int *min, int l)
       *min = n;
    }
 
-   return chain(n, start, min, l+1);
+   return sociable_chain(n, start, min, l+1);
 }
