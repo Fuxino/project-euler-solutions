@@ -937,3 +937,51 @@ int dijkstra(int **matrix, int **distances, int m, int n, int up, int back, int 
 
    return 1;
 }
+
+/* Function that calculates the radical of n, i.e. the product
+ * of its distinct prime factors.*/
+int radical(int n, int *primes)
+{
+   int i, limit, rad = 1;
+
+   /* There can be only one prime factor of n greater than sqrt(n),
+    * if we check up to sqrt(n) and divide all the prime factors we find,
+    * at the end we will have 1 or the only prime factor larger than sqrt(n).*/
+   limit = floor(sqrt(n));
+
+   /* Check if n is divisible by two, and divide all 2s factors. Since 2
+    * is the only even prime, we can then loop only on odd numbers.*/
+   if(n % 2 == 0)
+   {
+      rad *= 2;
+
+      do
+      {
+         n /= 2;
+      }while(n % 2 == 0);
+   }
+
+   /* For each prime i, check if it's a factor of n, then divide n by i 
+    * until n % i != 0.*/
+   for(i = 3; i <= limit; i+=2)
+   {
+      if(primes[i] && n % i == 0)
+      {
+         rad *= i;
+
+         do
+         {
+            n /= i;
+         }while(n % i == 0);
+      }
+
+      /* If n is prime, all other prime factors have been found.*/
+      if(n == 1 || primes[n])
+      {
+         rad *= n;
+         break;
+      }
+   }
+
+   return rad;
+}
