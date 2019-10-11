@@ -52,7 +52,7 @@ int main(int argc, char **argv)
    elapsed = (end.tv_sec - start.tv_sec) + (double)(end.tv_nsec - start.tv_nsec) / 1000000000;
 
    printf("Project Euler, Problem 206\n");
-   printf("Answer: %d\n", n);
+   printf("Answer: %ld\n", n);
 
    printf("Elapsed time: %.9lf seconds\n", elapsed);
 

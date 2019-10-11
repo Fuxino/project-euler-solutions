@@ -316,7 +316,7 @@ void insertion_sort(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 int partition(void **array, int l, int r, int (*cmp)(void *lv, void *rv))
 {
    int i = l -1, j = r;
-   void *pivot, *tmp;
+   void *pivot;
   
    /* Arbitrarily selecting the rightmost element as pivot.*/ 
    pivot = array[r];

@@ -110,7 +110,7 @@ int main(int argc, char **argv)
              * the right key was likely found.*/
             if(strstr(plain_text, "the") != NULL && strstr(plain_text, "be") != NULL &&
                   strstr(plain_text, "to") != NULL && strstr(plain_text, "of") != NULL &&
-                  strstr(plain_text, "and") != NULL & strstr(plain_text, "in") != NULL &&
+                  strstr(plain_text, "and") != NULL && strstr(plain_text, "in") != NULL &&
                   strstr(plain_text, "that") != NULL && strstr(plain_text, "have") != NULL)
             {
                sum = 0;
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
                }
 
                found = 1;
-               printf("%c%c%c\n", c1, c2, c3);
+//               printf("%c%c%c\n", c1, c2, c3);
             }
          }
       }

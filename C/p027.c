@@ -26,7 +26,6 @@
 int main(int argc, char **argv)
 {
    int a, b, n, p, count, max = 0, save_a, save_b;
-   int *primes;
    double elapsed;
    struct timespec start, end;
 

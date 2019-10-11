@@ -16,7 +16,7 @@
 
 int main(int argc, char **argv)
 {
-	int i, n;
+	int n;
    long int *partitions;
 	double elapsed;
 	struct timespec start, end;
