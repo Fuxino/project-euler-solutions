@@ -8,18 +8,16 @@
 # For the first one hundred natural numbers, find the total of the digital sums of the first one hundred decimal digits
 # for all the irrational square roots
 
+from timeit import default_timer
 from mpmath import sqrt, mp
 
-from timeit import default_timer
 
 def is_square(n):
     p = sqrt(n)
     m = int(p)
 
-    if p == m:
-        return True
-    else:
-        return False
+    return bool(p == m)
+
 
 def main():
     start = default_timer()
@@ -43,9 +41,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 80')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

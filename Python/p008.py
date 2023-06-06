@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The four adjacent digits in the 1000-digit number that have the greatest product are 9 × 9 × 8 × 9 = 5832.
 #
@@ -26,6 +26,7 @@
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -69,9 +70,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 8')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds'.format(end - start))
+
 
 if __name__ == '__main__':
     main()

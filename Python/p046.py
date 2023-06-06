@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # It was proposed by Christian Goldbach that every odd composite number can be written as the sum of a prime and twice a square.
 #
@@ -14,11 +14,15 @@
 # What is the smallest odd composite that cannot be written as the sum of a prime and twice a square?
 
 from timeit import default_timer
+
 from projecteuler import sieve
 
-def goldbach(n):
-    global primes
 
+N = 10000
+primes = sieve(N)
+
+
+def goldbach(n):
 #   Check every prime smaller than n.
     for i in range(3, n, 2):
         if primes[i] == 1:
@@ -43,12 +47,6 @@ def goldbach(n):
 def main():
     start = default_timer()
 
-    global primes
-
-    N = 10000
-
-    primes = sieve(N)
-
     found = 0
     i = 3
 
@@ -64,9 +62,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 46')
-    print('Answer: {}'.format(i-2))
+    print(f'Answer: {i - 2}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

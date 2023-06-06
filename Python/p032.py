@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # We shall say that an n-digit number is pandigital if it makes use of all the digits 1 to n exactly once; for example, the 5-digit number, 15234,
 # is 1 through 5 pandigital.
@@ -9,11 +9,13 @@
 #
 # HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
+from timeit import default_timer
+
 import numpy as np
 from numpy import zeros
 
-from timeit import default_timer
 from projecteuler import is_pandigital
+
 
 def main():
     start = default_timer()
@@ -26,14 +28,14 @@ def main():
 #   To get a 1 to 9 pandigital concatenation of the two factors and product,
 #   we need to multiply a 1 digit number times a 4 digit numbers (the biggest
 #   one digit number 9 times the biggest 3 digit number 999 multiplied give
-#   8991 and the total digit count is 8, which is not enough), or a 2 digit 
+#   8991 and the total digit count is 8, which is not enough), or a 2 digit
 #   number times a 3 digit number (the smallest two different 3 digits number,
 #   100 and 101, multiplied give 10100, and the total digit count is 11, which
 #   is too many). The outer loop starts at 2 because 1 times any number gives
-#   the same number, so its digit will be repeated and the result can't be 
-#   pandigital. The nested loop starts from 1234 because it's the smallest 
+#   the same number, so its digit will be repeated and the result can't be
+#   pandigital. The nested loop starts from 1234 because it's the smallest
 #   4-digit number with no repeated digits, and it ends at 4987 because it's
-#   the biggest number without repeated digits that multiplied by 2 gives a 
+#   the biggest number without repeated digits that multiplied by 2 gives a
 #   4 digit number.
     for i in range(2, 9):
         for j in range(1234, 4987):
@@ -80,9 +82,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 32')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

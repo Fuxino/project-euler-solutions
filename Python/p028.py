@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Starting with the number 1 and moving to the right in a clockwise direction a 5 by 5 spiral is formed as follows:
 #
@@ -13,6 +13,7 @@
 # What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -40,9 +41,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 28')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

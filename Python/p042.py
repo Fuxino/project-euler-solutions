@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The nth term of the sequence of triangle numbers is given by, tn = ½n(n+1); so the first ten triangle numbers are:
 #
@@ -10,7 +10,9 @@
 # Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words,
 # how many are triangle words?
 
+import sys
 from timeit import default_timer
+
 
 def is_triang(n):
     i = 1
@@ -24,18 +26,16 @@ def is_triang(n):
 
     return False
 
+
 def main():
     start = default_timer()
 
     try:
-        fp = open('words.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('words.txt'))
-        exit(1)
-
-    words = list(fp.readline().replace('"', '').split(','))
-
-    fp.close()
+        with open('words.txt', 'r', encoding='utf-8') as fp:
+            words = list(fp.readline().replace('"', '').split(','))
+    except FileNotFoundError:
+        print('Error while opening file words.txt')
+        sys.exit(1)
 
     count = 0
 
@@ -53,9 +53,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 42')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

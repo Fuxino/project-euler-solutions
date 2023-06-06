@@ -5,9 +5,10 @@
 #
 # Find the smallest cube for which exactly five permutations of its digits are cube.
 
+from timeit import default_timer
+
 from numpy import zeros
 
-from timeit import default_timer
 
 def main():
     start = default_timer()
@@ -45,9 +46,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 62')
-    print('Answer: {}'.format(cubes[i]))
+    print(f'Answer: {cubes[i]}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

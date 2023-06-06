@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
 #
@@ -6,6 +6,7 @@
 
 from timeit import default_timer
 from projecteuler import is_prime
+
 
 def main():
     start = default_timer()
@@ -25,9 +26,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 7')
-    print('Answer: {}'.format(n))
+    print(f'Answer: {n}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

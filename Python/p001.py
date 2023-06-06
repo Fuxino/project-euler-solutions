@@ -1,10 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
 #
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -20,9 +21,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 1')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

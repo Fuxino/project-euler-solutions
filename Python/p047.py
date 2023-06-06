@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The first two consecutive numbers to have two distinct prime factors are:
 #
@@ -15,6 +15,7 @@
 
 from timeit import default_timer
 
+
 # Function using a modified sieve of Eratosthenes to count
 # the distinct prime factors of each number.
 def count_factors(n):
@@ -28,6 +29,7 @@ def count_factors(n):
         i = i + 1
 
     return factors
+
 
 def main():
     start = default_timer()
@@ -53,9 +55,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 47')
-    print('Answer: {}'.format(res))
+    print(f'Answer: {res}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

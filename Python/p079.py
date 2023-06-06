@@ -8,13 +8,14 @@
 # Given that the three characters are always asked for in order, analyse the file so as to determine the shortest possible
 # secret passcode of unknown length.
 
+import sys
 from itertools import permutations
-
 from timeit import default_timer
+
 
 def check_passcode(passcode, len_, logins, n):
 #   For every login attempt, check if all the digits appear in the
-#   passcode in the correct order. Return 0 if a login attempt 
+#   passcode in the correct order. Return 0 if a login attempt
 #   incompatible with the current passcode is found.
     for i in range(n):
         k = 0
@@ -30,28 +31,26 @@ def check_passcode(passcode, len_, logins, n):
 
     return 1
 
+
 def main():
     start = default_timer()
 
     try:
-        fp = open('keylog.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('keylog.txt'))
-        exit(1)
-
-    logins = fp.readlines()
-
-    fp.close()
+        with open('keylog.txt', 'r', encoding='utf-8') as fp:
+            logins = fp.readlines()
+    except FileNotFoundError:
+        print('Error while opening file keylog.txt')
+        sys.exit(1)
 
     digits = [0] * 10
     passcode_digits = [0] * 10
 
     for i in logins:
         keylog = int(i)
-       
+
 #       Check which digits are present in the login attempts.
         while True:
-            digits[keylog%10] = digits[keylog%10] + 1
+            digits[keylog % 10] = digits[keylog % 10] + 1
             keylog = keylog // 10
 
             if keylog == 0:
@@ -97,9 +96,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 79')
-    print('Answer: {}'.format(res))
+    print(f'Answer: {res}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

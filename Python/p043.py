@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The number, 1406357289, is a 0 to 9 pandigital number because it is made up of each of the digits 0 to 9 in some order, but it also has a
 # rather interesting sub-string divisibility property.
@@ -16,8 +16,8 @@
 # Find the sum of all 0 to 9 pandigital numbers with this property.
 
 from itertools import permutations
-
 from timeit import default_timer
+
 
 # Function to check if the value has the desired property.
 def has_property(n):
@@ -50,13 +50,14 @@ def has_property(n):
 
     if value % 13 != 0:
         return False
-    
+
     value = int(n[7]) * 100 + int(n[8]) * 10 + int(n[9])
 
     if value % 17 != 0:
         return False
 
     return True
+
 
 def main():
     start = default_timer()
@@ -74,9 +75,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 43')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

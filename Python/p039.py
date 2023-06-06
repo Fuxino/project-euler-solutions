@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # If p is the perimeter of a right angle triangle with integral length sides, {a,b,c}, there are exactly three solutions for p = 120.
 #
@@ -6,9 +6,10 @@
 #
 # For which value of p ≤ 1000, is the number of solutions maximised?
 
+from timeit import default_timer
+
 from numpy import zeros
 
-from timeit import default_timer
 
 def main():
     start = default_timer()
@@ -68,9 +69,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 39')
-    print('Answer: {}'.format(res))
+    print(f'Answer: {res}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -18,6 +18,7 @@
 
 from timeit import default_timer
 
+
 def main():
     start = default_timer()
 
@@ -27,10 +28,10 @@ def main():
 
 #   If n/d is the current term of the expansion, the next term can be calculated as
 #   (n+2d)/(n+d).
-    for i in range(1, 1000):
+    for _ in range(1, 1000):
         d2 = 2 * d
         d = n + d
-        n = n +  d2
+        n = n + d2
 
         if len(str(n)) > len(str(d)):
             count = count + 1
@@ -38,9 +39,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 57')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 #
@@ -103,9 +103,9 @@
 # 20849603980134001723930671666823555245252804609722
 # 53503534226472524250874054075591789781264330331690
 
+from timeit import default_timer
 import numpy as np
 
-from timeit import default_timer
 
 def main():
     start = default_timer()
@@ -219,9 +219,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 13')
-    print('Answer: {}'.format(sum_[:10]))
+    print(f'Answer: {sum_[:10]}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

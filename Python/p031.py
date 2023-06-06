@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
 #
@@ -12,19 +12,22 @@
 
 from timeit import default_timer
 
+
 # Simple recursive function that tries every combination.
 def count(coins, value, n, i):
     for j in range(i, 8):
         value = value + coins[j]
         if value == 200:
             return n + 1
-        elif value > 200:
+
+        if value > 200:
             return n
-        else:
-            n = count(coins, value, n, j)
-            value = value - coins[j]
+
+        n = count(coins, value, n, j)
+        value = value - coins[j]
 
     return n
+
 
 def main():
     start = default_timer()
@@ -36,9 +39,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 31')
-    print('Answer: {}'.format(n))
+    print(f'Answer: {n}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

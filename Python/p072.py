@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
 #
@@ -11,7 +11,9 @@
 # How many elements would be contained in the set of reduced proper fractions for d ≤ 1,000,000?
 
 from timeit import default_timer
+
 from projecteuler import sieve, phi
+
 
 def main():
     start = default_timer()
@@ -21,7 +23,7 @@ def main():
     count = 0
     primes = sieve(N)
 
-#   For any denominator d, the number of reduced proper fractions is 
+#   For any denominator d, the number of reduced proper fractions is
 #   the number of fractions n/d where gcd(n, d)=1, which is the definition
 #   of Euler's Totient Function phi. It's sufficient to calculate phi for each
 #   denominator and sum the value.
@@ -31,9 +33,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 72')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

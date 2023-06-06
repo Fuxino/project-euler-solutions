@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The number 145 is well known for the property that the sum of the factorial of its digits is equal to 145:
 #
@@ -23,13 +23,14 @@
 # How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
 
 from math import factorial
-
 from timeit import default_timer
 
-def len_chain(n):
-    global N
-    global chains
 
+N = 1000000
+chains = [0] * N
+
+
+def len_chain(n):
     chain = [0] * 60
     count = 0
     finished = 0
@@ -68,15 +69,9 @@ def len_chain(n):
 
     return count
 
+
 def main():
     start = default_timer()
-
-    global N
-    global chains
-
-    N = 1000000
-
-    chains = [0] * N
 
     count = 0
 
@@ -89,9 +84,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 74')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

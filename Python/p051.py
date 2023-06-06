@@ -10,7 +10,15 @@
 # value family.
 
 from timeit import default_timer
+
 from projecteuler import sieve
+
+
+N = 1000000
+
+# N set to 1000000 as a reasonable limit, which turns out to be enough.
+primes = sieve(N)
+
 
 def count_digit(n, d):
     count = 0
@@ -22,9 +30,8 @@ def count_digit(n, d):
 
     return count
 
-def replace(n):
-    global primes
 
+def replace(n):
     n_string = list(str(n))
     l = len(n_string)
     max_ = 0
@@ -60,35 +67,29 @@ def replace(n):
 def main():
     start = default_timer()
 
-    global primes
-
-    N = 1000000
-
-#   N set to 1000000 as a reasonable limit, which turns out to be enough.
-    primes = sieve(N)
-
 #   Checking only odd numbers with at least 4 digits.
     i = 1001
 
     while i < N:
-#       The family of numbers needs to have at least one of 0, 1 or 2 as 
-#       repeated digits, otherwise we can't get a 8 number family (there 
+#       The family of numbers needs to have at least one of 0, 1 or 2 as
+#       repeated digits, otherwise we can't get a 8 number family (there
 #       are only 7 other digits). Also, te number of repeated digits must
 #       be 3, otherwise at least 3 resulting numbers will be divisible by 3.
 #       So the smallest number of this family must have three 0s, three 1s or
 #       three 2s.
         if count_digit(i, 0) >= 3 or count_digit(i, 1) >= 3 or\
                 count_digit(i, 2) >= 3:
-                    if primes[i] == 1 and replace(i) == 8:
-                        break
+            if primes[i] == 1 and replace(i) == 8:
+                break
         i = i + 2
-    
+
     end = default_timer()
 
     print('Project Euler, Problem 51')
-    print('Answer: {}'.format(i))
+    print(f'Answer: {i}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

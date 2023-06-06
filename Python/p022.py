@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Using names.txt, a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order.
 # Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
@@ -8,18 +8,20 @@
 #
 # What is the total of all the name scores in the file?
 
+import sys
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
 
     try:
-        fp = open('names.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('names.txt'))
-        exit(1)
+        with open('names.txt', 'r', encoding='utf-8') as fp:
+            names = list(fp.readline().replace('"', '').split(','))
+    except FileNotFoundError:
+        print('Error while opening file names.txt')
+        sys.exit(1)
 
-    names = list(fp.readline().replace('"', '').split(','))
     names.sort()
 
     sum_ = 0
@@ -38,9 +40,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 22')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

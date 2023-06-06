@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The prime 41, can be written as the sum of six consecutive primes:
 #
@@ -11,7 +11,9 @@
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
 from timeit import default_timer
+
 from projecteuler import sieve
+
 
 def main():
     start = default_timer()
@@ -64,9 +66,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 50')
-    print('Answer: {}'.format(max_p))
+    print(f'Answer: {max_p}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

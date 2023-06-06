@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Euler discovered the remarkable quadratic formula:
 #
@@ -20,7 +20,9 @@
 # Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n=0.
 
 from timeit import default_timer
+
 from projecteuler import is_prime
+
 
 def main():
     start = default_timer()
@@ -52,9 +54,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 27')
-    print('Answer: {}'.format(save_a * save_b))
+    print(f'Answer: {save_a * save_b}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

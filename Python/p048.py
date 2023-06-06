@@ -1,10 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The series, 1^1 + 2^2 + 3^3 + ... + 10^10 = 10405071317.
 #
 # Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -19,9 +20,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 48')
-    print('Answer: {}'.format(str(sum_)[-10:]))
+    print(f'Answer: {str(sum_)[-10:]}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

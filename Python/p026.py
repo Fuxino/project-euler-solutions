@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # A unit fraction contains 1 in the numerator. The decimal representation of the unit fractions with denominators 2 to 10 are given:
 #
@@ -17,6 +17,7 @@
 # Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -59,9 +60,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 26')
-    print('Answer: {}'.format(max_n))
+    print(f'Answer: {max_n}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

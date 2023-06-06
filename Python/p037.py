@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The number 3797 has an interesting property. Being prime itself, it is possible to continuously remove digits from left to right,
 # and remain prime at each stage: 3797, 797, 97, and 7. Similarly we can work from right to left: 3797, 379, 37, and 3.
@@ -8,7 +8,9 @@
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 from timeit import default_timer
+
 from projecteuler import is_prime
+
 
 def is_tr_prime(n):
 #   One-digit numbers and non-prime numbers are
@@ -40,6 +42,7 @@ def is_tr_prime(n):
 #   If it gets here, the number is truncatable prime.
     return True
 
+
 def main():
     start = default_timer()
 
@@ -57,9 +60,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 37')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

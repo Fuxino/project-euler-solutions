@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Euler's Totient function, φ(n) [sometimes called the phi function], is used to determine the number of numbers less than n which are
 # relatively prime to n. For example, as 1, 2, 4, 5, 7, and 8, are all less than nine and relatively prime to nine, φ(9)=6.
@@ -19,7 +19,9 @@
 # Find the value of n ≤ 1,000,000 for which n/φ(n) is a maximum.
 
 from timeit import default_timer
+
 from projecteuler import is_prime
+
 
 def main():
     start = default_timer()
@@ -47,9 +49,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 69')
-    print('Answer: {}'.format(res))
+    print(f'Answer: {res}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

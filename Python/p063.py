@@ -6,6 +6,7 @@
 
 from timeit import default_timer
 
+
 def main():
     start = default_timer()
 
@@ -30,9 +31,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 63')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

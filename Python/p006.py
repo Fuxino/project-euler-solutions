@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The sum of the squares of the first ten natural numbers is,
 #
@@ -13,6 +13,7 @@
 # Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -30,9 +31,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 6')
-    print('Answer: {}'.format(square_sum - sum_squares))
+    print(f'Answer: {square_sum - sum_squares}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

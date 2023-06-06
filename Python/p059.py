@@ -20,58 +20,62 @@
 
 from timeit import default_timer
 
+
 class EncryptedText():
 
     def __init__(self, *args, **kwargs):
-        super(EncryptedText, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.text = None
         self.len = 0
 
     def read_text(self, filename):
         try:
-            fp = open(filename, 'r')
-        except:
-            print('Error while opening file {}'.format(filename))
+            with open(filename, 'r', encoding='utf-8') as fp:
+                self.text = list(map(int, list(fp.readline().split(','))))
+        except FileNotFoundError:
+            print(f'Error while opening file {filename}')
+
             return -1
 
-        self.text = list(map(int, list(fp.readline().split(','))))
         self.len = len(self.text)
-
-        fp.close()
 
     def decrypt(self):
         found = 0
 
         for c1 in range(ord('a'), ord('z')+1):
-           if found:
+            if found:
                break
-           for c2 in range(ord('a'), ord('z')+1):
-               if found:
-                   break
-               for c3 in range(ord('a'), ord('z')+1):
-                   if found:
-                       break
-                   plain_text = [''] * self.len
-                   for i in range(0, self.len-2, 3):
-                       plain_text[i] = str(chr(self.text[i]^c1))
-                       plain_text[i+1] = str(chr(self.text[i+1]^c2))
-                       plain_text[i+2] = str(chr(self.text[i+2]^c3))
+            for c2 in range(ord('a'), ord('z')+1):
+                if found:
+                    break
+               
+                for c3 in range(ord('a'), ord('z')+1):
+                    if found:
+                        break
 
-                   if i == self.len - 2:
-                       plain_text[i] = str(chr(self.text[i]^c1))
-                       plain_text[i+1] = str(chr(self.text[i+1]^c2))
+                    plain_text = [''] * self.len
 
-                   if i == self.len - 1:
-                       plain_text[i] = str(chr(self.text[i]^c1))
+                    for i in range(0, self.len-2, 3):
+                        plain_text[i] = str(chr(self.text[i]^c1))
+                        plain_text[i+1] = str(chr(self.text[i+1]^c2))
+                        plain_text[i+2] = str(chr(self.text[i+2]^c3))
 
-                   plain_text = ''.join(plain_text)
+                    if i == self.len - 2:
+                        plain_text[i] = str(chr(self.text[i]^c1))
+                        plain_text[i+1] = str(chr(self.text[i+1]^c2))
 
-                   if 'the' in plain_text and 'be' in plain_text and 'to' in plain_text and 'of' in plain_text and\
-                           'and' in plain_text and 'in' in plain_text and 'that' in plain_text and 'have' in plain_text:
-                               found = 1
-        
+                    if i == self.len - 1:
+                        plain_text[i] = str(chr(self.text[i]^c1))
+
+                    plain_text = ''.join(plain_text)
+
+                    if 'the' in plain_text and 'be' in plain_text and 'to' in plain_text and 'of' in plain_text and\
+                            'and' in plain_text and 'in' in plain_text and 'that' in plain_text and 'have' in plain_text:
+                        found = 1
+
         return plain_text
+
 
 def main():
     start = default_timer()
@@ -79,7 +83,7 @@ def main():
     enc_text = EncryptedText()
 
     if enc_text.read_text('cipher.txt') == -1:
-        exit(1)
+        sys.exit(1)
 
     plain_text = enc_text.decrypt()
 
@@ -91,9 +95,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 59')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

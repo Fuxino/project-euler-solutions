@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
 # If d(a) = b and d(b) = a, where a ≠ b, then a and b are an amicable pair and each of a and b are called amicable numbers.
@@ -8,10 +8,11 @@
 #
 # Evaluate the sum of all the amicable numbers under 10000.
 
-from math import floor, sqrt
 
 from timeit import default_timer
+
 from projecteuler import sum_of_divisors
+
 
 def main():
     start = default_timer()
@@ -32,9 +33,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 21')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

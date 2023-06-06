@@ -46,9 +46,10 @@
 #
 #      How many hands does Player 1 win?
 
+import sys
 from enum import IntEnum
-
 from timeit import default_timer
+
 
 class Value(IntEnum):
     Two = 1
@@ -65,10 +66,11 @@ class Value(IntEnum):
     King = 12
     Ace = 13
 
+
 class Card():
 
     def __init__(self, *args, **kwargs):
-        super(Card, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.value = None
         self.suit = None
@@ -103,20 +105,22 @@ class Card():
 
         self.suit = card[1]
 
+
 class Hand():
 
     def __init__(self, *args, **kwargs):
-        super(Hand, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.cards = list()
 
     def sort(self):
         self.cards.sort(key=lambda x: x.value)
 
+
 class Game():
 
     def __init__(self, *args, **kwargs):
-        super(Game, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         self.hand1 = None
         self.hand2 = None
@@ -130,7 +134,8 @@ class Game():
                 self.hand1.cards[0].suit == self.hand1.cards[2].suit and\
                 self.hand1.cards[0].suit == self.hand1.cards[3].suit and\
                 self.hand1.cards[0].suit == self.hand1.cards[4].suit:
-                    return 1
+            return 1
+
 #       If player 2 has a Royal Flush, player 2 wins.
         if self.hand2.cards[4].value == Value.Ace and self.hand2.cards[3].value == Value.King and\
                 self.hand2.cards[2].value == Value.Queen and self.hand2.cards[1].value == Value.Jack and\
@@ -138,7 +143,7 @@ class Game():
                 self.hand2.cards[0].suit == self.hand2.cards[2].suit and\
                 self.hand2.cards[0].suit == self.hand2.cards[3].suit and\
                 self.hand2.cards[0].suit == self.hand2.cards[4].suit:
-                    return -1
+            return -1
 
         straightflush1 = 0
         straightflush2 = 0
@@ -146,35 +151,35 @@ class Game():
 #       Check if player 1 has a straight flush.
         if self.hand1.cards[0].suit == self.hand1.cards[1].suit and self.hand1.cards[0].suit == self.hand1.cards[2].suit and\
                 self.hand1.cards[0].suit == self.hand1.cards[3].suit and self.hand1.cards[0].suit == self.hand1.cards[4].suit:
-                    value = self.hand1.cards[0].value
+            value = self.hand1.cards[0].value
 
-                    straightflush1 = 1
+            straightflush1 = 1
 
-                    for i in range(1, 5):
-                        value = value + 1
+            for i in range(1, 5):
+                value = value + 1
 
-                        if self.hand1.cards[i].value != value:
-                            straightflush1 = 0
-                            break
+                if self.hand1.cards[i].value != value:
+                    straightflush1 = 0
+                    break
 
 #       Check if player 2 has a straight flush.
         if self.hand2.cards[0].suit == self.hand2.cards[1].suit and self.hand2.cards[0].suit == self.hand2.cards[2].suit and\
                 self.hand2.cards[0].suit == self.hand2.cards[3].suit and self.hand2.cards[0].suit == self.hand2.cards[4].suit:
-                    value = self.hand2.cards[0].value
+            value = self.hand2.cards[0].value
 
-                    straightflush2 = 1
+            straightflush2 = 1
 
-                    for i in range(1, 5):
-                        value = value + 1
+            for i in range(1, 5):
+                value = value + 1
 
-                        if self.hand2.cards[i].value != value:
-                            straightflush2 = 0
-                            break
+                if self.hand2.cards[i].value != value:
+                    straightflush2 = 0
+                    break
 
 #       If player 1 has a straight flush and player 2 doesn't, player 1 wins
         if straightflush1 and not straightflush2:
             return 1
-        
+
 #       If player 2 has a straight flush and player 1 doesn't, player 2 wins
         if not straightflush1 and straightflush2:
             return -1
@@ -185,8 +190,8 @@ class Game():
         if straightflush1 and straightflush2:
             if self.hand1.cards[0].value > self.hand2.cards[0].value:
                 return 1
-            else:
-                return -1
+
+            return -1
 
         four1 = 0
         four2 = 0
@@ -221,12 +226,12 @@ class Game():
 #       Check if player 1 has a full house.
         if self.hand1.cards[0].value == self.hand1.cards[1].value and self.hand1.cards[3].value == self.hand1.cards[4].value and\
                 (self.hand1.cards[1].value == self.hand1.cards[2].value or self.hand1.cards[2].value == self.hand1.cards[3].value):
-                    full1 = 1
+            full1 = 1
 
 #       Check if player 2 has a full house.
         if self.hand2.cards[0].value == self.hand2.cards[1].value and self.hand2.cards[3].value == self.hand2.cards[4].value and\
                 (self.hand2.cards[1].value == self.hand2.cards[2].value or self.hand2.cards[2].value == self.hand2.cards[3].value):
-                    full2 = 1
+            full2 = 1
 
 #       If player 1 has a full house and player 2 doesn't, player 1 wins.
         if full1 and not full2:
@@ -242,7 +247,8 @@ class Game():
         if full1 and full2:
             if self.hand1.cards[2].value > self.hand2.cards[2].value:
                 return 1
-            elif self.hand1.cards[2].value < self.hand2.cards[2].value:
+
+            if self.hand1.cards[2].value < self.hand2.cards[2].value:
                 return -1
 
         flush1 = 0
@@ -251,12 +257,12 @@ class Game():
 #       Check if player 1 has a flush.
         if self.hand1.cards[0].suit == self.hand1.cards[1].suit and self.hand1.cards[0].suit == self.hand1.cards[2].suit and\
                 self.hand1.cards[0].suit == self.hand1.cards[3].suit and self.hand1.cards[0].suit == self.hand1.cards[4].suit:
-                    flush1 = 1
+            flush1 = 1
 
 #       Check if player 2 has a flush.
         if self.hand2.cards[0].suit == self.hand2.cards[1].suit and self.hand2.cards[0].suit == self.hand2.cards[2].suit and\
                 self.hand2.cards[0].suit == self.hand2.cards[3].suit and self.hand2.cards[0].suit == self.hand2.cards[4].suit:
-                    flush2 = 1
+            flush2 = 1
 
 #       If player 1 has a flush and player 2 doesn't, player 1 wins.
         if flush1 and not flush2:
@@ -304,13 +310,13 @@ class Game():
         if (self.hand1.cards[0].value == self.hand1.cards[1].value and self.hand1.cards[0].value == self.hand1.cards[2].value) or\
                 (self.hand1.cards[1].value == self.hand1.cards[2].value and self.hand1.cards[1].value == self.hand1.cards[3].value) or\
                 (self.hand1.cards[2].value == self.hand1.cards[3].value and self.hand1.cards[2].value == self.hand1.cards[4].value):
-                    three1 = 1
+            three1 = 1
 
 #       Check if player 2 has three of a kind.
         if (self.hand2.cards[0].value == self.hand2.cards[1].value and self.hand2.cards[0].value == self.hand2.cards[2].value) or\
                 (self.hand2.cards[1].value == self.hand2.cards[2].value and self.hand2.cards[1].value == self.hand2.cards[3].value) or\
                 (self.hand2.cards[2].value == self.hand2.cards[3].value and self.hand2.cards[2].value == self.hand2.cards[4].value):
-                    three2 = 1
+            three2 = 1
 
 #       If player 1 has three of a kind and player 2 doesn't, player 1 wins.
         if three1 and not three2:
@@ -323,7 +329,8 @@ class Game():
         if three1 and three2:
             if self.hand1.cards[2].value > self.hand2.cards[2].value:
                 return 1
-            elif self.hand1.cards[2].value < self.hand2.cards[2].value:
+
+            if self.hand1.cards[2].value < self.hand2.cards[2].value:
                 return -1
 
         twopairs1 = 0
@@ -333,13 +340,13 @@ class Game():
         if (self.hand1.cards[0].value == self.hand1.cards[1].value and self.hand1.cards[2].value == self.hand1.cards[3].value) or\
                 (self.hand1.cards[0].value == self.hand1.cards[1].value and self.hand1.cards[3].value == self.hand1.cards[4].value) or\
                 (self.hand1.cards[1].value == self.hand1.cards[2].value and self.hand1.cards[3].value == self.hand1.cards[4].value):
-                    twopairs1 = 1
+            twopairs1 = 1
 
 #       Check if player 2 has two pairs.
         if (self.hand2.cards[0].value == self.hand2.cards[1].value and self.hand2.cards[2].value == self.hand2.cards[3].value) or\
                 (self.hand2.cards[0].value == self.hand2.cards[1].value and self.hand2.cards[3].value == self.hand2.cards[4].value) or\
                 (self.hand2.cards[1].value == self.hand2.cards[2].value and self.hand2.cards[3].value == self.hand2.cards[4].value):
-                    twopairs2 = 1
+            twopairs2 = 1
 
 #       If player 1 has two pairs and player 2 doesn't, player 1 wins.
         if twopairs1 and not twopairs2:
@@ -354,17 +361,21 @@ class Game():
         if twopairs1 and twopairs2:
             if self.hand1.cards[3].value > self.hand2.cards[3].value:
                 return 1
-            elif self.hand1.cards[3].value < self.hand2.cards[3].value:
+
+            if self.hand1.cards[3].value < self.hand2.cards[3].value:
                 return -1
-            elif self.hand1.cards[1].value > self.hand2.cards[1].value:
+
+            if self.hand1.cards[1].value > self.hand2.cards[1].value:
                 return 1
-            elif self.hand1.cards[1].value < self.hand2.cards[1].value:
+
+            if self.hand1.cards[1].value < self.hand2.cards[1].value:
                 return -1
 
             for i in range(4, -1, -1):
                 if self.hand1.cards[i].value > self.hand2.cards[i].value:
                     return 1
-                elif self.hand1.cards[i].value < self.hand2.cards[i].value:
+
+                if self.hand1.cards[i].value < self.hand2.cards[i].value:
                     return -1
 
         pair1 = 0
@@ -373,12 +384,12 @@ class Game():
 #       Check if player 1 has a pair of cards.
         if self.hand1.cards[0].value == self.hand1.cards[1].value or self.hand1.cards[1].value == self.hand1.cards[2].value or\
                 self.hand1.cards[2].value == self.hand1.cards[3].value or self.hand1.cards[3].value == self.hand1.cards[4].value:
-                    pair1 = 1
+            pair1 = 1
 
 #       Check if player 2 has a pair of cards.
         if self.hand2.cards[0].value == self.hand2.cards[1].value or self.hand2.cards[1].value == self.hand2.cards[2].value or\
                 self.hand2.cards[2].value == self.hand2.cards[3].value or self.hand2.cards[3].value == self.hand2.cards[4].value:
-                    pair2 = 1
+            pair2 = 1
 
 #       If player 1 has a pair of cards and player 2 doesn't, player 1 wins.
         if pair1 and not pair2:
@@ -427,22 +438,20 @@ class Game():
                 return 1
             if self.hand1.cards[i].value < self.hand2.cards[i].value:
                 return -1
-        
+
 #       If everything is equal, return 0
         return 0
+
 
 def main():
     start = default_timer()
 
     try:
-        fp = open('poker.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('poker.txt'))
-        exit(1)
-
-    games = fp.readlines()
-
-    fp.close()
+        with open('poker.txt', 'r', encoding='utf-8') as fp:
+            games = fp.readlines()
+    except FileNotFoundError:
+        print('Error while opening file poker.txt')
+        sys.exit(1)
 
     count = 0
 
@@ -478,9 +487,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 54')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

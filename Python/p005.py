@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 #
@@ -6,6 +6,7 @@
 
 from timeit import default_timer
 from projecteuler import lcmm
+
 
 def main():
     start = default_timer()
@@ -19,9 +20,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 5')
-    print('Answer: {}'.format(res))
+    print(f'Answer: {res}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

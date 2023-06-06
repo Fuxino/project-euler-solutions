@@ -10,11 +10,12 @@
 
 from timeit import default_timer
 
+
 def main():
     start = default_timer()
 
-    N = 10000000
-    
+    N = 1000000000
+
     count = 0
 
 #   Brute force approach, sum each number and their reverse and
@@ -23,16 +24,17 @@ def main():
         if i % 10 != 0:
             s = str(i + int(''.join(reversed(str(i)))))
 
-            if not '0' in s and not '2' in s and not '4' in s and\
-                    not '6' in s and not '8' in s:
+            if '0' not in s and '2' not in s and '4' not in s and\
+                    '6' not in s and '8' not in s:
                 count = count + 1
 
     end = default_timer()
 
     print('Project Euler, Problem 145')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

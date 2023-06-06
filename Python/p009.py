@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # A Pythagorean triplet is a set of three natural numbers, a < b < c, for which,
 #
@@ -11,8 +11,8 @@
 # Find the product abc.
 
 from math import gcd
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -61,9 +61,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 9')
-    print('Answer: {}'.format(a * b * c))
+    print(f'Answer: {a * b * c}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

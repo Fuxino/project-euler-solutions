@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # If the numbers 1 to 5 are written out in words: one, two, three, four, five, then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
 #
@@ -9,6 +9,7 @@
 
 from timeit import default_timer
 
+
 def main():
     start = default_timer()
 
@@ -16,10 +17,10 @@ def main():
 #   the second letters for "twenty", "thirty", ..., "ninety",
 #   the third letters for "one hundred and", "two hundred and", ..., "nine hundre and",
 #   the last one-element one the number of letters of 1000
-    n_letters = [[3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8],\
-                [6, 6, 5, 5, 5, 7, 6, 6],\
-                [13, 13, 15, 14, 14, 13, 15, 15, 14],\
-                [11]]
+    n_letters = [[3, 3, 5, 4, 4, 3, 5, 5, 4, 3, 6, 6, 8, 8, 7, 7, 9, 8, 8],
+                 [6, 6, 5, 5, 5, 7, 6, 6],
+                 [13, 13, 15, 14, 14, 13, 15, 15, 14],
+                 [11]]
 
     sum_ = 0
 
@@ -59,9 +60,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 17')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

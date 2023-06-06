@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # A perfect number is a number for which the sum of its proper divisors is exactly equal to the number.
 # For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
@@ -12,13 +12,14 @@
 #
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
-from math import floor, sqrt
-
 from timeit import default_timer
+
 from projecteuler import sum_of_divisors
+
 
 def is_abundant(n):
     return sum_of_divisors(n) > n
+
 
 def main():
     start = default_timer()
@@ -52,9 +53,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 23')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

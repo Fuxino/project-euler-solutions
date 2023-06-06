@@ -42,19 +42,18 @@
 #
 # How many continued fractions for N≤10000 have an odd period?
 
-from math import floor, sqrt
-
+from math import sqrt
 from timeit import default_timer
+
 from projecteuler import build_sqrt_cont_fraction
+
 
 def is_square(n):
     p = sqrt(n)
     m = int(p)
 
-    if p == m:
-        return True
-    else:
-        return False
+    return bool(p == m)
+
 
 def main():
     start = default_timer()
@@ -74,9 +73,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 64')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

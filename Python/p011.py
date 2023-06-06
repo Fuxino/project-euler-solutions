@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # In the 20×20 grid below, four numbers along a diagonal line have been marked in red.
 #
@@ -29,6 +29,7 @@
 
 from timeit import default_timer
 
+
 def main():
     start = default_timer()
 
@@ -51,7 +52,7 @@ def main():
             [4, 42, 16, 73, 38, 25, 39, 11, 24, 94, 72, 18, 8, 46, 29, 32, 40, 62, 76, 36],
             [20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 4, 36, 16],
             [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
-            [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]];
+            [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]]
 
     max_ = 0
 
@@ -112,9 +113,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 11')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

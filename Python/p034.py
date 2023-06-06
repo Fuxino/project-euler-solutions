@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # 145 is a curious number, as 1! + 4! + 5! = 1 + 24 + 120 = 145.
 #
@@ -7,10 +7,10 @@
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 from math import factorial
+from timeit import default_timer
 
 from numpy import ones
 
-from timeit import default_timer
 
 def main():
     start = default_timer()
@@ -41,9 +41,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 34')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

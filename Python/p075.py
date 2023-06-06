@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # It turns out that 12 cm is the smallest length of wire that can be bent to form an integer sided right angle triangle in exactly one way,
 # but there are many more examples.
@@ -18,8 +18,8 @@
 # Given that L is the length of the wire, for how many values of L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
 
 from math import gcd
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -46,7 +46,7 @@ def main():
                 b = 2 * m * n
                 c = m * m + n * n
 
-                if(a + b + c <= N):
+                if a + b + c <= N:
                     l[a+b+c] = l[a+b+c] + 1
 
                 i = 2
@@ -54,7 +54,7 @@ def main():
                 tmpb = i * b
                 tmpc = i * c
 
-                while(tmpa + tmpb + tmpc <= N):
+                while tmpa + tmpb + tmpc <= N:
                     l[tmpa+tmpb+tmpc] = l[tmpa+tmpb+tmpc] + 1
 
                     i = i + 1
@@ -71,9 +71,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 75')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

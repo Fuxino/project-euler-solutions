@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The Fibonacci sequence is defined by the recurrence relation:
 #
@@ -23,6 +23,7 @@
 
 from timeit import default_timer
 
+
 def main():
     start = default_timer()
 
@@ -42,9 +43,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 25')
-    print('Answer: {}'.format(i))
+    print(f'Answer: {i}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

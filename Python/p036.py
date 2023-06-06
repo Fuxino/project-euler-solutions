@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The decimal number, 585 = 1001001001_2 (binary), is palindromic in both bases.
 #
@@ -7,7 +7,9 @@
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
 from timeit import default_timer
+
 from projecteuler import is_palindrome
+
 
 def main():
     start = default_timer()
@@ -26,9 +28,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 36')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-#!/usr/bin/python3 
+#!/usr/bin/env python3 
 
 # The following iterative sequence is defined for the set of positive integers:
 #
@@ -16,12 +16,13 @@
 #
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
+from timeit import default_timer
 from numpy import zeros
 
-from timeit import default_timer
 
 N = 1000000
 collatz_found = zeros(N, dtype=int)
+
 
 # Recursive function to calculate the Collatz sequence for n.
 # If n is even, Collatz(n)=1+Collatz(n/2), if n is odd
@@ -38,8 +39,8 @@ def collatz_length(n):
 
     if n % 2 == 0:
         return 1 + collatz_length(n//2)
-    else:
-        return 1 + collatz_length(3*n+1)
+
+    return 1 + collatz_length(3*n+1)
 
 def main():
     start = default_timer()
@@ -60,9 +61,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 14')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

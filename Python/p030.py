@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Surprisingly there are only three numbers that can be written as the sum of fourth powers of their digits:
 #
@@ -13,6 +13,7 @@
 # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -37,9 +38,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 30')
-    print('Answer: {}'.format(tot))
+    print(f'Answer: {tot}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

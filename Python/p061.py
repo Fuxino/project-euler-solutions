@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Triangle, square, pentagonal, hexagonal, heptagonal, and octagonal numbers are all figurate (polygonal) numbers and are generated
 # by the following formulae:
@@ -19,18 +19,22 @@
 # Find the sum of the only ordered set of six cyclic 4-digit numbers for which each polygonal type: triangle, square, pentagonal,
 # hexagonal, heptagonal, and octagonal, is represented by a different number in the set.
 
+from timeit import default_timer
+
 from numpy import zeros
 
-from timeit import default_timer
+
+polygonal = zeros((6, 10000), int)
+chain = [0] * 6
+flags = [0] * 6
+sum_ = 0
+
 
 # Recursive function to find the required set. It finds a polygonal number,
 # check if it can be part of the chain, then use recursion to find the next
 # number. If a solution can't be found with the current numbers, it uses
 # backtracking and tries the next polygonal number.
 def find_set(step):
-    global polygonal
-    global chain
-    global flags
     global sum_
 
 #   Use one polygonal number per type, starting from triangular.
@@ -49,7 +53,7 @@ def find_set(step):
 #                   If it's the first number, just add it as first step in the chain.
                     if step == 0:
                         chain[step] = j
-                        sum_ = sum_ + j
+                        sum_ += j
 
 #                       Recursively try to add other numbers to the chain. If a solution
 #                       is found, return 1.
@@ -58,42 +62,34 @@ def find_set(step):
 
 #                       If a solution was not found, backtrack, subtracting the value of
 #                       the number from the total.
-                        sum_ = sum_ - j
+                        sum_ -= j
 #                   If this is the last step and the current number can be added to the chain,
 #                   add it, update the sum and return 1. A solution has been found.
                     elif step == 5 and j % 100 == chain[0] // 100 and j // 100 == chain[step-1] % 100:
                         chain[step] = j
-                        sum_ = sum_ + j
+                        sum_ += j
                         return 1
 #                   For every other step, add the number to the chain if possible, then recursively
 #                   try to add other numbers.
                     elif step < 5 and j // 100 == chain[step-1] % 100:
                         chain[step] = j
-                        sum_ = sum_ + j
+                        sum_ += + j
 
                         if find_set(step+1):
                             return 1
 
 #                       If a solution was not found, backtrack.
-                        sum_ = sum_ - j
+                        sum_ -= j
 
 #           Remove the flag for the current polygonal type.
             flags[i] = 0
 
     return 0
 
+
 def main():
     start = default_timer()
 
-    global polygonal
-    global chain
-    global flags
-    global sum_
-
-    polygonal = zeros((6, 10000), int)
-    chain = [0] * 6
-    flags = [0] * 6
-    sum_ = 0
     i = 1
     n = 1
 
@@ -172,9 +168,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 61')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

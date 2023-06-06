@@ -4,9 +4,8 @@
 #
 # Find the smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
 
-from numpy import zeros
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -20,15 +19,16 @@ def main():
                 ''.join(sorted(str(i))) == ''.join(sorted(str(4*i))) and\
                 ''.join(sorted(str(i))) == ''.join(sorted(str(5*i))) and\
                 ''.join(sorted(str(i))) == ''.join(sorted(str(6*i))):
-                    break
+            break
         i = i + 1
-    
+
     end = default_timer()
 
     print('Project Euler, Problem 52')
-    print('Answer: {}'.format(i))
+    print(f'Answer: {i}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The fraction 49/98 is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that 49/98 = 4/8,
 # which is correct, is obtained by cancelling the 9s.
@@ -11,8 +11,8 @@
 # If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 
 from math import gcd
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -25,7 +25,7 @@ def main():
 #           If the example is non-trivial, check if cancelling the digit that's equal
 #           in numerator and denominator gives the same fraction.
             if i % 10 != 0 and j % 10 != 0 and\
-            i != j and i % 10 == j // 10:
+                    i != j and i % 10 == j // 10:
                 n = i // 10
                 d = j % 10
 
@@ -42,9 +42,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 33')
-    print('Answer: {}'.format(prod_d // div))
+    print(f'Answer: {prod_d // div}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

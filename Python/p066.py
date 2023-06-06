@@ -21,18 +21,17 @@
 # Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
 
 from math import sqrt
-
 from timeit import default_timer
+
 from projecteuler import pell_eq
+
 
 def is_square(n):
     p = sqrt(n)
     m = int(p)
 
-    if p == m:
-        return True
-    else:
-        return False
+    return bool(p == m)
+
 
 def main():
     start = default_timer()
@@ -52,9 +51,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 66')
-    print('Answer: {}'.format(max_d))
+    print(f'Answer: {max_d}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

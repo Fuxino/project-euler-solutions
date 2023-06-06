@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.
 #
@@ -6,6 +6,7 @@
 
 from timeit import default_timer
 from projecteuler import is_palindrome
+
 
 def main():
     start = default_timer()
@@ -25,9 +26,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 4')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

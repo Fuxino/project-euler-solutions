@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The arithmetic sequence, 1487, 4817, 8147, in which each of the terms increases by 3330, is unusual in two ways: (i) each of the three terms are prime,
 # and, (ii) each of the 4-digit numbers are permutations of one another.
@@ -8,10 +8,10 @@
 #
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 
-from numpy import zeros
-
 from timeit import default_timer
+
 from projecteuler import sieve
+
 
 def main():
     start = default_timer()
@@ -35,18 +35,20 @@ def main():
                 if i + 2 * j < N and primes[i+j] == 1 and primes[i+2*j] == 1 and\
                         ''.join(sorted(str(i))) == ''.join(sorted(str(i+j))) and\
                         ''.join(sorted(str(i))) == ''.join(sorted(str(i+2*j))):
-                            found = 1
-                            break
-        if(found):
+                    found = 1
+                    break
+        if found:
             break
+
         i = i + 2
 
     end = default_timer()
 
     print('Project Euler, Problem 49')
-    print('Answer: {}'.format(str(i)+str(i+j)+str(i+2*j)))
+    print(f'Answer: {str(i)+str(i+j)+str(i+2*j)}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 #
@@ -15,24 +15,24 @@
 # If you could check one trillion (1012) routes every second it would take over twenty billion years to check them all.
 # There is an efficient algorithm to solve it. ;o)
 
+import sys
 from timeit import default_timer
+
 from projecteuler import find_max_path
+
 
 def main():
     start = default_timer()
 
+    triang = []
+
     try:
-        fp = open('triangle.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('triangle.txt'))
-        exit(1)
-
-    triang = list()
-
-    for line in fp:
-        triang.append(line.strip('\n').split())
-
-    fp.close()
+        with open('triangle.txt', 'r', encoding='utf-8') as fp:
+            for line in fp:
+                triang.append(line.strip('\n').split())
+    except FileNotFoundError:
+        print('Error while opening file triangle.txt')
+        sys.exit(1)
 
     l = len(triang)
 
@@ -45,9 +45,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 67')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Consider the fraction, n/d, where n and d are positive integers. If n<d and HCF(n,d)=1, it is called a reduced proper fraction.
 #
@@ -12,8 +12,8 @@
 # of the fraction immediately to the left of 3/7.
 
 from math import gcd
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -46,9 +46,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 71')
-    print('Answer: {}'.format(max_n))
+    print(f'Answer: {max_n}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

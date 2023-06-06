@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Consider the following "magic" 3-gon ring, filled with the numbers 1 to 6, and each line adding to nine.
 #
@@ -46,8 +46,8 @@
 #
 
 from itertools import permutations
-
 from timeit import default_timer
+
 
 # Function to evaluate the ring. The ring is represented as a vector of 2*n elements,
 # the first n elements represent the external nodes of the ring, the next n elements
@@ -91,8 +91,9 @@ def eval_ring(ring, n):
 
     return res
 
+
 def list_to_int(l):
-    if l == None:
+    if l is None:
         return 0
 
     res = 0
@@ -108,6 +109,7 @@ def list_to_int(l):
 
     return res
 
+
 def main():
     start = default_timer()
 
@@ -118,8 +120,8 @@ def main():
     n = None
 
     for ring in rings:
-        eval_ = eval_ring(ring, 5);
-   
+        eval_ = eval_ring(ring, 5)
+
 #       Convert the list into an integer number.
         n = list_to_int(eval_)
 
@@ -129,9 +131,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 68')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

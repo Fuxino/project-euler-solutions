@@ -24,13 +24,15 @@
 # NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
 
 from timeit import default_timer
+
 from projecteuler import is_palindrome
+
 
 def is_lychrel(n):
     tmp = n
 
 #   Run for 50 iterations
-    for i in range(50):
+    for _ in range(50):
         reverse = 0
 
 #       Find the reverse of the given number
@@ -50,6 +52,7 @@ def is_lychrel(n):
 
     return True
 
+
 def main():
     start = default_timer()
 
@@ -64,9 +67,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 55')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # n! means n × (n − 1) × ... × 3 × 2 × 1
 #
@@ -8,8 +8,8 @@
 # Find the sum of the digits in the number 100!
 
 from math import factorial
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -25,9 +25,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 20')
-    print('Answer: {}'.format(sum_))
+    print(f'Answer: {sum_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

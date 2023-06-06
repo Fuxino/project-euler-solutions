@@ -1,13 +1,13 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The prime factors of 13195 are 5, 7, 13 and 29.
 #
 # What is the largest prime factor of the number 600851475143?
 
-from math import floor, sqrt
-
 from timeit import default_timer
+
 from projecteuler import is_prime
+
 
 # Recursive approach: if num is prime, return num, otherwise
 # recursively look for the largest prime factor of num divided
@@ -21,19 +21,20 @@ def max_prime_factor(num):
     if num % 2 == 0:
         return max_prime_factor(num // 2)
 
-    else:
-        i = 3
+    i = 3
 
-#       If num is divisible by i and i is prime, find largest
-#       prime factor of num/i.
-        while True:
-            if num % i == 0:
-                if is_prime(i):
-                    return max_prime_factor(num//i)
-            i = i + 2
+#   If num is divisible by i and i is prime, find largest
+#   prime factor of num/i.
+    while True:
+        if num % i == 0:
+            if is_prime(i):
+                return max_prime_factor(num//i)
+
+        i = i + 2
 
 #   Should never get here
     return -1
+
 
 def main():
     start = default_timer()
@@ -43,9 +44,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 3')
-    print('Answer: {}'.format(res))
+    print(f'Answer: {res}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

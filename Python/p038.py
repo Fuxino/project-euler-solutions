@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Take the number 192 and multiply it by each of 1, 2, and 3:
 #
@@ -13,10 +13,10 @@
 #
 # What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
-from numpy import zeros
-
 from timeit import default_timer
+
 from projecteuler import is_pandigital
+
 
 def main():
     start = default_timer()
@@ -57,9 +57,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 38')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

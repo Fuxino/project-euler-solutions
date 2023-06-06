@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # You are given the following information, but you may prefer to do some research for yourself.
 #
@@ -14,8 +14,8 @@
 # How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 
 import datetime
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -31,9 +31,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 19')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

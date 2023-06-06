@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # An irrational decimal fraction is created by concatenating the positive integers:
 #
@@ -10,9 +10,10 @@
 #
 # d_1 × d_10 × d_100 × d_1000 × d_10000 × d_100000 × d_1000000
 
+from timeit import default_timer
+
 from numpy import zeros
 
-from timeit import default_timer
 
 def main():
     start = default_timer()
@@ -66,9 +67,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 40')
-    print('Answer: {}'.format(n))
+    print(f'Answer: {n}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

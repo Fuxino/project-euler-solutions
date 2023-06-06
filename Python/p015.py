@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Starting in the top left corner of a 2×2 grid, and only being able to move to the right and down, there are exactly 6 routes to the bottom right corner
 # How many such routes are there through a 20×20 grid?
 
 from math import factorial
-
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -22,9 +22,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 15')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

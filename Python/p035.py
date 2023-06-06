@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
 #
@@ -7,18 +7,23 @@
 # How many circular primes are there below one million?
 
 from timeit import default_timer
+
 from projecteuler import sieve
 
-def is_circular_prime(n):
-    global primes
 
+# Calculate all primes below one million, then check if they're circular.
+N = 1000000
+primes = sieve(N)
+
+
+def is_circular_prime(n):
 #   If n is not prime, it's obviously not a circular prime.
     if primes[n] == 0:
         return False
 
 #   The primes below 10 are circular primes.
     if primes[n] == 1 and n < 10:
-            return True
+        return True
 
     tmp = n
     count = 0
@@ -32,7 +37,7 @@ def is_circular_prime(n):
         count = count + 1
         tmp = tmp // 10
 
-    for i in range(1, count):
+    for _ in range(1, count):
 #       Generate rotations and check if they're prime.
         n = n % (10 ** (count - 1)) * 10 + n // (10 ** (count - 1))
 
@@ -41,15 +46,10 @@ def is_circular_prime(n):
 
     return True
 
+
 def main():
     start = default_timer()
 
-    global primes
-
-    N = 1000000
-
-#   Calculate all primes below one million, then check if they're circular.
-    primes = sieve(N)
     count = 13
 
 #   Calculate all primes below one million, then check if they're circular.
@@ -60,9 +60,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 35')
-    print('Answer: {}'.format(count))
+    print(f'Answer: {count}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

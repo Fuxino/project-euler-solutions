@@ -11,32 +11,33 @@
 # What is the first value which can be written as the sum of primes in over five thousand different ways?
 
 from timeit import default_timer
+
 from projecteuler import is_prime
+
+
+primes = [0] * 100
+
 
 # Function using a simple recursive brute force approach
 # to find all the partitions.
 def count(value, n, i, target):
-    global primes
-
     for j in range(i, 100):
         value = value + primes[j]
 
         if value == target:
             return n + 1
-        elif value > target:
+
+        if value > target:
             return n
-        else:
-            n = count(value, n, j, target)
-            value = value - primes[j]
+
+        n = count(value, n, j, target)
+        value = value - primes[j]
 
     return n
 
+
 def main():
     start = default_timer()
-
-    global primes
-
-    primes = [0] * 100
 
 #   Generate a list of the first 100 primes.
     i = 0
@@ -64,9 +65,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 77')
-    print('Answer: {}'.format(i))
+    print(f'Answer: {i}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

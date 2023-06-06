@@ -1,9 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # Find the unique positive integer whose square has the form 1_2_3_4_5_6_7_8_9_0,
 # where each “_” is a single digit.
 
 from timeit import default_timer
+
 
 def main():
     start = default_timer()
@@ -37,10 +38,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 206')
-    print('Answer: {}'.format(n))
+    print(f'Answer: {n}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()
-

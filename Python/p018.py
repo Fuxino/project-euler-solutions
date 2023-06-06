@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # By starting at the top of the triangle below and moving to adjacent numbers on the row below, the maximum total from top to bottom is 23.
 #
@@ -30,24 +30,24 @@
 # NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge
 # with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 
+import sys
 from timeit import default_timer
+
 from projecteuler import find_max_path
+
 
 def main():
     start = default_timer()
 
     try:
-        fp = open('triang.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('triang.txt'))
-        exit(1)
+        with open('triang.txt', 'r', encoding='utf-8') as fp:
+            triang = []
 
-    triang = list()
-
-    for line in fp:
-        triang.append(line.strip('\n').split())
-
-    fp.close()
+            for line in fp:
+                triang.append(line.strip('\n').split())
+    except FileNotFoundError:
+        print('Error while opening file trian.txt')
+        sys.exit(1)
 
     l = len(triang)
 
@@ -60,9 +60,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 18')
-    print('Answer: {}'.format(max_))
+    print(f'Answer: {max_}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

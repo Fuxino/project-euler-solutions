@@ -12,7 +12,9 @@
 # Find the minimal path sum, in matrix.txt, a 31K text file containing a 80 by 80 matrix, from the top left to the bottom right
 # by only moving right and down.
 
+import sys
 from timeit import default_timer
+
 
 def sum_paths(matrix, m, n):
     for i in range(m-2, -1, -1):
@@ -27,21 +29,20 @@ def sum_paths(matrix, m, n):
                 matrix[i][j] = matrix[i][j] + matrix[i][j+1]
 
     return matrix[0][0]
-    
+
+
 def main():
     start = default_timer()
 
     try:
-        fp = open('matrix.txt', 'r')
-    except:
-        print('Error while opening file {}'.format('matrix.txt'))
-        exit(1)
-
-    matrix = fp.readlines()
-
-    fp.close()
+        with open('matrix.txt', 'r', encoding='utf-8') as fp:
+            matrix = fp.readlines()
+    except FileNotFoundError:
+        print('Error while opening file matrix.txt')
+        sys.exit(1)
 
     j = 0
+
     for i in matrix:
         matrix[j] = list(map(int, i.strip().split(',')))
         j = j + 1
@@ -51,9 +52,10 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 81')
-    print('Answer: {}'.format(dist))
+    print(f'Answer: {dist}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()

@@ -1,3 +1,5 @@
+#! /usr/bin/env python3
+
 # The Fibonacci sequence is defined by the recurrence relation:
 #
 # F_n = F_n−1 + F_n−2, where F_1 = 1 and F_2 = 1.
@@ -7,12 +9,16 @@
 #
 # Given that F_k is the first Fibonacci number for which the first nine digits AND the last nine digits are 1-9 pandigital, find k.
 
-#!/usr/bin/python
-
-from mpmath import matrix, mp
-
+import sys
 from timeit import default_timer
+
+from mpmath import matrix
+
 from projecteuler import is_pandigital
+
+
+sys.set_int_max_str_digits(70000)
+
 
 def main():
     start = default_timer()
@@ -45,13 +51,14 @@ def main():
 
             if is_pandigital(int(str(fib)[:9]), 9):
                 found = 1
- 
+
     end = default_timer()
 
     print('Project Euler, Problem 104')
-    print('Answer: {}'.format(i))
+    print(f'Answer: {i}')
 
-    print('Elapsed time: {:.9f} seconds'.format(end - start))
+    print(f'Elapsed time: {end - start:.9f} seconds')
+
 
 if __name__ == '__main__':
     main()
