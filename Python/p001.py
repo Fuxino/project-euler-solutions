@@ -21,7 +21,7 @@ def main():
     end = default_timer()
 
     print('Project Euler, Problem 1')
-    print(f'Answer: {sum}')
+    print(f'Answer: {sum_}')
 
     print(f'Elapsed time: {end - start:.9f} seconds')
 
