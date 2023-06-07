@@ -6,14 +6,11 @@
 #
 # Find the lowest sum for a set of five primes for which any two primes concatenate to produce another prime.
 
-from timeit import default_timer
-
-from projecteuler import sieve, is_prime
+from projecteuler import is_prime, sieve, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p060():
     N = 10000
 
     primes = sieve(N)
@@ -21,9 +18,9 @@ def main():
     found = 0
     p1 = 3
 
-#   Straightforward brute force approach
+    # Straightforward brute force approach
     while p1 < N and not found:
-#       If p1 is not prime, go to the next number.
+        # If p1 is not prime, go to the next number.
         if primes[p1] == 0:
             p1 = p1 + 2
             continue
@@ -31,8 +28,8 @@ def main():
         p2 = p1 + 2
 
         while p2 < N and not found:
-#           If p2 is not prime, or at least one of the possible concatenations of
-#           p1 and p2 is not prime, go to the next number.
+            # If p2 is not prime, or at least one of the possible concatenations of
+            # p1 and p2 is not prime, go to the next number.
             if primes[p2] == 0 or not is_prime(int(str(p1)+str(p2))) or not is_prime(int(str(p2)+str(p1))):
                 p2 = p2 + 2
                 continue
@@ -40,8 +37,8 @@ def main():
             p3 = p2 + 2
 
             while p3 < N and not found:
-#               If p3 is not prime, or at least one of the possible concatenations of
-#               p1, p2 and p3 is not prime, got to the next number.
+                # If p3 is not prime, or at least one of the possible concatenations of
+                # p1, p2 and p3 is not prime, got to the next number.
                 if primes[p3] == 0 or not is_prime(int(str(p1)+str(p3))) or not is_prime(int(str(p3)+str(p1))) or\
                         not is_prime(int(str(p2)+str(p3))) or not is_prime(int(str(p3)+str(p2))):
                     p3 = p3 + 2
@@ -51,8 +48,8 @@ def main():
                 p4 = p3 + 2
 
                 while p4 < N and not found:
-#                   If p4 is not prime, or at least one of the possible concatenations of
-#                   p1, p2, p3 and p4 is not prime, go to the next number.
+                    # If p4 is not prime, or at least one of the possible concatenations of
+                    # p1, p2, p3 and p4 is not prime, go to the next number.
                     if primes[p4] == 0 or not is_prime(int(str(p1)+str(p4))) or not is_prime(int(str(p4)+str(p1))) or\
                             not is_prime(int(str(p2)+str(p4))) or not is_prime(int(str(p4)+str(p2))) or\
                             not is_prime(int(str(p3)+str(p4))) or not is_prime(int(str(p4)+str(p3))):
@@ -63,8 +60,8 @@ def main():
                     p5 = p4 + 2
 
                     while p5 < N and not found:
-#                       If p5 is not prime, or at least one of the possible concatenations of
-#                       p1, p2, p3, p4 and p5 is not prime, go to the next number
+                        # If p5 is not prime, or at least one of the possible concatenations of
+                        # p1, p2, p3, p4 and p5 is not prime, go to the next number
                         if primes[p5] == 0 or not is_prime(int(str(p1)+str(p5))) or not is_prime(int(str(p5)+str(p1))) or\
                                 not is_prime(int(str(p2)+str(p5))) or not is_prime(int(str(p5)+str(p2))) or\
                                 not is_prime(int(str(p3)+str(p5))) or not is_prime(int(str(p5)+str(p3))) or\
@@ -73,7 +70,7 @@ def main():
 
                             continue
 
-#                       If it gets here, the five values have been found.
+                        # If it gets here, the five values have been found.
                         n = p1 + p2 + p3 + p4 + p5
                         found = 1
 
@@ -85,13 +82,9 @@ def main():
 
         p1 = p1 + 2
 
-    end = default_timer()
-
     print('Project Euler, Problem 60')
     print(f'Answer: {n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p060()

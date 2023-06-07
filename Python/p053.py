@@ -12,31 +12,26 @@
 #
 # How many, not necessarily distinct, values of (n r) for 1≤n≤100, are greater than one-million?
 
-from timeit import default_timer
-
 from scipy.special import comb
 
+from projecteuler import timing
 
-def main():
-    start = default_timer()
 
+@timing
+def p053():
     LIMIT = 1000000
 
     count = 0
 
-#   Use the scipy comb function to calculate the binomial values
+    # Use the scipy comb function to calculate the binomial values
     for i in range(23, 101):
         for j in range(1, i+1):
             if comb(i, j) > LIMIT:
                 count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 53')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p053()

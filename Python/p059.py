@@ -18,7 +18,9 @@
 # encrypted ASCII codes, and the knowledge that the plain text must contain common English words, decrypt the message and find the sum of the
 # ASCII values in the original text.
 
-from timeit import default_timer
+import sys
+
+from projecteuler import timing
 
 
 class EncryptedText():
@@ -40,16 +42,18 @@ class EncryptedText():
 
         self.len = len(self.text)
 
+        return 0
+
     def decrypt(self):
         found = 0
 
         for c1 in range(ord('a'), ord('z')+1):
             if found:
-               break
+                break
             for c2 in range(ord('a'), ord('z')+1):
                 if found:
                     break
-               
+
                 for c3 in range(ord('a'), ord('z')+1):
                     if found:
                         break
@@ -57,16 +61,16 @@ class EncryptedText():
                     plain_text = [''] * self.len
 
                     for i in range(0, self.len-2, 3):
-                        plain_text[i] = str(chr(self.text[i]^c1))
-                        plain_text[i+1] = str(chr(self.text[i+1]^c2))
-                        plain_text[i+2] = str(chr(self.text[i+2]^c3))
+                        plain_text[i] = str(chr(self.text[i] ^ c1))
+                        plain_text[i+1] = str(chr(self.text[i+1] ^ c2))
+                        plain_text[i+2] = str(chr(self.text[i+2] ^ c3))
 
                     if i == self.len - 2:
-                        plain_text[i] = str(chr(self.text[i]^c1))
-                        plain_text[i+1] = str(chr(self.text[i+1]^c2))
+                        plain_text[i] = str(chr(self.text[i] ^ c1))
+                        plain_text[i+1] = str(chr(self.text[i+1] ^ c2))
 
                     if i == self.len - 1:
-                        plain_text[i] = str(chr(self.text[i]^c1))
+                        plain_text[i] = str(chr(self.text[i] ^ c1))
 
                     plain_text = ''.join(plain_text)
 
@@ -77,9 +81,8 @@ class EncryptedText():
         return plain_text
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p059():
     enc_text = EncryptedText()
 
     if enc_text.read_text('p059_cipher.txt') == -1:
@@ -92,13 +95,9 @@ def main():
     for i in list(plain_text):
         sum_ = sum_ + ord(i)
 
-    end = default_timer()
-
     print('Project Euler, Problem 59')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p059()

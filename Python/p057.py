@@ -16,18 +16,17 @@
 #
 # In the first one-thousand expansions, how many fractions contain a numerator with more digits than the denominator?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p057():
     n = 1
     d = 1
     count = 0
 
-#   If n/d is the current term of the expansion, the next term can be calculated as
-#   (n+2d)/(n+d).
+    # If n/d is the current term of the expansion, the next term can be calculated as
+    # (n+2d)/(n+d).
     for _ in range(1, 1000):
         d2 = 2 * d
         d = n + d
@@ -36,13 +35,9 @@ def main():
         if len(str(n)) > len(str(d)):
             count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 57')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p057()

@@ -8,14 +8,11 @@
 #
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 
-from timeit import default_timer
-
-from projecteuler import sieve
+from projecteuler import sieve, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p049():
     N = 10000
 
     primes = sieve(N)
@@ -23,15 +20,14 @@ def main():
     found = 0
     i = 1489
 
-#   Starting from i=1489 (bigger than the first number in the sequence given in the problem),
-#   check odd numbers. If they're prime, loop on even numbers j (odd+even=odd, odd+odd=even and
-#   we need odd numbers because we're looking for primes) up to 4254 (1489+2*4256=10001 which has
-#   5 digits.
+    # Starting from i=1489 (bigger than the first number in the sequence given in the problem),
+    # check odd numbers. If they're prime, loop on even numbers j (odd+even=odd, odd+odd=even and
+    # we need odd numbers because we're looking for primes) up to 4254 (1489+2*4256=10001 which has
+    # 5 digits.
     while i < N:
         if primes[i] == 1:
             for j in range(1, 4255):
-#               If i, i+j and i+2*j are all primes and they have
-#               all the same digits, the result has been found.
+                # If i, i+j and i+2*j are all primes and they have all the same digits, the result has been found.
                 if i + 2 * j < N and primes[i+j] == 1 and primes[i+2*j] == 1 and\
                         ''.join(sorted(str(i))) == ''.join(sorted(str(i+j))) and\
                         ''.join(sorted(str(i))) == ''.join(sorted(str(i+2*j))):
@@ -42,13 +38,9 @@ def main():
 
         i = i + 2
 
-    end = default_timer()
-
     print('Project Euler, Problem 49')
     print(f'Answer: {str(i)+str(i+j)+str(i+2*j)}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p049()

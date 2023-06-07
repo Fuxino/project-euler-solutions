@@ -23,28 +23,26 @@
 #
 # NOTE: Wording was modified slightly on 24 April 2007 to emphasise the theoretical nature of Lychrel numbers.
 
-from timeit import default_timer
-
-from projecteuler import is_palindrome
+from projecteuler import is_palindrome, timing
 
 
 def is_lychrel(n):
     tmp = n
 
-#   Run for 50 iterations
+    # Run for 50 iterations
     for _ in range(50):
         reverse = 0
 
-#       Find the reverse of the given number
+        # Find the reverse of the given number
         while tmp > 0:
             reverse = reverse * 10
             reverse = reverse + tmp % 10
             tmp = tmp // 10
 
-#       Add the reverse to the original number
+        # Add the reverse to the original number
         tmp = n + reverse
 
-#       If the sum is palindrome, the number is not a Lychrel number.
+        # If the sum is palindrome, the number is not a Lychrel number.
         if is_palindrome(tmp, 10):
             return False
 
@@ -53,24 +51,19 @@ def is_lychrel(n):
     return True
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p055():
     count = 0
 
-#   For each number, use the is_lychrel function to check if the number
-#   is a Lychrel number.
+    # For each number, use the is_lychrel function to check if the number
+    # is a Lychrel number.
     for i in range(1, 10000):
         if is_lychrel(i):
             count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 55')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p055()

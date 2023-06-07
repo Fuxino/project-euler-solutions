@@ -16,7 +16,8 @@
 # Find the sum of all 0 to 9 pandigital numbers with this property.
 
 from itertools import permutations
-from timeit import default_timer
+
+from projecteuler import timing
 
 
 # Function to check if the value has the desired property.
@@ -59,26 +60,21 @@ def has_property(n):
     return True
 
 
-def main():
-    start = default_timer()
-
-#   Find all the permutations
+@timing
+def p043():
+    # Find all the permutations
     perm = list(permutations('0123456789'))
 
     sum_ = 0
 
-#   For each permutation, check if it has the required property
+    # For each permutation, check if it has the required property
     for i in perm:
         if has_property(i):
             sum_ = sum_ + int(''.join(map(str, i)))
 
-    end = default_timer()
-
     print('Project Euler, Problem 43')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p043()

@@ -13,7 +13,7 @@
 #
 # Find the first four consecutive integers to have four distinct prime factors each. What is the first of these numbers?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
 # Function using a modified sieve of Eratosthenes to count
@@ -31,17 +31,16 @@ def count_factors(n):
     return factors
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p047():
     N = 150000
 
     factors = count_factors(N)
 
     count = 0
 
-#   Find the first instance of four consecutive numbers
-#   having four distinct prime factors.
+    # Find the first instance of four consecutive numbers
+    # having four distinct prime factors.
     for i in range(N):
         if factors[i] == 4:
             count = count + 1
@@ -52,13 +51,9 @@ def main():
             res = i - 3
             break
 
-    end = default_timer()
-
     print('Project Euler, Problem 47')
     print(f'Answer: {res}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p047()

@@ -11,7 +11,8 @@
 # how many are triangle words?
 
 import sys
-from timeit import default_timer
+
+from projecteuler import timing
 
 
 def is_triang(n):
@@ -27,9 +28,8 @@ def is_triang(n):
     return False
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p042():
     try:
         with open('p042_words.txt', 'r', encoding='utf-8') as fp:
             words = list(fp.readline().replace('"', '').split(','))
@@ -39,7 +39,7 @@ def main():
 
     count = 0
 
-#   For each word, calculate its value and check if it's a triangle number.
+    # For each word, calculate its value and check if it's a triangle number.
     for word in words:
         value = 0
         l = len(word)
@@ -50,13 +50,9 @@ def main():
         if is_triang(value):
             count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 42')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p042()

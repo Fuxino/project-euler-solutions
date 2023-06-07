@@ -4,26 +4,21 @@
 #
 # Find the last ten digits of the series, 1^1 + 2^2 + 3^3 + ... + 1000^1000.
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p048():
     sum_ = 0
 
-#   Simply calculate the sum of the powers
+    # Simply calculate the sum of the powers
     for i in range(1, 1001):
         power = i ** i
         sum_ = sum_ + power
 
-    end = default_timer()
-
     print('Project Euler, Problem 48')
     print(f'Answer: {str(sum_)[-10:]}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p048()

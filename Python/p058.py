@@ -16,19 +16,16 @@
 # If one complete new layer is wrapped around the spiral above, a square spiral with side length 9 will be formed. If this process is continued,
 # what is the side length of the square spiral for which the ratio of primes along both diagonals first falls below 10%?
 
-from timeit import default_timer
-
-from projecteuler import is_prime
+from projecteuler import is_prime, timing
 
 
-def main():
-    start = default_timer()
-
-#   Starting with 1, the next four numbers in the diagonal are 3 (1+2), 5 (1+2+2), 7 (1+2+2+2)
-#   and 9 (1+2+2+2+2). Check which are prime, increment the counter every time a new prime is
-#   found, and divide by the number of elements of the diagonal, which are increase by 4 at
-#   every cycle. The next four number added to the diagonal are 13 (9+4), 17 (9+4+4), 21 and 25.
-#   Then 25+6 etc., at every cycle the step is increased by 2. Continue until the ratio goes below 0.1.
+@timing
+def p058():
+    # Starting with 1, the next four numbers in the diagonal are 3 (1+2), 5 (1+2+2), 7 (1+2+2+2)
+    # and 9 (1+2+2+2+2). Check which are prime, increment the counter every time a new prime is
+    # found, and divide by the number of elements of the diagonal, which are increase by 4 at
+    # every cycle. The next four number added to the diagonal are 13 (9+4), 17 (9+4+4), 21 and 25.
+    # Then 25+6 etc., at every cycle the step is increased by 2. Continue until the ratio goes below 0.1.
     i = 1
     l = 1
     step = 2
@@ -61,13 +58,9 @@ def main():
         if ratio < 0.1:
             break
 
-    end = default_timer()
-
     print('Project Euler, Problem 58')
     print(f'Answer: {l}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p058()

@@ -9,20 +9,17 @@
 # Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal and D = |Pk − Pj| is minimised;
 # what is the value of D?
 
-from timeit import default_timer
-
-from projecteuler import is_pentagonal
+from projecteuler import is_pentagonal, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p044():
     found = 0
     n = 2
 
-#   Check all couples of pentagonal numbers until the right one
-#   is found. Use the function implemented in projecteuler.py to
-#   check if the sum and difference ot the two numbers is pentagonal.
+    # Check all couples of pentagonal numbers until the right one
+    # is found. Use the function implemented in projecteuler.py to
+    # check if the sum and difference ot the two numbers is pentagonal.
     while not found:
         pn = n * (3 * n - 1) // 2
 
@@ -35,13 +32,9 @@ def main():
 
         n = n + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 44')
     print(f'Answer: {pn - pm}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p044()

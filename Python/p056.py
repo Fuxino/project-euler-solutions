@@ -5,15 +5,14 @@
 #
 # Considering natural numbers of the form, a^b, where a, b < 100, what is the maximum digital sum?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p056():
     max_ = 0
 
-#   Straightforward brute force approach
+    # Straightforward brute force approach
     for a in range(1, 100):
         for b in range(1, 100):
             p = a ** b
@@ -26,13 +25,9 @@ def main():
             if sum_ > max_:
                 max_ = sum_
 
-    end = default_timer()
-
     print('Project Euler, Problem 56')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p056()

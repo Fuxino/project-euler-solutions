@@ -10,14 +10,11 @@
 #
 # Which prime, below one-million, can be written as the sum of the most consecutive primes?
 
-from timeit import default_timer
-
-from projecteuler import sieve
+from projecteuler import sieve, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p050():
     N = 1000000
 
     primes = sieve(N)
@@ -25,12 +22,12 @@ def main():
     max_ = 0
     max_p = 0
 
-#   Starting from a prime i, add consecutive primes until the
-#   sum exceeds the limit, every time the sum is also a prime
-#   save the value and the count if the count is larger than the
-#   current maximum. Repeat for all primes below N.
-#   A separate loop is used for i=2, so later only odd numbers are
-#   checked for primality.
+    # Starting from a prime i, add consecutive primes until the
+    # sum exceeds the limit, every time the sum is also a prime
+    # save the value and the count if the count is larger than the
+    # current maximum. Repeat for all primes below N.
+    # A separate loop is used for i=2, so later only odd numbers are
+    # checked for primality.
     i = 2
     j = i + 1
     count = 1
@@ -63,13 +60,9 @@ def main():
 
                 j = j + 2
 
-    end = default_timer()
-
     print('Project Euler, Problem 50')
     print(f'Answer: {max_p}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p050()

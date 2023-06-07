@@ -10,34 +10,27 @@
 #
 # Find the next triangle number that is also pentagonal and hexagonal.
 
-from timeit import default_timer
-
-from projecteuler import is_pentagonal
+from projecteuler import is_pentagonal, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p045():
     found = 0
     i = 143
 
     while not found:
         i = i + 1
-#       Hexagonal numbers are also triangle numbers, so it's sufficient
-#       to generate hexagonal numbers (starting from H_144) and check if
-#       they're also pentagonal.
+        # Hexagonal numbers are also triangle numbers, so it's sufficient
+        # to generate hexagonal numbers (starting from H_144) and check if
+        # they're also pentagonal.
         n = i * (2 * i - 1)
 
         if is_pentagonal(n):
             found = 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 45')
     print(f'Answer: {n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p045()
