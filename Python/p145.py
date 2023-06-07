@@ -8,18 +8,17 @@
 #
 # How many reversible numbers are there below one-billion (109)?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p145():
     N = 1000000000
 
     count = 0
 
-#   Brute force approach, sum each number and their reverse and
-#   check if there are only odd digits.
+    # Brute force approach, sum each number and their reverse and
+    # check if there are only odd digits.
     for i in range(11, N):
         if i % 10 != 0:
             s = str(i + int(''.join(reversed(str(i)))))
@@ -28,13 +27,9 @@ def main():
                     '6' not in s and '8' not in s:
                 count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 145')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p145()

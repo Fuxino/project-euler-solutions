@@ -15,16 +15,14 @@
 # from the top left to the bottom right by moving left, right, up, and down.
 
 import sys
-from timeit import default_timer
 
 from numpy import zeros
 
-from projecteuler import dijkstra
+from projecteuler import dijkstra, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p083():
     try:
         with open('matrix.txt', 'r', encoding='utf-8') as fp:
             matrix = fp.readlines()
@@ -43,13 +41,9 @@ def main():
 
     dist = distances[79][79]
 
-    end = default_timer()
-
     print('Project Euler, Problem 83')
     print(f'Answer: {dist}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p083()

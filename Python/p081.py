@@ -13,7 +13,8 @@
 # by only moving right and down.
 
 import sys
-from timeit import default_timer
+
+from projecteuler import timing
 
 
 def sum_paths(matrix, m, n):
@@ -31,9 +32,8 @@ def sum_paths(matrix, m, n):
     return matrix[0][0]
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p081():
     try:
         with open('matrix.txt', 'r', encoding='utf-8') as fp:
             matrix = fp.readlines()
@@ -49,13 +49,9 @@ def main():
 
     dist = sum_paths(matrix, 80, 80)
 
-    end = default_timer()
-
     print('Project Euler, Problem 81')
     print(f'Answer: {dist}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p081()

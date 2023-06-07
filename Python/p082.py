@@ -16,16 +16,14 @@
 # Find the minimal path sum, in matrix.txt, a 31K text file containing a 80 by 80 matrix, from the left column to the right column.
 
 import sys
-from timeit import default_timer
 
 from numpy import zeros
 
-from projecteuler import dijkstra
+from projecteuler import dijkstra, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p082():
     try:
         with open('matrix.txt', 'r', encoding='utf-8') as fp:
             matrix = fp.readlines()
@@ -43,24 +41,19 @@ def main():
 
     min_path = 999999999
 
-#   Use Dijkstra's algorithm starting from all possible nodes
-#   in the first column.
+    # Use Dijkstra's algorithm starting from all possible nodes in the first column.
     for i in range(80):
         dijkstra(matrix, distances, 80, 80, 1, 0, i)
 
-#       For the current starting node, check if there is an ending node
-#       with a smaller path cost than the current minimum.
+        # For the current starting node, check if there is an ending node
+        # with a smaller path cost than the current minimum.
         for j in range(80):
             if distances[j][79] < min_path:
                 min_path = distances[j][79]
 
-    end = default_timer()
-
     print('Project Euler, Problem 82')
     print(f'Answer: {min_path}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p082()

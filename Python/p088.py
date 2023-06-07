@@ -18,7 +18,7 @@
 #
 # What is the sum of all the minimal product-sum numbers for 2<=k<=12000?
 
-from math import floor, sqrt, prod
+from math import prod
 
 from projecteuler import sieve, timing
 
