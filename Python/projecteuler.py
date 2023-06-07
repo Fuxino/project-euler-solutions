@@ -146,7 +146,8 @@ def sum_of_divisors(n):
 
     for i in range(2, limit):
         if n % i == 0:
-            sum_ = sum_ + i
+            sum_ += i
+
             # If n is a perfect square, i=limit is a divisor and has to be counted only once.
             if n != i * i:
                 sum_ = sum_ + n // i
