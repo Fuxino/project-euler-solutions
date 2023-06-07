@@ -11,18 +11,17 @@
 # Find the product abc.
 
 from math import gcd
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p009():
     found = 0
 
     m = 2
 
-#   Brute force approach: generate all the Pythagorean triplets using
-#   Euclid's formula, until the one where a+b+c=1000 is found.
+    # Brute force approach: generate all the Pythagorean triplets using
+    # Euclid's formula, until the one where a+b+c=1000 is found.
     while not found:
         for n in range(1, m):
             if found == 1:
@@ -58,13 +57,9 @@ def main():
 
         m = m + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 9')
     print(f'Answer: {a * b * c}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p009()

@@ -25,12 +25,11 @@
 #
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p008():
     number = '73167176531330624919225119674426574742355349194934' +\
              '96983520312774506326239578318016984801869478851843' +\
              '85861560789112949495459501737958331952853208805511' +\
@@ -51,12 +50,12 @@ def main():
              '05886116467109405077541002256983155200055935729725' +\
              '71636269561882670428252483600823257530420752963450'
 
-#   Transform the string into a list of integers
+    # Transform the string into a list of integers
     number = list(map(int, number))
 
     max_ = 0
 
-#   Calculate all the 13-digit products, and save the maximum
+    # Calculate all the 13-digit products, and save the maximum
     for i in range(1000-13):
         curr = number[i:i+13]
         prod = 1
@@ -67,13 +66,9 @@ def main():
         if prod > max_:
             max_ = prod
 
-    end = default_timer()
-
     print('Project Euler, Problem 8')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds'.format(end - start))
-
 
 if __name__ == '__main__':
-    main()
+    p008()

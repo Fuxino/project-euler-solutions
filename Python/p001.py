@@ -4,27 +4,22 @@
 #
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p001():
     sum_ = 0
 
-#   Simple brute-force approach: try every number between 3 and 999,
-#   check if it's a multiple of 3 or 5, if yes add it to the total.
+    # Simple brute-force approach: try every number between 3 and 999,
+    # check if it's a multiple of 3 or 5, if yes add it to the total.
     for i in range(3, 1000):
         if i % 3 == 0 or i % 5 == 0:
             sum_ += i
 
-    end = default_timer()
-
     print('Project Euler, Problem 1')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p001()

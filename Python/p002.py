@@ -6,13 +6,11 @@
 #
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-
-    start = default_timer()
-
+@timing
+def p002():
     N = 4000000
 
     fib1 = 1
@@ -20,8 +18,8 @@ def main():
     fibn = fib1 + fib2
     sum_ = 2
 
-#   Simple brute-force approach: generate every value in the Fibonacci
-#   sequence smaller than 4 million and if it's even add it to the total.
+    # Simple brute-force approach: generate every value in the Fibonacci
+    # sequence smaller than 4 million and if it's even add it to the total.
     while fibn < N:
         if fibn % 2 == 0:
             sum_ = sum_ + fibn
@@ -30,13 +28,9 @@ def main():
         fib2 = fibn
         fibn = fib1 + fib2
 
-    end = default_timer()
-
     print('Project Euler, Problem 2')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p002()
