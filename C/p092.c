@@ -22,7 +22,7 @@ int chain(int n);
 
 int main(int argc, char **argv)
 {
-   int i, count;
+   int i, count = 0;
    double elapsed;
    struct timespec start, end;
 
