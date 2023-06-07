@@ -77,13 +77,10 @@ def sieve(n):
 #   0 and 1 are not prime, 2 and 3 are prime.
     primes[0] = 0
     primes[1] = 0
-#    primes[2] = 1
-#    primes[3] = 1
 
 #   Cross out (set to 0) all even numbers and set the odd numbers to 1 (possible prime).
-    for i in range(4, n - 1, 2):
+    for i in range(4, n, 2):
         primes[i] = 0
-#        primes[i+1] = 1
 
 #   If i is prime, all multiples of i smaller than i*i have already been crossed out.
 #   if i=sqrt(n), all multiples of i up to n (the target) have been crossed out. So
