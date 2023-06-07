@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
+from functools import wraps
 from math import sqrt, floor, ceil, gcd
+from timeit import default_timer
 
 from numpy import zeros
 
@@ -495,3 +497,17 @@ def dijkstra(matrix, distances, m, n, up=False, back=False, start=0):
 
         if i == m - 1 and j == n - 1:
             break
+
+
+def timing(f):
+    @wraps(f)
+    def wrapper(*args, **kwargs):
+        start = default_timer()
+        result = f(*args, **kwargs)
+        end = default_timer()
+
+        print(f'{f.__name__!r} took {end - start:.9f} seconds')
+
+        return result
+
+    return wrapper
