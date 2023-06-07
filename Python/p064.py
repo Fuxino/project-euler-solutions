@@ -43,9 +43,8 @@
 # How many continued fractions for N≤10000 have an odd period?
 
 from math import sqrt
-from timeit import default_timer
 
-from projecteuler import build_sqrt_cont_fraction
+from projecteuler import build_sqrt_cont_fraction, timing
 
 
 def is_square(n):
@@ -55,28 +54,23 @@ def is_square(n):
     return bool(p == m)
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p064():
     count = 0
 
     for i in range(2, 10000):
-#       Perfect squares are obviously not represented as continued fractions.
-#       For all other numbers, calculate their period and check if it's odd.
+        # Perfect squares are obviously not represented as continued fractions.
+        # For all other numbers, calculate their period and check if it's odd.
         if not is_square(i):
-#            period_cf(i) % 2 != 0:
-            fraction, period = build_sqrt_cont_fraction(i, 300)
+            # period_cf(i) % 2 != 0:
+            _, period = build_sqrt_cont_fraction(i, 300)
 
             if period % 2 != 0:
                 count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 64')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p064()

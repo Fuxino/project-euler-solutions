@@ -29,12 +29,11 @@
 #
 # Find the sum of digits in the numerator of the 100th convergent of the continued fraction for e.
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p065():
     ai = [1, 2, 1]
     count = 4
 
@@ -42,14 +41,14 @@ def main():
     n1 = 8
     n2 = 11
 
-#   For a continued fractions [a_0; a_1, a_2, ...], the numerator of the
-#   next convergent N_n=a_n*N_(n-1)+N_(n-2). The first three values for e are
-#   3, 8 and 11, the next ones are easily calculated, considering that a_n
-#   follows a simple pattern:
-#   a_1=1, a_2=2, a_3=1
-#   a_4=1, a_5=4, a_6=1
-#   a_7=1, a_8=6, a_9=1
-#   and so on.
+    # For a continued fractions [a_0; a_1, a_2, ...], the numerator of the
+    # next convergent N_n=a_n*N_(n-1)+N_(n-2). The first three values for e are
+    # 3, 8 and 11, the next ones are easily calculated, considering that a_n
+    # follows a simple pattern:
+    # a_1=1, a_2=2, a_3=1
+    # a_4=1, a_5=4, a_6=1
+    # a_7=1, a_8=6, a_9=1
+    # and so on.
     while count < 100:
         ai[1] = ai[1] + 2
 
@@ -68,13 +67,9 @@ def main():
         sum_ = sum_ + n2 % 10
         n2 = n2 // 10
 
-    end = default_timer()
-
     print('Project Euler, Problem 65')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p065()

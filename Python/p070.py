@@ -9,14 +9,11 @@
 #
 # Find the value of n, 1 < n < 10^7, for which φ(n) is a permutation of n and the ratio n/φ(n) produces a minimum.
 
-from timeit import default_timer
-
-from projecteuler import sieve, is_semiprime, phi_semiprime
+from projecteuler import sieve, is_semiprime, phi_semiprime, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p070():
     N = 10000000
     n = -1
     min_ = float('inf')
@@ -25,12 +22,9 @@ def main():
     primes = sieve(N)
 
     for i in range(2, N):
-#       When n is prime, phi(n)=(n-1), so to minimize n/phi(n) we should
-#       use n prime. But n-1 can't be a permutation of n. The second best
-#       bet is to use semiprimes. For a semiprime n=p*q, phi(n)=(p-1)(q-1).
-#       So we check if a number is semiprime, if yes calculate phi, finally
-#       check if phi(n) is a permutation of n and update the minimum if it's
-#       smaller.
+        # When n is prime, phi(n)=(n-1), so to minimize n/phi(n) we should use n prime. But n-1 can't be a permutation of n. The second best
+        # bet is to use semiprimes. For a semiprime n=p*q, phi(n)=(p-1)(q-1). So we check if a number is semiprime, if yes calculate phi, finally
+        # check if phi(n) is a permutation of n and update the minimum if it's smaller.
         semi_p, a, b = is_semiprime(i, primes)
 
         if semi_p is True:
@@ -40,13 +34,9 @@ def main():
                 n = i
                 min_ = i / p
 
-    end = default_timer()
-
     print('Project Euler, Problem 70')
     print(f'Answer: {n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p070()

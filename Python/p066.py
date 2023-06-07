@@ -21,9 +21,8 @@
 # Find the value of D ≤ 1000 in minimal solutions of x for which the largest value of x is obtained.
 
 from math import sqrt
-from timeit import default_timer
 
-from projecteuler import pell_eq
+from projecteuler import pell_eq, timing
 
 
 def is_square(n):
@@ -33,28 +32,23 @@ def is_square(n):
     return bool(p == m)
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p066():
     max_ = 0
     max_d = -1
 
     for i in range(2, 1001):
         if not is_square(i):
-#           Solve the Diophantine equation x^2-D*y^2=1 (Pell equation)
+            # Solve the Diophantine equation x^2-D*y^2=1 (Pell equation)
             x = pell_eq(i)
 
             if x > max_:
                 max_ = x
                 max_d = i
 
-    end = default_timer()
-
     print('Project Euler, Problem 66')
     print(f'Answer: {max_d}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p066()

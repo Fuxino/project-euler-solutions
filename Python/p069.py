@@ -18,41 +18,34 @@
 #
 # Find the value of n ≤ 1,000,000 for which n/φ(n) is a maximum.
 
-from timeit import default_timer
-
-from projecteuler import is_prime
+from projecteuler import is_prime, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p069():
     N = 1000000
 
     i = 1
     res = 1
 
-#   Using Euler's formula, phi(n)=n*prod(1-1/p), where p are the distinct
-#   primes that divide n. So n/phi(n)=1/prod(1-1/p). To find the maximum
-#   value of this function, the denominator must be minimized. This happens
-#   when n has the most distinct small prime factor, i.e. to find the solution
-#   we need to multiply the smallest consecutive primes until the result is
-#   larger than 1000000.
+    # Using Euler's formula, phi(n)=n*prod(1-1/p), where p are the distinct
+    # primes that divide n. So n/phi(n)=1/prod(1-1/p). To find the maximum
+    # value of this function, the denominator must be minimized. This happens
+    # when n has the most distinct small prime factor, i.e. to find the solution
+    # we need to multiply the smallest consecutive primes until the result is
+    # larger than 1000000.
     while res < N:
         i = i + 1
 
         if is_prime(i):
             res = res * i
 
-#   We need the previous value, because we want i<1000000
+    # We need the previous value, because we want i<1000000
     res = res // i
-
-    end = default_timer()
 
     print('Project Euler, Problem 69')
     print(f'Answer: {res}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p069()

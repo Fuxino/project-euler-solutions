@@ -16,14 +16,12 @@
 # There is an efficient algorithm to solve it. ;o)
 
 import sys
-from timeit import default_timer
 
-from projecteuler import find_max_path
+from projecteuler import find_max_path, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p067():
     triang = []
 
     try:
@@ -39,16 +37,12 @@ def main():
     for i in range(l):
         triang[i] = list(map(int, triang[i]))
 
-#   Use the function implemented in projecteuler.c to find the maximum path.
+    # Use the function implemented in projecteuler.c to find the maximum path.
     max_ = find_max_path(triang, 100)
-
-    end = default_timer()
 
     print('Project Euler, Problem 67')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p067()

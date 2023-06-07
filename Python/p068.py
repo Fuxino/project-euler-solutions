@@ -46,7 +46,8 @@
 #
 
 from itertools import permutations
-from timeit import default_timer
+
+from projecteuler import timing
 
 
 # Function to evaluate the ring. The ring is represented as a vector of 2*n elements,
@@ -54,38 +55,36 @@ from timeit import default_timer
 # represent the internal ring.
 def eval_ring(ring, n):
     for i in range(1, n):
-#       We need to start from the lowest external node, so if
-#       the first element in the vector is not the lowest of
-#       the first n elements (the external elements), the configuration
-#       is not a valid one.
+        # We need to start from the lowest external node, so if
+        # the first element in the vector is not the lowest of
+        # the first n elements (the external elements), the configuration
+        # is not a valid one.
         if ring[i] < ring[0]:
             return None
 
     res = [0] * 3 * n
 
-#   Each group of three must have the same value.
+    # Each group of three must have the same value.
     magic_val = ring[0] + ring[n] + ring[n+1]
 
     j = 0
 
     for i in range(n):
-#       We need to find the maximum 16-digit string, this is
-#       possible only if the element "10" is used only once,
-#       i.e. if it's one of the external nodes.
-        if ring[n+i] == 10 or ring[n+(i+1)%n] == 10:
+        # We need to find the maximum 16-digit string, this is possible only if the element "10" is used only once,
+        # i.e. if it's one of the external nodes.
+        if ring[n+i] == 10 or ring[n+(i+1) % n] == 10:
             return None
 
-#       Check that the value of the current three-element group
-#       is the "magic" value.
-        val = ring[i] + ring[n+i] + ring[n+(i+1)%n]
+        # Check that the value of the current three-element group is the "magic" value.
+        val = ring[i] + ring[n+i] + ring[n+(i+1) % n]
 
-        if val != magic_val :
+        if val != magic_val:
             return None
 
-#       Save the current element group in the result string.
+        # Save the current element group in the result string.
         res[j] = ring[i]
         res[j+1] = ring[n+i]
-        res[j+2] = ring[n+(i+1)%n]
+        res[j+2] = ring[n+(i+1) % n]
 
         j = j + 3
 
@@ -110,11 +109,9 @@ def list_to_int(l):
     return res
 
 
-def main():
-    start = default_timer()
-
-#   Generate all possible permutations, for each one check if
-#   it's a possible solution for the ring and save the maximum
+@timing
+def p068():
+    # Generate all possible permutations, for each one check if it's a possible solution for the ring and save the maximum
     rings = list(permutations(list(range(1, 11))))
     max_ = 0
     n = None
@@ -122,19 +119,15 @@ def main():
     for ring in rings:
         eval_ = eval_ring(ring, 5)
 
-#       Convert the list into an integer number.
+        # Convert the list into an integer number.
         n = list_to_int(eval_)
 
         if n > max_:
             max_ = n
 
-    end = default_timer()
-
     print('Project Euler, Problem 68')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p068()

@@ -5,30 +5,29 @@
 #
 # Find the smallest cube for which exactly five permutations of its digits are cube.
 
-from timeit import default_timer
-
 from numpy import zeros
 
+from projecteuler import timing
 
-def main():
-    start = default_timer()
 
+@timing
+def p062():
     N = 10000
 
     cubes = zeros(N, int)
 
-#   Calculate i^3 for all i smaller than 10000
+    # Calculate i^3 for all i smaller than 10000
     for i in range(N):
         cubes[i] = i * i * i
 
-#   For each cube, check if there are four other cubes which are also
-#   a permutation of the first cube.
+    # For each cube, check if there are four other cubes which are also
+    # a permutation of the first cube.
     for i in range(N-5):
         count = 1
 
-#       Stop when the limit has been reached, when 5 values have been found or
-#       when j^3 has more digits than i^3 (if they don't have the same digits,
-#       they can't be permutations).
+        # Stop when the limit has been reached, when 5 values have been found or
+        # when j^3 has more digits than i^3 (if they don't have the same digits,
+        # they can't be permutations).
         j = i + 1
 
         while j < N and len(str(cubes[j])) == len(str(cubes[i])):
@@ -43,13 +42,9 @@ def main():
         if count == 5:
             break
 
-    end = default_timer()
-
     print('Project Euler, Problem 62')
     print(f'Answer: {cubes[i]}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p062()
