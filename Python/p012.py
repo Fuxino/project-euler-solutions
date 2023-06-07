@@ -19,33 +19,27 @@
 #
 # What is the value of the first triangle number to have over five hundred divisors?
 
-from timeit import default_timer
-from projecteuler import count_divisors
+from projecteuler import count_divisors, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p012():
     i = 0
     triang = 0
     finished = 0
 
-#   Generate all triangle numbers until the first one with more than 500 divisors is found.
+    # Generate all triangle numbers until the first one with more than 500 divisors is found.
     while not finished:
         i = i + 1
         triang = triang + i
 
-#       Use the function implemented in projecteuler.py to count divisors of a number.
+        # Use the function implemented in projecteuler.py to count divisors of a number.
         if count_divisors(triang) > 500:
             finished = 1
-
-    end = default_timer()
 
     print('Project Euler, Problem 12')
     print(f'Answer: {triang}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p012()

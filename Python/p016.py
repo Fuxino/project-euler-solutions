@@ -4,14 +4,13 @@
 #
 # What is the sum of the digits of the number 2^1000?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
-#   Simply calculate 2^1000, convert the result to string and calculate
-#   the sum of the digits
+@timing
+def p016():
+    # Simply calculate 2^1000, convert the result to string and calculate
+    # the sum of the digits
     res = str(2 ** 1000)
 
     sum_ = 0
@@ -19,13 +18,9 @@ def main():
     for i in res:
         sum_ = sum_ + int(i)
 
-    end = default_timer()
-
     print('Project Euler, Problem 16')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p016()

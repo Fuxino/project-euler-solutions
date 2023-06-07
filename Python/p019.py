@@ -14,27 +14,23 @@
 # How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
 
 import datetime
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p019():
     count = 0
 
-#   Use the datetime library to find out which first day of the month is a Sunday
+    # Use the datetime library to find out which first day of the month is a Sunday
     for year in range(1901, 2001):
         for month in range(1, 13):
             if datetime.datetime(year, month, 1).weekday() == 6:
                 count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 19')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p019()

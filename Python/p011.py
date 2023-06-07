@@ -27,12 +27,11 @@
 #
 # What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p011():
     grid = [[8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
             [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
             [81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65],
@@ -56,12 +55,12 @@ def main():
 
     max_ = 0
 
-#   Brute-force approach: for each number in the grid, try products with its three
-#   adjacent numbers in every direction (horizontal, vertical and the two diagonals).
-#   If the product is larger than the current  maximum, save it.
+    # Brute-force approach: for each number in the grid, try products with its three
+    # adjacent numbers in every direction (horizontal, vertical and the two diagonals).
+    # If the product is larger than the current  maximum, save it.
     for i in range(17):
         for j in range(17):
-#           Horizontal direction.
+            # Horizontal direction.
             prod = 1
             k = j
             while k < j + 4:
@@ -71,7 +70,7 @@ def main():
             if prod > max_:
                 max_ = prod
 
-#           Vertical direction.
+            # Vertical direction.
             prod = 1
             k = i
             while k < i + 4:
@@ -81,7 +80,7 @@ def main():
             if prod > max_:
                 max_ = prod
 
-#           Diagonal direction, from top left to bottom right.
+            # Diagonal direction, from top left to bottom right.
             prod = 1
             k = i
             w = j
@@ -94,10 +93,10 @@ def main():
             if prod > max_:
                 max_ = prod
 
-#   The last diagonal is handled separately
+    # The last diagonal is handled separately
     for i in range(17):
         for j in range(3, 20):
-#           Diagonal direction, from top right to bottom left.
+            # Diagonal direction, from top right to bottom left.
             prod = 1
             k = i
             w = j
@@ -110,13 +109,9 @@ def main():
             if prod > max_:
                 max_ = prod
 
-    end = default_timer()
-
     print('Project Euler, Problem 11')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p011()

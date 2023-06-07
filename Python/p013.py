@@ -103,13 +103,13 @@
 # 20849603980134001723930671666823555245252804609722
 # 53503534226472524250874054075591789781264330331690
 
-from timeit import default_timer
 import numpy as np
 
+from projecteuler import timing
 
-def main():
-    start = default_timer()
 
+@timing
+def p013():
     numbers = [37107287533902102798797998220837590246510135740250,
                46376937677490009712648124896970078050417018260538,
                74324986199524741059474233309513058123726617309629,
@@ -211,18 +211,14 @@ def main():
                20849603980134001723930671666823555245252804609722,
                53503534226472524250874054075591789781264330331690]
 
-#   Convert the list of numbers in a numpy array and calculate the sum
+    # Convert the list of numbers in a numpy array and calculate the sum
     numbers = np.array(numbers)
 
     sum_ = str(numbers.sum())
 
-    end = default_timer()
-
     print('Project Euler, Problem 13')
     print(f'Answer: {sum_[:10]}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p013()

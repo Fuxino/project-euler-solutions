@@ -16,8 +16,9 @@
 #
 # NOTE: Once the chain starts the terms are allowed to go above one million.
 
-from timeit import default_timer
 from numpy import zeros
+
+from projecteuler import timing
 
 
 N = 1000000
@@ -32,8 +33,8 @@ def collatz_length(n):
     if n == 1:
         return 1
 
-#   If Collatz(n) has been previously calculated,
-#   just return the value.
+    # If Collatz(n) has been previously calculated,
+    # just return the value.
     if n < N and collatz_found[n]:
         return collatz_found[n]
 
@@ -42,14 +43,14 @@ def collatz_length(n):
 
     return 1 + collatz_length(3*n+1)
 
-def main():
-    start = default_timer()
 
+@timing
+def p014():
     max_l = 0
     max_ = 0
 
-#   For each number from 1 to 1000000, find the length of the sequence
-#   and save its value, so that it can be used for the next numbers.
+    # For each number from 1 to 1000000, find the length of the sequence
+    # and save its value, so that it can be used for the next numbers.
     for i in range(1, N):
         count = collatz_length(i)
         collatz_found[i] = count
@@ -58,13 +59,9 @@ def main():
             max_l = count
             max_ = i
 
-    end = default_timer()
-
     print('Project Euler, Problem 14')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p014()

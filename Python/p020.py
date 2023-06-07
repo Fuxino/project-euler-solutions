@@ -8,13 +8,13 @@
 # Find the sum of the digits in the number 100!
 
 from math import factorial
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
-#   Calculate the factorial, convert the result to string and sum the digits.
+@timing
+def p020():
+    # Calculate the factorial, convert the result to string and sum the digits.
     n = str(factorial(100))
 
     sum_ = 0
@@ -22,13 +22,9 @@ def main():
     for i in n:
         sum_ = sum_ + int(i)
 
-    end = default_timer()
-
     print('Project Euler, Problem 20')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p020()
