@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Using names.txt, a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order.
+# Using p022_names.txt, a 46K text file containing over five-thousand first names, begin by sorting it into alphabetical order.
 # Then working out the alphabetical value for each name, multiply this value by its alphabetical position in the list to obtain a name score.
 #
 # For example, when the list is sorted into alphabetical order, COLIN, which is worth 3 + 15 + 12 + 9 + 14 = 53, is the 938th name in the list.
@@ -16,10 +16,10 @@ def main():
     start = default_timer()
 
     try:
-        with open('names.txt', 'r', encoding='utf-8') as fp:
+        with open('p022_names.txt', 'r', encoding='utf-8') as fp:
             names = list(fp.readline().replace('"', '').split(','))
     except FileNotFoundError:
-        print('Error while opening file names.txt')
+        print('Error while opening file p022_names.txt')
         sys.exit(1)
 
     names.sort()

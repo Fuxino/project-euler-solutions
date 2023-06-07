@@ -14,7 +14,7 @@
 # the message, which is likely, the key is repeated cyclically throughout the message. The balance for this method is using a sufficiently long
 # password key for security, but short enough to be memorable.
 #
-# Your task has been made easy, as the encryption key consists of three lower case characters. Using cipher.txt, a file containing the
+# Your task has been made easy, as the encryption key consists of three lower case characters. Using p059_cipher.txt, a file containing the
 # encrypted ASCII codes, and the knowledge that the plain text must contain common English words, decrypt the message and find the sum of the
 # ASCII values in the original text.
 
@@ -82,7 +82,7 @@ def main():
 
     enc_text = EncryptedText()
 
-    if enc_text.read_text('cipher.txt') == -1:
+    if enc_text.read_text('p059_cipher.txt') == -1:
         sys.exit(1)
 
     plain_text = enc_text.decrypt()

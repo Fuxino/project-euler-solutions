@@ -40,13 +40,13 @@ def main():
     start = default_timer()
 
     try:
-        with open('triang.txt', 'r', encoding='utf-8') as fp:
+        with open('p018_triangle.txt', 'r', encoding='utf-8') as fp:
             triang = []
 
             for line in fp:
                 triang.append(line.strip('\n').split())
     except FileNotFoundError:
-        print('Error while opening file trian.txt')
+        print('Error while opening file p018_triangle.txt')
         sys.exit(1)
 
     l = len(triang)

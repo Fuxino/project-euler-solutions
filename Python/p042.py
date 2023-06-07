@@ -7,7 +7,7 @@
 # By converting each letter in a word to a number corresponding to its alphabetical position and adding these values we form a word value.
 # For example, the word value for SKY is 19 + 11 + 25 = 55 = t10. If the word value is a triangle number then we shall call the word a triangle word.
 #
-# Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words,
+# Using p042_words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly two-thousand common English words,
 # how many are triangle words?
 
 import sys
@@ -31,10 +31,10 @@ def main():
     start = default_timer()
 
     try:
-        with open('words.txt', 'r', encoding='utf-8') as fp:
+        with open('p042_words.txt', 'r', encoding='utf-8') as fp:
             words = list(fp.readline().replace('"', '').split(','))
     except FileNotFoundError:
-        print('Error while opening file words.txt')
+        print('Error while opening file p042_words.txt')
         sys.exit(1)
 
     count = 0

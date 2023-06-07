@@ -39,7 +39,7 @@
 #         Full House  	    Full House
 #      With Three Fours  With Three Threes
 #
-#      The file, poker.txt, contains one-thousand random hands dealt to two players. Each line of the file contains ten cards
+#      The file, p054_poker.txt, contains one-thousand random hands dealt to two players. Each line of the file contains ten cards
 #      (separated by a single space): the first five are Player 1's cards and the last five are Player 2's cards.
 #      You can assume that all hands are valid (no invalid characters or repeated cards), each player's hand is in no specific order,
 #      and in each hand there is a clear winner.
@@ -447,10 +447,10 @@ def main():
     start = default_timer()
 
     try:
-        with open('poker.txt', 'r', encoding='utf-8') as fp:
+        with open('p054_poker.txt', 'r', encoding='utf-8') as fp:
             games = fp.readlines()
     except FileNotFoundError:
-        print('Error while opening file poker.txt')
+        print('Error while opening file p054_poker.txt')
         sys.exit(1)
 
     count = 0
