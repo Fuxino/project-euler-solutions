@@ -10,33 +10,26 @@
 #
 # How many elements would be contained in the set of reduced proper fractions for d ≤ 1,000,000?
 
-from timeit import default_timer
-
-from projecteuler import sieve, phi
+from projecteuler import sieve, phi, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p072():
     N = 1000001
 
     count = 0
     primes = sieve(N)
 
-#   For any denominator d, the number of reduced proper fractions is
-#   the number of fractions n/d where gcd(n, d)=1, which is the definition
-#   of Euler's Totient Function phi. It's sufficient to calculate phi for each
-#   denominator and sum the value.
+    # For any denominator d, the number of reduced proper fractions is
+    # the number of fractions n/d where gcd(n, d)=1, which is the definition
+    # of Euler's Totient Function phi. It's sufficient to calculate phi for each
+    # denominator and sum the value.
     for i in range(2, N):
         count = count + phi(i, primes)
 
-    end = default_timer()
-
     print('Project Euler, Problem 72')
-    print(f'Answer: {count}')
-
-    print(f'Elapsed time: {end - start:.9f} seconds')
+    print(f'Answer: {int(count)}')
 
 
 if __name__ == '__main__':
-    main()
+    p072()

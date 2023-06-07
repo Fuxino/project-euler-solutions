@@ -11,28 +11,21 @@
 #
 # How many different ways can one hundred be written as a sum of at least two positive integers?*/
 
-from timeit import default_timer
-
-from projecteuler import partition_fn
+from projecteuler import partition_fn, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p076():
     partitions = [0] * 101
 
-#   The number of ways a number can be written as a sum is given by the partition function
-#   (-1 because the partition function includes also the number itself).
-#   The function is implemented in projecteuler.py.
+    # The number of ways a number can be written as a sum is given by the partition function
+    # (-1 because the partition function includes also the number itself).
+    # The function is implemented in projecteuler.py.
     n = partition_fn(100, partitions) - 1
-
-    end = default_timer()
 
     print('Project Euler, Problem 76')
     print(f'Answer: {n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p076()

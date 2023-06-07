@@ -12,22 +12,22 @@
 # of the fraction immediately to the left of 3/7.
 
 from math import gcd
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p071():
     N = 1000000
 
     max_ = 0
 
-#   For each denominator q, we need to find the biggest numerator p for which
-#   p/q<a/b, where a/b is 3/7 for this problem. So:
-#   pb<aq
-#   pb<=aq-1
-#   p<=(aq-1)/b
-#   So we can set p=(3*q-1)/7 (using integer division).
+    # For each denominator q, we need to find the biggest numerator p for which
+    # p/q<a/b, where a/b is 3/7 for this problem. So:
+    # pb<aq
+    # pb<=aq-1
+    # p<=(aq-1)/b
+    # So we can set p=(3*q-1)/7 (using integer division).
     for i in range(2, N+1):
         j = (3 * i - 1) // 7
 
@@ -36,20 +36,16 @@ def main():
             d = i
             max_ = n / d
 
-#           Reduce the fractions if it's not already reduced.
+            # Reduce the fractions if it's not already reduced.
             if gcd(i, j) > 1:
                 n /= gcd(i, j)
                 d /= gcd(i, j)
 
             max_n = n
 
-    end = default_timer()
-
     print('Project Euler, Problem 71')
     print(f'Answer: {max_n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p071()

@@ -18,27 +18,27 @@
 # Given that L is the length of the wire, for how many values of L ≤ 1,500,000 can exactly one integer sided right angle triangle be formed?
 
 from math import gcd
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p075():
     N = 1500000
 
     l = [0] * (N+1)
 
-#   Generate all Pythagorean triplets using Euclid's algorithm:
-#   For m>=2 and n<m:
-#   a=m*m-n*n
-#   b=2*m*n
-#   c=m*m+n*n
-#   This gives a primitive triple if gcd(m, n)=1 and exactly one
-#   of m and n is odd. To generate all the triples, generate all
-#   the primitive one and multiply them by i=2,3, ..., n until the
-#   perimeter is larger than the limit. The limit for m is 865, because
-#   when m=866 even with the smaller n (i.e. 1) the perimeter is greater
-#   than the given limit.
+    # Generate all Pythagorean triplets using Euclid's algorithm:
+    # For m>=2 and n<m:
+    # a=m*m-n*n
+    # b=2*m*n
+    # c=m*m+n*n
+    # This gives a primitive triple if gcd(m, n)=1 and exactly one
+    # of m and n is odd. To generate all the triples, generate all
+    # the primitive one and multiply them by i=2,3, ..., n until the
+    # perimeter is larger than the limit. The limit for m is 865, because
+    # when m=866 even with the smaller n (i.e. 1) the perimeter is greater
+    # than the given limit.
     for m in range(2, 866):
         for n in range(1, m):
             if gcd(m, n) == 1 and ((m % 2 == 0 and n % 2 != 0) or (m % 2 != 0 and n % 2 == 0)):
@@ -68,13 +68,9 @@ def main():
         if l[i] == 1:
             count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 75')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p075()

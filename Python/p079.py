@@ -10,13 +10,13 @@
 
 import sys
 from itertools import permutations
-from timeit import default_timer
+
+from projecteuler import timing
 
 
 def check_passcode(passcode, len_, logins, n):
-#   For every login attempt, check if all the digits appear in the
-#   passcode in the correct order. Return 0 if a login attempt
-#   incompatible with the current passcode is found.
+    # For every login attempt, check if all the digits appear in the passcode in the correct order. Return 0 if a login attempt
+    # incompatible with the current passcode is found.
     for i in range(n):
         k = 0
         for j in range(len_):
@@ -32,9 +32,8 @@ def check_passcode(passcode, len_, logins, n):
     return 1
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p079():
     try:
         with open('p079_keylog.txt', 'r', encoding='utf-8') as fp:
             logins = fp.readlines()
@@ -48,7 +47,7 @@ def main():
     for i in logins:
         keylog = int(i)
 
-#       Check which digits are present in the login attempts.
+        # Check which digits are present in the login attempts.
         while True:
             digits[keylog % 10] = digits[keylog % 10] + 1
             keylog = keylog // 10
@@ -58,8 +57,7 @@ def main():
 
     j = 0
     for i in range(10):
-#       To generate the passcode, only use the digits present in the
-#       login attempts.
+        # To generate the passcode, only use the digits present in the login attempts.
         if digits[i] > 0:
             passcode_digits[j] = i
             j = j + 1
@@ -70,18 +68,17 @@ def main():
     while not found:
         passcode = [0] * len_
 
-#       For the current length, generate the first passcode with the
-#       digits in order.
+        # For the current length, generate the first passcode with the digits in order.
         for i in range(len_):
             passcode[i] = passcode_digits[i]
 
-#       Check if the passcode is compatible with the login attempts.
+        # Check if the passcode is compatible with the login attempts.
         if check_passcode(passcode, len_, logins, 50):
             found = 1
             break
 
-#       For the given length, check every permutation until the correct
-#       passcode has been found, or all the permutations have been tried.
+        # For the given length, check every permutation until the correct
+        # passcode has been found, or all the permutations have been tried.
         passcodes = permutations(passcode, len_)
 
         for i in passcodes:
@@ -90,16 +87,12 @@ def main():
                 res = ''.join(map(str, i))
                 break
 
-#       If the passcode has not yet been found, try a longer passcode.
+        # If the passcode has not yet been found, try a longer passcode.
         len_ = len_ + 1
-
-    end = default_timer()
 
     print('Project Euler, Problem 79')
     print(f'Answer: {res}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p079()

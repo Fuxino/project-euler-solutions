@@ -11,32 +11,28 @@
 # How many fractions lie between 1/3 and 1/2 in the sorted set of reduced proper fractions for d ≤ 12,000?
 
 from math import gcd
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p073():
     count = 0
 
-#   For each denominator q, we need to find the fractions p/q for which
-#   1/3<p/q<1/2. For the lower limit, if p=q/3, then p/q=1/3, so we take
-#   p=q/3+1. For the upper limit, if p=q/2 p/q=1/2, so we take p=(q-1)/2.
+    # For each denominator q, we need to find the fractions p/q for which
+    # 1/3<p/q<1/2. For the lower limit, if p=q/3, then p/q=1/3, so we take
+    # p=q/3+1. For the upper limit, if p=q/2 p/q=1/2, so we take p=(q-1)/2.
     for i in range(2, 12001):
         limit = (i - 1) // 2 + 1
 
         for j in range(i//3+1, limit):
-#           Increment the counter if the current fraction is reduced.*/
+            # Increment the counter if the current fraction is reduced.*/
             if gcd(j, i) == 1:
                 count = count + 1
-
-    end = default_timer()
 
     print('Project Euler, Problem 73')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p073()

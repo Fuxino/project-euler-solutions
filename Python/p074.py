@@ -23,7 +23,8 @@
 # How many chains, with a starting number below one million, contain exactly sixty non-repeating terms?
 
 from math import factorial
-from timeit import default_timer
+
+from projecteuler import timing
 
 
 N = 1000000
@@ -42,23 +43,23 @@ def len_chain(n):
         tmp = 0
         count = count + 1
 
-#      Generate the next number of the chain by taking
-#      the digits of the current value, calculating the
-#      factorials and adding them.*/
+        # Generate the next number of the chain by taking
+        # the digits of the current value, calculating the
+        # factorials and adding them.
         while value != 0:
             tmp = tmp + factorial(value % 10)
             value = value // 10
 
-#       If the chain length for the new value has already been
-#       calculated before, use the saved value (only chains for
-#       values smaller than N are saved).*/
+        # If the chain length for the new value has already been
+        # calculated before, use the saved value (only chains for
+        # values smaller than N are saved).
         if tmp < N and chains[tmp] != 0:
             return count + chains[tmp]
 
         value = tmp
 
-#       If the current value is already present in the chain,
-#       the chain is finished.*/
+        # If the current value is already present in the chain,
+        # the chain is finished.
         for i in range(count):
             if chain[i] == value:
                 finished = 1
@@ -70,24 +71,19 @@ def len_chain(n):
     return count
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p074():
     count = 0
 
-#   Simple brute force approach, for every number calculate
-#   the length of the chain.
+    # Simple brute force approach, for every number calculate
+    # the length of the chain.
     for i in range(3, N):
         if len_chain(i) == 60:
             count = count + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 74')
     print(f'Answer: {count}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p074()
