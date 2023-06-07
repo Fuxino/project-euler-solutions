@@ -10,21 +10,20 @@
 #
 # d_1 × d_10 × d_100 × d_1000 × d_10000 × d_100000 × d_1000000
 
-from timeit import default_timer
-
 from numpy import zeros
 
+from projecteuler import timing
 
-def main():
-    start = default_timer()
 
+@timing
+def p040():
     digits = zeros(1000005, int)
     i = 1
     value = 1
 
-#   Loop on all numbers and put the digits in the right place
-#   in an array. Use modulo and division to get the digits
-#   for numbers with more than one digit.
+    # Loop on all numbers and put the digits in the right place
+    # in an array. Use modulo and division to get the digits
+    # for numbers with more than one digit.
     while i <= 1000000:
         if value < 10:
             digits[i-1] = value
@@ -61,16 +60,12 @@ def main():
             i = i + 6
         value = value + 1
 
-#   Calculate the product.
+    # Calculate the product.
     n = digits[0] * digits[9] * digits[99] * digits[999] * digits[9999] * digits[99999] * digits[999999]
-
-    end = default_timer()
 
     print('Project Euler, Problem 40')
     print(f'Answer: {n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p040()

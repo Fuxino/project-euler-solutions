@@ -10,7 +10,7 @@
 #
 # How many different ways can £2 be made using any number of coins?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
 # Simple recursive function that tries every combination.
@@ -29,20 +29,15 @@ def count(coins, value, n, i):
     return n
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p031():
     coins = [1, 2, 5, 10, 20, 50, 100, 200]
 
     n = count(coins, 0, 0, 0)
 
-    end = default_timer()
-
     print('Project Euler, Problem 31')
     print(f'Answer: {n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p031()

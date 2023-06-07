@@ -7,29 +7,26 @@
 #
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
-from timeit import default_timer
-
-from projecteuler import is_prime
+from projecteuler import is_prime, timing
 
 
 def is_tr_prime(n):
-#   One-digit numbers and non-prime numbers are
-#   not truncatable primes.
+    # One-digit numbers and non-prime numbers are
+    # not truncatable primes.
     if n < 11 or not is_prime(n):
         return False
 
     tmp = n // 10
 
-#   Remove one digit at a time from the right and check
-#   if the resulting number is prime. Return 0 if it isn't.
+    # Remove one digit at a time from the right and check
+    # if the resulting number is prime. Return 0 if it isn't.
     while tmp > 0:
         if not is_prime(tmp):
             return False
         tmp = tmp // 10
 
-#   Starting from the last digit, check if it's prime, then
-#   add back one digit at a time on the left and check if it
-#   is prime. Return 0 when it isn't.
+    # Starting from the last digit, check if it's prime, then add back one digit at a time on the left and check if it
+    # is prime. Return 0 when it isn't.
     i = 10
     tmp = n % i
 
@@ -39,31 +36,26 @@ def is_tr_prime(n):
         i = i * 10
         tmp = n % i
 
-#   If it gets here, the number is truncatable prime.
+    # If it gets here, the number is truncatable prime.
     return True
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p037():
     i = 0
     n = 1
     sum_ = 0
 
-#   Check every number until 11 truncatable primes are found.
+    # Check every number until 11 truncatable primes are found.
     while i < 11:
         if is_tr_prime(n):
             sum_ = sum_ + n
             i = i + 1
         n = n + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 37')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p037()

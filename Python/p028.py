@@ -12,12 +12,11 @@
 #
 # What is the sum of the numbers on the diagonals in a 1001 by 1001 spiral formed in the same way?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p028():
     N = 1001
 
     limit = N * N
@@ -27,10 +26,10 @@ def main():
     step = 0
     sum_ = 1
 
-#   Starting with the central 1, it's easy to see that the next four numbers in the diagonal
-#   are 1+2, 1+2+2, 1+2+2+2 and 1+2+2+2+2, then for the next four number the step is increased
-#   by two, so from 9 to 9+4, 9+4+4 etc, for the next four number the step is again increased
-#   by two, and so on. We go on until the value is equal to N*N, with N=1001 for this problem.
+    # Starting with the central 1, it's easy to see that the next four numbers in the diagonal
+    # are 1+2, 1+2+2, 1+2+2+2 and 1+2+2+2+2, then for the next four number the step is increased
+    # by two, so from 9 to 9+4, 9+4+4 etc, for the next four number the step is again increased
+    # by two, and so on. We go on until the value is equal to N*N, with N=1001 for this problem.
     while j < limit:
         if i == 0:
             step = step + 2
@@ -38,13 +37,9 @@ def main():
         sum_ = sum_ + j
         i = (i + 1) % 4
 
-    end = default_timer()
-
     print('Project Euler, Problem 28')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p028()

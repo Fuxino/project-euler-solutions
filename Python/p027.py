@@ -19,20 +19,17 @@
 #
 # Find the product of the coefficients, a and b, for the quadratic expression that produces the maximum number of primes for consecutive values of n, starting with n=0.
 
-from timeit import default_timer
-
-from projecteuler import is_prime
+from projecteuler import is_prime, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p027():
     max_ = 0
 
-#   Brute force approach, optimized by checking only values of b where b is prime.
+    # Brute force approach, optimized by checking only values of b where b is prime.
     for a in range(-999, 1000):
         for b in range(2, 1001):
-#           For n=0, n^2+an+b=b, so b must be prime.
+            # For n=0, n^2+an+b=b, so b must be prime.
             if is_prime(b):
                 n = 0
                 count = 0
@@ -51,13 +48,9 @@ def main():
                     save_a = a
                     save_b = b
 
-    end = default_timer()
-
     print('Project Euler, Problem 27')
     print(f'Answer: {save_a * save_b}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p027()

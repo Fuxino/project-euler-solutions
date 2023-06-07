@@ -13,22 +13,19 @@
 #
 # What is the largest 1 to 9 pandigital 9-digit number that can be formed as the concatenated product of an integer with (1,2, ... , n) where n > 1?
 
-from timeit import default_timer
-
-from projecteuler import is_pandigital
+from projecteuler import is_pandigital, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p038():
     max_ = 0
 
-#   A brute force approach is used, starting with 1 and multiplying
-#   the number by 1, 2 etc., concatenating the results, checking if
-#   it's 1 to 9 pandigital, and going to the next number when the
-#   concatenated result is greater than the greatest 9 digit pandigital
-#   value. The limit is set to 10000, since 1*10000=10000, 2*10000=20000 and
-#   concatenating this two numbers a 10-digit number is obtained.
+    # A brute force approach is used, starting with 1 and multiplying
+    # the number by 1, 2 etc., concatenating the results, checking if
+    # it's 1 to 9 pandigital, and going to the next number when the
+    # concatenated result is greater than the greatest 9 digit pandigital
+    # value. The limit is set to 10000, since 1*10000=10000, 2*10000=20000 and
+    # concatenating this two numbers a 10-digit number is obtained.
     for i in range(1, 10000):
         n = 0
         j = 1
@@ -54,13 +51,9 @@ def main():
             if n > 987654321:
                 break
 
-    end = default_timer()
-
     print('Project Euler, Problem 38')
     print(f'Answer: {max_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p038()

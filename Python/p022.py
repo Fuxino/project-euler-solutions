@@ -9,12 +9,12 @@
 # What is the total of all the name scores in the file?
 
 import sys
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p022():
     try:
         with open('p022_names.txt', 'r', encoding='utf-8') as fp:
             names = list(fp.readline().replace('"', '').split(','))
@@ -37,13 +37,9 @@ def main():
         sum_ = sum_ + score
         i = i + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 22')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p022()

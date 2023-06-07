@@ -21,32 +21,27 @@
 #
 # What is the index of the first term in the Fibonacci sequence to contain 1000 digits?
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p025():
     fib1 = 1
     fib2 = 1
     fibn = fib1 + fib2
 
     i = 3
 
-#   Calculate the Fibonacci numbers until one with 1000 digits is found.
+    # Calculate the Fibonacci numbers until one with 1000 digits is found.
     while len(str(fibn)) < 1000:
         fib1 = fib2
         fib2 = fibn
         fibn = fib1 + fib2
         i = i + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 25')
     print(f'Answer: {i}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p025()

@@ -16,27 +16,24 @@
 #
 # Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal fraction part.
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p026():
     max_ = 0
 
     for i in range(2, 1000):
         j = i
 
-#       The repeating cycle of 1/(2^a*5^b*p^c*...) is equal to
-#       that of 1/p^c*..., so factors 2 and 5 can be eliminated.
+        # The repeating cycle of 1/(2^a*5^b*p^c*...) is equal to that of 1/p^c*..., so factors 2 and 5 can be eliminated.
         while j % 2 == 0 and j > 1:
             j = j // 2
 
         while j % 5 == 0 and j > 1:
             j = j // 5
 
-#       If the denominator had only factors 2 and 5, there is no
-#       repeating cycle.
+        # If the denominator had only factors 2 and 5, there is no repeating cycle.
         if j == 1:
             n = 0
         else:
@@ -44,10 +41,10 @@ def main():
             k = 9
             div = j
 
-#           After eliminating factors 2s and 5s, the length of the repeating cycle
-#           of 1/d is the smallest n for which k=10^n-1/d is an integer. So we start
-#           with k=9, then k=99, k=999 and  so on until k is divisible by d.
-#           The number  of digits of k is the length of the repeating cycle.
+            # After eliminating factors 2s and 5s, the length of the repeating cycle
+            # of 1/d is the smallest n for which k=10^n-1/d is an integer. So we start
+            # with k=9, then k=99, k=999 and  so on until k is divisible by d.
+            # The number  of digits of k is the length of the repeating cycle.
             while k % div != 0:
                 n = n + 1
                 k = k * 10
@@ -57,13 +54,9 @@ def main():
                 max_ = n
                 max_n = i
 
-    end = default_timer()
-
     print('Project Euler, Problem 26')
     print(f'Answer: {max_n}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p026()

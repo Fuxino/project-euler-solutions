@@ -12,29 +12,26 @@
 #
 # Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
 
-from timeit import default_timer
-
-from projecteuler import sum_of_divisors
+from projecteuler import sum_of_divisors, timing
 
 
 def is_abundant(n):
     return sum_of_divisors(n) > n
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p023():
     ab_nums = [False] * 28124
 
-#   Find all abundant numbers smaller than 28123.
+    # Find all abundant numbers smaller than 28123.
     for i in range(12, 28124):
         ab_nums[i] = is_abundant(i)
 
     sums = [False] * 28124
 
-#   For every abundant number, sum every other abundant number greater
-#   than itself, until the sum exceeds 28123. Record that the resulting
-#   number is the sum of two abundant numbers.
+    # For every abundant number, sum every other abundant number greater
+    # than itself, until the sum exceeds 28123. Record that the resulting
+    # number is the sum of two abundant numbers.
     for i in range(1, 28123):
         if ab_nums[i]:
             for j in range(i, 28123):
@@ -45,18 +42,14 @@ def main():
 
     sum_ = 0
 
-#   Sum every number that was not found as a sum of two abundant numbers.
+    # Sum every number that was not found as a sum of two abundant numbers.
     for i in range(1, 28124):
         if not sums[i]:
             sum_ = sum_ + i
 
-    end = default_timer()
-
     print('Project Euler, Problem 23')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p023()

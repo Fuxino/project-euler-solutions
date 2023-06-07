@@ -12,17 +12,16 @@
 #
 # Find the sum of all the numbers that can be written as the sum of fifth powers of their digits.
 
-from timeit import default_timer
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p030():
     tot = 0
 
-#   Straightforward brute force approach. The limit is chosen considering that
-#   6*9^5=354294, so no number larger than that can be expressed as sum
-#   of 5th power of its digits.
+    # Straightforward brute force approach. The limit is chosen considering that
+    # 6*9^5=354294, so no number larger than that can be expressed as sum
+    # of 5th power of its digits.
     for i in range(10, 354295):
         j = i
         sum_ = 0
@@ -35,13 +34,9 @@ def main():
         if sum_ == i:
             tot = tot + i
 
-    end = default_timer()
-
     print('Project Euler, Problem 30')
     print(f'Answer: {tot}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p030()

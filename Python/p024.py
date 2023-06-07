@@ -8,23 +8,19 @@
 # What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?
 
 from itertools import permutations
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
-#   Generate all the permutations in lexicographic order and get the millionth one.
+@timing
+def p024():
+    # Generate all the permutations in lexicographic order and get the millionth one.
     perm = list(permutations('0123456789'))
     res = int(''.join(map(str, perm[999999])))
-
-    end = default_timer()
 
     print('Project Euler, Problem 24')
     print(f'Answer: {res}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p024()

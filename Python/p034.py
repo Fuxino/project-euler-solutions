@@ -7,23 +7,23 @@
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 from math import factorial
-from timeit import default_timer
 
 from numpy import ones
 
+from projecteuler import timing
 
-def main():
-    start = default_timer()
 
+@timing
+def p034():
     a = 10
     sum_ = 0
     factorials = ones(10, int)
 
-#   Pre-calculate factorials of each digit from 0 to 9.
+    # Pre-calculate factorials of each digit from 0 to 9.
     for i in range(2, 10):
         factorials[i] = factorial(i)
 
-#   9!*7<9999999, so 9999999 is certainly un upper bound.
+    # 9!*7<9999999, so 9999999 is certainly un upper bound.
     while a < 9999999:
         b = a
         sum_f = 0
@@ -38,13 +38,9 @@ def main():
 
         a = a + 1
 
-    end = default_timer()
-
     print('Project Euler, Problem 34')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p034()

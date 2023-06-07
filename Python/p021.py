@@ -9,34 +9,28 @@
 # Evaluate the sum of all the amicable numbers under 10000.
 
 
-from timeit import default_timer
-
-from projecteuler import sum_of_divisors
+from projecteuler import sum_of_divisors, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p021():
     sum_ = 0
 
     for i in range(2, 10000):
-#       Calculate the sum of proper divisors with the function
-#       implemented in projecteuler.py.
+        # Calculate the sum of proper divisors with the function
+        # implemented in projecteuler.py.
         n = sum_of_divisors(i)
-#       If i!=n and the sum of proper divisors of n=i,
-#       sum the pair of numbers and add it to the total.
+
+        # If i!=n and the sum of proper divisors of n=i,
+        # sum the pair of numbers and add it to the total.
         if i != n and sum_of_divisors(n) == i:
             sum_ = sum_ + i + n
 
     sum_ = sum_ // 2
 
-    end = default_timer()
-
     print('Project Euler, Problem 21')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p021()

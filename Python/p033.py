@@ -11,19 +11,19 @@
 # If the product of these four fractions is given in its lowest common terms, find the value of the denominator.
 
 from math import gcd
-from timeit import default_timer
+
+from projecteuler import timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p033():
     prod_n = 1
     prod_d = 1
 
     for i in range(11, 100):
         for j in range(11, 100):
-#           If the example is non-trivial, check if cancelling the digit that's equal
-#           in numerator and denominator gives the same fraction.
+            # If the example is non-trivial, check if cancelling the digit that's equal
+            # in numerator and denominator gives the same fraction.
             if i % 10 != 0 and j % 10 != 0 and\
                     i != j and i % 10 == j // 10:
                 n = i // 10
@@ -36,16 +36,12 @@ def main():
                     prod_n = prod_n * i
                     prod_d = prod_d * j
 
-#   Find the greater common divisor of the fraction found.
+    # Find the greater common divisor of the fraction found.
     div = gcd(prod_n, prod_d)
-
-    end = default_timer()
 
     print('Project Euler, Problem 33')
     print(f'Answer: {prod_d // div}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p033()

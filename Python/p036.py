@@ -6,32 +6,25 @@
 #
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
-from timeit import default_timer
-
-from projecteuler import is_palindrome
+from projecteuler import is_palindrome, timing
 
 
-def main():
-    start = default_timer()
-
+@timing
+def p036():
     N = 1000000
 
     sum_ = 0
 
-#   Brute force approach. For every number below 1 million,
-#   check if they're palindrome in base 2 and 10 using the
-#   function implemented in projecteuler.c.
+    # Brute force approach. For every number below 1 million,
+    # check if they're palindrome in base 2 and 10 using the
+    # function implemented in projecteuler.c.
     for i in range(1, N):
         if is_palindrome(i, 10) and is_palindrome(i, 2):
             sum_ = sum_ + i
 
-    end = default_timer()
-
     print('Project Euler, Problem 36')
     print(f'Answer: {sum_}')
 
-    print(f'Elapsed time: {end - start:.9f} seconds')
-
 
 if __name__ == '__main__':
-    main()
+    p036()
