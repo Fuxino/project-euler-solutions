@@ -10,20 +10,19 @@ from numpy import zeros
 def is_prime(num):
     if num < 4:
         # If num is 2 or 3 then it's prime.
-        return num == 2 or num == 3
+        return num in (2, 3)
 
     # If num is divisible by 2 or 3 then it's not prime.
     if num % 2 == 0 or num % 3 == 0:
         return False
+
     # Any number can have only one prime factor greater than its
     # square root. If we reach the square root and we haven't found
     # any smaller prime factors, then the number is prime.
     limit = floor(sqrt(num)) + 1
 
-    # Every prime other than 2 and 3 is in the form 6k+1 or 6k-1.
-    # If I check all those value no prime factors of the number
-    # will be missed. If a factor is found, the number is not prime
-    # and the function returns 0.
+    # Every prime other than 2 and 3 is in the form 6k+1 or 6k-1. If I check all those values no prime factors of the number
+    # will be missed. If a factor is found, the number is not prime and the function returns False.
     for i in range(5, limit, 6):
         if num % i == 0 or num % (i + 2) == 0:
             return False
@@ -32,7 +31,7 @@ def is_prime(num):
     return True
 
 
-def is_palindrome(num, base):
+def is_palindrome(num, base=10):
     reverse = 0
 
     tmp = num
@@ -426,6 +425,7 @@ def partition_fn(n, partitions, mod=-1):
     # The partition function for zero is 1 by definition.
     if n == 0:
         partitions[n] = 1
+
         return 1
 
     # If the partition for the current n has already been calculated, return the value.
