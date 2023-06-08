@@ -73,7 +73,7 @@ def lcmm(values, n):
 
 # Function implementing the Sieve or Eratosthenes to generate primes up to a certain number.
 def sieve(n):
-    primes = [1] * n
+    primes = [1] * (n + 1)
 
     # 0 and 1 are not prime, 2 and 3 are prime.
     primes[0] = 0
@@ -86,7 +86,7 @@ def sieve(n):
     # If i is prime, all multiples of i smaller than i*i have already been crossed out.
     # if i=sqrt(n), all multiples of i up to n (the target) have been crossed out. So
     # there is no need check i>sqrt(n).
-    limit = floor(sqrt(n))
+    limit = ceil(sqrt(n + 1))
 
     for i in range(3, limit, 2):
         # Find the next number not crossed out, which is prime.
