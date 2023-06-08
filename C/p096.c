@@ -118,7 +118,7 @@ int check(int grid[][9], int i, int j, int n)
    {
       for(w = 0; w < 3; w++)
       {
-         if(ii + k != i && jj +w != j && grid[ii+k][jj+w] == n)
+         if(ii + k != i && jj + w != j && grid[ii+k][jj+w] == n)
          {
             return 0;
          }
