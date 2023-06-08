@@ -19,7 +19,7 @@ int *primes;
 int main(int argc, char **argv)
 {
    int i;
-   long int sum = 0;
+   long int sum = 1;
    double elapsed;
    struct timespec start, end;
 
