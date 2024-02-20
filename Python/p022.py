@@ -27,7 +27,7 @@ def p022():
     sum_ = 0
     i = 1
 
-#   Calculate the score of each name an multiply by its position.
+    # Calculate the score of each name an multiply by its position.
     for name in names:
         l = len(name)
         score = 0

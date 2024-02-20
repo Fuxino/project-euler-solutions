@@ -11,7 +11,7 @@
 #       *201* *96* *342*  965   150
 #        630  803   746   422   111
 #        537  699   497   121   956
-#        805  732   524    37   331 
+#        805  732   524    37   331
 #
 # Find the minimal path sum, in matrix.txt, a 31K text file containing a 80 by 80 matrix, from the left column to the right column.
 

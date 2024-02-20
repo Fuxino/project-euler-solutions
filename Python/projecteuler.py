@@ -294,7 +294,7 @@ def is_semiprime(n, primes):
         return False, -1, -1
 
     # Check if n is semiprime and one of the factors is 3.
-    elif n % 3 == 0:
+    if n % 3 == 0:
         if primes[n//3] == 1:
             p = 3
             q = n // 3
