@@ -3,15 +3,15 @@
 -- 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, ...
 --
 -- By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
-fib :: (Integral n) => n -> n
+
+fib :: Integer -> Integer
 fib 0 = 0
 fib 1 = 1
 fib n = fib (n-1) + fib(n-2)
 
-sumEvenFib :: (Integral n) => n
+sumEvenFib :: Integer
 sumEvenFib = sum $ filter even $ takeWhile (<=4000000) (map fib [0..])
 
-main :: IO ()
 main =  do
     let result = sumEvenFib
     putStrLn $ "Project Euler, Problem 2\n"
