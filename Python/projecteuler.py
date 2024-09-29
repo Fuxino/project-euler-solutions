@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from typing import Callable, List, ParamSpec, Tuple, TypeVar
+from typing import Callable, List, ParamSpec, Sequence, Tuple, TypeVar
 from functools import wraps
 from math import sqrt, floor, ceil, gcd
 from timeit import default_timer
@@ -78,7 +78,7 @@ def lcm(a: int , b: int) -> int:
 
 
 # Recursive function to calculate the least common multiple of more than 2 numbers.
-def lcmm(values: List[int], n: int) -> int:
+def lcmm(values: Sequence[int], n: int) -> int:
     # If there are only two numbers, use the lcm function to calculate the lcm.
     if n == 2:
         return lcm(values[0], values[1])
