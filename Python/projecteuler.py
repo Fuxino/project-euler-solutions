@@ -500,12 +500,12 @@ def dijkstra(matrix: List[List[int]], distances: List[List[int]], m: int, n: int
             if j > 0 and distances[i][j] + matrix[i][j-1] < distances[i][j-1]:
                 distances[i][j-1] = distances[i][j] + matrix[i][j-1]
 
-        min_ = 999999999
+        _min = 999999999
 
         for i in range(m):
             for j in range(n):
-                if not visited[i][j] and distances[i][j] <= min_:
-                    min_ = distances[i][j]
+                if not visited[i][j] and distances[i][j] <= _min:
+                    _min = distances[i][j]
                     min_i = i
                     min_j = j
 

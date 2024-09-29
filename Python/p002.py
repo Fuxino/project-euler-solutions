@@ -16,20 +16,20 @@ def p002() -> None:
     fib1 = 1
     fib2 = 2
     fibn = fib1 + fib2
-    sum_ = 2
+    _sum = 2
 
     # Simple brute-force approach: generate every value in the Fibonacci
     # sequence smaller than 4 million and if it's even add it to the total.
     while fibn < N:
         if fibn % 2 == 0:
-            sum_ = sum_ + fibn
+            _sum = _sum + fibn
 
         fib1 = fib2
         fib2 = fibn
         fibn = fib1 + fib2
 
     print('Project Euler, Problem 2')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

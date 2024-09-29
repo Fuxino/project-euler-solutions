@@ -21,11 +21,11 @@ def p017() -> None:
                  [13, 13, 15, 14, 14, 13, 15, 15, 14],
                  [11]]
 
-    sum_ = 0
+    _sum = 0
 
     # Sum the letters of the first 19 numbers.
     for i in range(19):
-        sum_ = sum_ + n_letters[0][i]
+        _sum = _sum + n_letters[0][i]
 
     # Add the letters of the numbers from 20 to 99.
     for i in range(8):
@@ -37,7 +37,7 @@ def p017() -> None:
         for j in range(9):
             n_letters[1][i] = n_letters[1][i] + n_letters[0][j]
 
-        sum_ = sum_ + n_letters[1][i]
+        _sum = _sum + n_letters[1][i]
 
     # Add the letters of the numbers from 100 to 999.
     for i in range(9):
@@ -52,13 +52,13 @@ def p017() -> None:
             n_letters[2][i] = n_letters[2][i] + n_letters[1][j]
         # "One hundred", "two hundred", ... don't have the "and", so remove
         # three letters for each of them.
-        sum_ = sum_ + n_letters[2][i] - 3
+        _sum = _sum + n_letters[2][i] - 3
 
     # Add "one thousand".
-    sum_ = sum_ + n_letters[3][0]
+    _sum = _sum + n_letters[3][0]
 
     print('Project Euler, Problem 17')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

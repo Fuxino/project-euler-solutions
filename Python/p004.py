@@ -9,7 +9,7 @@ from projecteuler import is_palindrome, timing
 
 @timing
 def p004() -> None:
-    max_ = 0
+    _max = 0
 
     # Using a brute-force approach: generate every product of 3-digit numbers
     # and check if it's palindrome. If the product found is greater than the
@@ -18,11 +18,11 @@ def p004() -> None:
         for j in range(i, 99, -1):
             num = i * j
             # Use the function defined in projecteuler.py to check if a number is palindrome.
-            if num > max_ and is_palindrome(num, 10):
-                max_ = num
+            if num > _max and is_palindrome(num, 10):
+                _max = num
 
     print('Project Euler, Problem 4')
-    print(f'Answer: {max_}')
+    print(f'Answer: {_max}')
 
 
 if __name__ == '__main__':

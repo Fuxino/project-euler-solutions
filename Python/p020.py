@@ -17,13 +17,13 @@ def p020() -> None:
     # Calculate the factorial, convert the result to string and sum the digits.
     n = str(factorial(100))
 
-    sum_ = 0
+    _sum = 0
 
     for i in n:
-        sum_ = sum_ + int(i)
+        _sum = _sum + int(i)
 
     print('Project Euler, Problem 20')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

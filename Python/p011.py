@@ -53,7 +53,7 @@ def p011() -> None:
             [20, 73, 35, 29, 78, 31, 90, 1, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 5, 54],
             [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]]
 
-    max_ = 0
+    _max = 0
 
     # Brute-force approach: for each number in the grid, try products with its three
     # adjacent numbers in every direction (horizontal, vertical and the two diagonals).
@@ -67,7 +67,7 @@ def p011() -> None:
                 prod = prod * grid[i][k]
                 k = k + 1
 
-            max_ = max(max_, prod)
+            _max = max(_max, prod)
 
             # Vertical direction.
             prod = 1
@@ -76,7 +76,7 @@ def p011() -> None:
                 prod = prod * grid[k][j]
                 k = k + 1
 
-            max_ = max(max_, prod)
+            _max = max(_max, prod)
 
             # Diagonal direction, from top left to bottom right.
             prod = 1
@@ -88,7 +88,7 @@ def p011() -> None:
                 k = k + 1
                 w = w + 1
 
-            max_ = max(max_, prod)
+            _max = max(_max, prod)
 
     # The last diagonal is handled separately
     for i in range(17):
@@ -103,10 +103,10 @@ def p011() -> None:
                 k = k + 1
                 w = w - 1
 
-            max_ = max(max_, prod)
+            _max = max(_max, prod)
 
     print('Project Euler, Problem 11')
-    print(f'Answer: {max_}')
+    print(f'Answer: {_max}')
 
 
 if __name__ == '__main__':

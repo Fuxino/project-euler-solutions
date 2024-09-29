@@ -13,13 +13,13 @@ def p016() -> None:
     # the sum of the digits
     res = str(2 ** 1000)
 
-    sum_ = 0
+    _sum = 0
 
     for i in res:
-        sum_ = sum_ + int(i)
+        _sum = _sum + int(i)
 
     print('Project Euler, Problem 16')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

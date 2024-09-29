@@ -53,10 +53,10 @@ def p018() -> None:
         triang[i] = list(map(int, triang[i]))
 
     # Use the function implemented in projecteuler.c to find the maximum path.
-    max_ = find_max_path(triang, 15)
+    _max = find_max_path(triang, 15)
 
     print('Project Euler, Problem 18')
-    print(f'Answer: {max_}')
+    print(f'Answer: {_max}')
 
 
 if __name__ == '__main__':

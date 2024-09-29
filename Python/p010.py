@@ -14,15 +14,15 @@ def p010() -> None:
     # Use the function in projecteuler.py implementing the
     # Sieve of Eratosthenes algorithm to generate primes.
     primes = sieve(N)
-    sum_ = 0
+    _sum = 0
 
     # Sum all the primes
     for i in range(N):
         if primes[i] == 1:
-            sum_ = sum_ + i
+            _sum = _sum + i
 
     print('Project Euler, Problem 10')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

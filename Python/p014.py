@@ -47,7 +47,7 @@ def collatz_length(n: int) -> int:
 @timing
 def p014() -> None:
     max_l = 0
-    max_ = 0
+    _max = 0
 
     # For each number from 1 to 1000000, find the length of the sequence
     # and save its value, so that it can be used for the next numbers.
@@ -57,10 +57,10 @@ def p014() -> None:
 
         if count > max_l:
             max_l = count
-            max_ = i
+            _max = i
 
     print('Project Euler, Problem 14')
-    print(f'Answer: {max_}')
+    print(f'Answer: {_max}')
 
 
 if __name__ == '__main__':

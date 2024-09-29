@@ -214,10 +214,10 @@ def p013() -> None:
     # Convert the list of numbers in a numpy array and calculate the sum
     numbers = np.array(numbers)
 
-    sum_ = str(numbers.sum())
+    _sum = str(numbers.sum())
 
     print('Project Euler, Problem 13')
-    print(f'Answer: {sum_[:10]}')
+    print(f'Answer: {_sum[:10]}')
 
 
 if __name__ == '__main__':
