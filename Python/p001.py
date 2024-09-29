@@ -8,7 +8,7 @@ from projecteuler import timing
 
 
 @timing
-def p001():
+def p001() -> None:
     sum_ = 0
 
     # Simple brute-force approach: try every number between 3 and 999,

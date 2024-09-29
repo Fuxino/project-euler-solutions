@@ -16,7 +16,7 @@ from projecteuler import timing
 
 
 @timing
-def p006():
+def p006() -> None:
     sum_squares = 0
     square_sum = 0
 

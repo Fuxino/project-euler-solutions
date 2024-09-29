@@ -10,7 +10,7 @@ from projecteuler import timing
 
 
 @timing
-def p002():
+def p002() -> None:
     N = 4000000
 
     fib1 = 1

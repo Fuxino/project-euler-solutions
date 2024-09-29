@@ -8,7 +8,7 @@ from projecteuler import is_prime, timing
 
 
 @timing
-def p007():
+def p007() -> None:
     count = 1
     n = 1
 

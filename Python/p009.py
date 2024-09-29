@@ -15,7 +15,7 @@ from projecteuler import timing
 
 
 @timing
-def p009():
+def p009() -> None:
     found = 0
 
     m = 2
@@ -34,6 +34,7 @@ def p009():
 
                 if a + b + c == 1000:
                     found = 1
+
                     break
 
                 i = 2
@@ -48,6 +49,7 @@ def p009():
                         b = tmpb
                         c = tmpc
                         found = 1
+
                         break
 
                     if tmpa + tmpb + tmpc > 1000:

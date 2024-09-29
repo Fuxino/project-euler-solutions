@@ -29,7 +29,7 @@ from projecteuler import timing
 
 
 @timing
-def p008():
+def p008() -> None:
     number = '73167176531330624919225119674426574742355349194934' +\
              '96983520312774506326239578318016984801869478851843' +\
              '85861560789112949495459501737958331952853208805511' +\
@@ -53,7 +53,7 @@ def p008():
     # Transform the string into a list of integers
     number = list(map(int, number))
 
-    max_ = 0
+    _max = 0
 
     # Calculate all the 13-digit products, and save the maximum
     for i in range(1000-13):
@@ -63,11 +63,10 @@ def p008():
         for j in curr:
             prod = prod * j
 
-        if prod > max_:
-            max_ = prod
+        _max = max(_max, prod)
 
     print('Project Euler, Problem 8')
-    print(f'Answer: {max_}')
+    print(f'Answer: {_max}')
 
 
 if __name__ == '__main__':

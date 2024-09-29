@@ -10,7 +10,7 @@ from projecteuler import is_prime, timing
 # Recursive approach: if num is prime, return num, otherwise
 # recursively look for the largest prime factor of num divided
 # by its prime factors until only the largest remains.
-def max_prime_factor(num):
+def max_prime_factor(num: int) -> int:
     # Use function defined in projecteuler.py to check if a number is prime.
     if is_prime(num):
         return num
@@ -34,7 +34,7 @@ def max_prime_factor(num):
 
 
 @timing
-def p003():
+def p003() -> None:
     res = max_prime_factor(600851475143)
 
     print('Project Euler, Problem 3')

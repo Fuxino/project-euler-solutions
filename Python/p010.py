@@ -8,7 +8,7 @@ from projecteuler import sieve, timing
 
 
 @timing
-def p010():
+def p010() -> None:
     N = 2000000
 
     # Use the function in projecteuler.py implementing the

@@ -8,7 +8,7 @@ from projecteuler import is_palindrome, timing
 
 
 @timing
-def p004():
+def p004() -> None:
     max_ = 0
 
     # Using a brute-force approach: generate every product of 3-digit numbers
