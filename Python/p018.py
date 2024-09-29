@@ -42,15 +42,10 @@ def p018() -> None:
             triang = []
 
             for line in fp:
-                triang.append(line.strip('\n').split())
+                triang.append(list(map(int, line.strip('\n').split())))
     except FileNotFoundError:
         print('Error while opening file p018_triangle.txt')
         sys.exit(1)
-
-    l = len(triang)
-
-    for i in range(l):
-        triang[i] = list(map(int, triang[i]))
 
     # Use the function implemented in projecteuler.c to find the maximum path.
     _max = find_max_path(triang, 15)
