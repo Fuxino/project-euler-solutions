@@ -23,7 +23,7 @@ from projecteuler import count_divisors, timing
 
 
 @timing
-def p012():
+def p012() -> None:
     i = 0
     triang = 0
     finished = 0

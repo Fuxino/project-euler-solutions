@@ -9,7 +9,7 @@ from projecteuler import timing
 
 
 @timing
-def p015():
+def p015() -> None:
     # Using a combinatorial solution: in a 20x20 grid there will always be
     # 20 movements to the right and 20 movements down, that can be represented
     # as a string of Rs and Ds. The number of routes is the number of combinations.

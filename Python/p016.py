@@ -8,7 +8,7 @@ from projecteuler import timing
 
 
 @timing
-def p016():
+def p016() -> None:
     # Simply calculate 2^1000, convert the result to string and calculate
     # the sum of the digits
     res = str(2 ** 1000)

@@ -31,7 +31,7 @@ from projecteuler import timing
 
 
 @timing
-def p011():
+def p011() -> None:
     grid = [[8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
             [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
             [81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65],
@@ -67,8 +67,7 @@ def p011():
                 prod = prod * grid[i][k]
                 k = k + 1
 
-            if prod > max_:
-                max_ = prod
+            max_ = max(max_, prod)
 
             # Vertical direction.
             prod = 1
@@ -77,8 +76,7 @@ def p011():
                 prod = prod * grid[k][j]
                 k = k + 1
 
-            if prod > max_:
-                max_ = prod
+            max_ = max(max_, prod)
 
             # Diagonal direction, from top left to bottom right.
             prod = 1
@@ -90,8 +88,7 @@ def p011():
                 k = k + 1
                 w = w + 1
 
-            if prod > max_:
-                max_ = prod
+            max_ = max(max_, prod)
 
     # The last diagonal is handled separately
     for i in range(17):
@@ -106,8 +103,7 @@ def p011():
                 k = k + 1
                 w = w - 1
 
-            if prod > max_:
-                max_ = prod
+            max_ = max(max_, prod)
 
     print('Project Euler, Problem 11')
     print(f'Answer: {max_}')

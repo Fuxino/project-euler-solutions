@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 
 # The following iterative sequence is defined for the set of positive integers:
 #
@@ -28,7 +28,7 @@ collatz_found = zeros(N, dtype=int)
 # Recursive function to calculate the Collatz sequence for n.
 # If n is even, Collatz(n)=1+Collatz(n/2), if n is odd
 # Collatz(n)=1+Collatz(3*n+1).
-def collatz_length(n):
+def collatz_length(n: int) -> int:
 
     if n == 1:
         return 1
@@ -45,7 +45,7 @@ def collatz_length(n):
 
 
 @timing
-def p014():
+def p014() -> None:
     max_l = 0
     max_ = 0
 

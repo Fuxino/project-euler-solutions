@@ -11,7 +11,7 @@ from projecteuler import timing
 
 
 @timing
-def p017():
+def p017() -> None:
     # First list contains number of letters for numbers from 1 to 19,
     # the second letters for "twenty", "thirty", ..., "ninety",
     # the third letters for "one hundred and", "two hundred and", ..., "nine hundre and",

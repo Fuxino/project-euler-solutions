@@ -36,7 +36,7 @@ from projecteuler import find_max_path, timing
 
 
 @timing
-def p018():
+def p018() -> None:
     try:
         with open('p018_triangle.txt', 'r', encoding='utf-8') as fp:
             triang = []

@@ -19,7 +19,7 @@ from projecteuler import timing
 
 
 @timing
-def p019():
+def p019() -> None:
     count = 0
 
     # Use the datetime library to find out which first day of the month is a Sunday

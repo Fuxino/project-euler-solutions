@@ -13,7 +13,7 @@ from projecteuler import timing
 
 
 @timing
-def p020():
+def p020() -> None:
     # Calculate the factorial, convert the result to string and sum the digits.
     n = str(factorial(100))
 
