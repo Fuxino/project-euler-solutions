@@ -12,8 +12,9 @@ from projecteuler import timing
 
 
 @timing
-def p039():
-    max_ = 0
+def p039() -> None:
+    _max = 0
+    res = 0
     savedc = zeros(1000, int)
 
     # Start with p=12 (the smallest pythagorean triplet is (3,4,5) and 3+4+5=12.
@@ -59,8 +60,8 @@ def p039():
 
         # If the current value is greater than the maximum,
         # save the new maximum and the value of p.
-        if count > max_:
-            max_ = count
+        if count > _max:
+            _max = count
             res = p
 
     print('Project Euler, Problem 39')

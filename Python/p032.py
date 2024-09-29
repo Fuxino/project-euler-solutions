@@ -16,7 +16,7 @@ from projecteuler import is_pandigital, timing
 
 
 @timing
-def p032():
+def p032() -> None:
     n = 0
     # Initially I used a bigger array, but printing the resulting products
     # shows that 10 values are sufficient.
@@ -70,14 +70,14 @@ def p032():
     # Sort the found products to easily see if there are duplicates.
     products = np.sort(products[:n])
 
-    sum_ = products[0]
+    _sum = products[0]
 
     for i in range(1, n):
         if products[i] != products[i-1]:
-            sum_ = sum_ + products[i]
+            _sum = _sum + products[i]
 
     print('Project Euler, Problem 32')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

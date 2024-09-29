@@ -10,7 +10,7 @@
 from projecteuler import is_prime, timing
 
 
-def is_tr_prime(n):
+def is_tr_prime(n: int) -> bool:
     # One-digit numbers and non-prime numbers are
     # not truncatable primes.
     if n < 11 or not is_prime(n):
@@ -23,6 +23,7 @@ def is_tr_prime(n):
     while tmp > 0:
         if not is_prime(tmp):
             return False
+
         tmp = tmp // 10
 
     # Starting from the last digit, check if it's prime, then add back one digit at a time on the left and check if it
@@ -33,6 +34,7 @@ def is_tr_prime(n):
     while tmp != n:
         if not is_prime(tmp):
             return False
+
         i = i * 10
         tmp = n % i
 
@@ -41,20 +43,20 @@ def is_tr_prime(n):
 
 
 @timing
-def p037():
+def p037() -> None:
     i = 0
     n = 1
-    sum_ = 0
+    _sum = 0
 
     # Check every number until 11 truncatable primes are found.
     while i < 11:
         if is_tr_prime(n):
-            sum_ = sum_ + n
+            _sum = _sum + n
             i = i + 1
         n = n + 1
 
     print('Project Euler, Problem 37')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

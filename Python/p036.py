@@ -10,20 +10,20 @@ from projecteuler import is_palindrome, timing
 
 
 @timing
-def p036():
+def p036() -> None:
     N = 1000000
 
-    sum_ = 0
+    _sum = 0
 
     # Brute force approach. For every number below 1 million,
     # check if they're palindrome in base 2 and 10 using the
     # function implemented in projecteuler.c.
     for i in range(1, N):
         if is_palindrome(i, 10) and is_palindrome(i, 2):
-            sum_ = sum_ + i
+            _sum = _sum + i
 
     print('Project Euler, Problem 36')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

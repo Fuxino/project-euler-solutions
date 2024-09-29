@@ -14,9 +14,9 @@ from projecteuler import timing
 
 
 @timing
-def p034():
+def p034() -> None:
     a = 10
-    sum_ = 0
+    _sum = 0
     factorials = ones(10, int)
 
     # Pre-calculate factorials of each digit from 0 to 9.
@@ -34,12 +34,12 @@ def p034():
             sum_f = sum_f + factorials[digit]
 
         if a == sum_f:
-            sum_ = sum_ + a
+            _sum = _sum + a
 
         a = a + 1
 
     print('Project Euler, Problem 34')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

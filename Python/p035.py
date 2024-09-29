@@ -14,7 +14,7 @@ N = 1000000
 primes = sieve(N)
 
 
-def is_circular_prime(n):
+def is_circular_prime(n: int) -> bool:
     # If n is not prime, it's obviously not a circular prime.
     if primes[n] == 0:
         return False
@@ -31,6 +31,7 @@ def is_circular_prime(n):
     while tmp > 0:
         if tmp % 2 == 0:
             return False
+
         # Count the number of digits.
         count = count + 1
         tmp = tmp // 10
@@ -46,7 +47,7 @@ def is_circular_prime(n):
 
 
 @timing
-def p035():
+def p035() -> None:
     count = 13
 
     # Calculate all primes below one million, then check if they're circular.

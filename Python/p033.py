@@ -16,7 +16,7 @@ from projecteuler import timing
 
 
 @timing
-def p033():
+def p033() -> None:
     prod_n = 1
     prod_d = 1
 

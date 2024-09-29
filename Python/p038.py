@@ -17,8 +17,8 @@ from projecteuler import is_pandigital, timing
 
 
 @timing
-def p038():
-    max_ = 0
+def p038() -> None:
+    _max = 0
 
     # A brute force approach is used, starting with 1 and multiplying
     # the number by 1, 2 etc., concatenating the results, checking if
@@ -35,8 +35,8 @@ def p038():
             n = n + tmp
             j = j + 1
 
-            if n > max_ and is_pandigital(n, 9):
-                max_ = n
+            if n > _max and is_pandigital(n, 9):
+                _max = n
             if i * j < 10:
                 n = n * 10
             elif i * j < 100:
@@ -52,7 +52,7 @@ def p038():
                 break
 
     print('Project Euler, Problem 38')
-    print(f'Answer: {max_}')
+    print(f'Answer: {_max}')
 
 
 if __name__ == '__main__':

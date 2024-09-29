@@ -16,7 +16,7 @@ from projecteuler import timing
 
 
 @timing
-def p040():
+def p040() -> None:
     digits = zeros(1000005, int)
     i = 1
     value = 1
