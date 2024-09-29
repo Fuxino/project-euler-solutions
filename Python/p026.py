@@ -20,8 +20,9 @@ from projecteuler import timing
 
 
 @timing
-def p026():
-    max_ = 0
+def p026() -> None:
+    _max = 0
+    max_n = -1
 
     for i in range(2, 1000):
         j = i
@@ -50,8 +51,8 @@ def p026():
                 k = k * 10
                 k = k + 9
 
-            if n > max_:
-                max_ = n
+            if n > _max:
+                _max = n
                 max_n = i
 
     print('Project Euler, Problem 26')

@@ -15,12 +15,12 @@
 from projecteuler import sum_of_divisors, timing
 
 
-def is_abundant(n):
+def is_abundant(n: int) -> bool:
     return sum_of_divisors(n) > n
 
 
 @timing
-def p023():
+def p023() -> None:
     ab_nums = [False] * 28124
 
     # Find all abundant numbers smaller than 28123.
@@ -36,19 +36,20 @@ def p023():
         if ab_nums[i]:
             for j in range(i, 28123):
                 if ab_nums[j]:
-                    sum_ = i + j
-                    if sum_ <= 28123:
-                        sums[sum_] = True
+                    _sum = i + j
 
-    sum_ = 0
+                    if _sum <= 28123:
+                        sums[_sum] = True
+
+    _sum = 0
 
     # Sum every number that was not found as a sum of two abundant numbers.
     for i in range(1, 28124):
         if not sums[i]:
-            sum_ = sum_ + i
+            _sum = _sum + i
 
     print('Project Euler, Problem 23')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

@@ -24,8 +24,8 @@ from projecteuler import is_prime, timing
 
 
 @timing
-def p027():
-    max_ = 0
+def p027() -> None:
+    _max = 0
 
     # Brute force approach, optimized by checking only values of b where b is prime.
     for a in range(-999, 1000):
@@ -44,8 +44,8 @@ def p027():
                     else:
                         break
 
-                if count > max_:
-                    max_ = count
+                if count > _max:
+                    _max = count
                     save_a = a
                     save_b = b
 

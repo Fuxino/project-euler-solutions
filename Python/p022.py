@@ -14,7 +14,7 @@ from projecteuler import timing
 
 
 @timing
-def p022():
+def p022() -> None:
     try:
         with open('p022_names.txt', 'r', encoding='utf-8') as fp:
             names = list(fp.readline().replace('"', '').split(','))
@@ -24,7 +24,7 @@ def p022():
 
     names.sort()
 
-    sum_ = 0
+    _sum = 0
     i = 1
 
     # Calculate the score of each name an multiply by its position.
@@ -34,11 +34,11 @@ def p022():
         for j in range(l):
             score = score + ord(name[j]) - ord('A') + 1
         score = score * i
-        sum_ = sum_ + score
+        _sum = _sum + score
         i = i + 1
 
     print('Project Euler, Problem 22')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

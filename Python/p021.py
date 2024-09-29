@@ -13,8 +13,8 @@ from projecteuler import sum_of_divisors, timing
 
 
 @timing
-def p021():
-    sum_ = 0
+def p021() -> None:
+    _sum = 0
 
     for i in range(2, 10000):
         # Calculate the sum of proper divisors with the function
@@ -24,12 +24,12 @@ def p021():
         # If i!=n and the sum of proper divisors of n=i,
         # sum the pair of numbers and add it to the total.
         if i != n and sum_of_divisors(n) == i:
-            sum_ = sum_ + i + n
+            _sum = _sum + i + n
 
-    sum_ = sum_ // 2
+    _sum = _sum // 2
 
     print('Project Euler, Problem 21')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

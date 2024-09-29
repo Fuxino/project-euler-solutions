@@ -16,7 +16,7 @@ from projecteuler import timing
 
 
 @timing
-def p030():
+def p030() -> None:
     tot = 0
 
     # Straightforward brute force approach. The limit is chosen considering that
@@ -24,14 +24,14 @@ def p030():
     # of 5th power of its digits.
     for i in range(10, 354295):
         j = i
-        sum_ = 0
+        _sum = 0
 
         while j > 0:
             digit = j % 10
-            sum_ = sum_ + digit ** 5
+            _sum = _sum + digit ** 5
             j = j // 10
 
-        if sum_ == i:
+        if _sum == i:
             tot = tot + i
 
     print('Project Euler, Problem 30')

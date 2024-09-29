@@ -16,7 +16,7 @@ from projecteuler import timing
 
 
 @timing
-def p028():
+def p028() -> None:
     N = 1001
 
     limit = N * N
@@ -24,7 +24,7 @@ def p028():
     i = 0
     j = 1
     step = 0
-    sum_ = 1
+    _sum = 1
 
     # Starting with the central 1, it's easy to see that the next four numbers in the diagonal
     # are 1+2, 1+2+2, 1+2+2+2 and 1+2+2+2+2, then for the next four number the step is increased
@@ -34,11 +34,11 @@ def p028():
         if i == 0:
             step = step + 2
         j = j + step
-        sum_ = sum_ + j
+        _sum = _sum + j
         i = (i + 1) % 4
 
     print('Project Euler, Problem 28')
-    print(f'Answer: {sum_}')
+    print(f'Answer: {_sum}')
 
 
 if __name__ == '__main__':

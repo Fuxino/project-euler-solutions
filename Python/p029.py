@@ -19,17 +19,17 @@ from projecteuler import timing
 
 
 @timing
-def p029():
-    powers = zeros(9801)
+def p029() -> None:
+    _powers = zeros(9801)
 
     # Generate all the powers
     for i in range(2, 101):
         a = i
         for j in range(2, 101):
-            powers[(i-2)*99+j-2] = a ** j
+            _powers[(i-2)*99+j-2] = a ** j
 
     # Sort the values and count the different values.
-    powers = list(powers)
+    powers = list(_powers)
     powers.sort()
 
     count = 1

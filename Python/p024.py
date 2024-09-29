@@ -13,7 +13,7 @@ from projecteuler import timing
 
 
 @timing
-def p024():
+def p024() -> None:
     # Generate all the permutations in lexicographic order and get the millionth one.
     perm = list(permutations('0123456789'))
     res = int(''.join(map(str, perm[999999])))

@@ -25,7 +25,7 @@ from projecteuler import timing
 
 
 @timing
-def p025():
+def p025() -> None:
     fib1 = 1
     fib2 = 1
     fibn = fib1 + fib2
